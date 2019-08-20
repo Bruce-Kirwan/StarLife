@@ -144,12 +144,11 @@ function getChildrenById(x) {
 		*/
 
 		console.log("********** window.innerWidth is "+window.innerWidth);
-		windowWidth = (window.innerWidth > 0) ? window.innerWidth : screen.width;
-		canvas.width = windowWidth;
-		console.log("********** windowWidth is "+windowWidth);
-		console.log("********** canvas.width is "+canvas.width);	
-		document.getElementById("main-content-1").innerHTML = "Width of screen is "+screen.width+"<br> width of window is "+window.innerWidth;
-		
+		windowWidth = screen.width;
+		windowWidth = (window.innerWidth > 0 && window.innerWidth < screen.width) ? window.innerWidth : screen.width;		// if the window width is less than the screen width, use its width instead of the screen width
+
+		//canvas.width = windowWidth;
+				console.log("********** windowWidth is "+windowWidth);
 
 
 		/*
@@ -158,6 +157,18 @@ function getChildrenById(x) {
 		windowHeight = (window.innerHeight > 0) ? window.innerHeight : screen.height;
 		console.log('height is '+windowHeight);
 		canvas.height= windowHeight/5;
+		
+
+		console.log("********** canvas.width is "+canvas.width);	
+		document.getElementById("main-content-1").innerHTML = "Width of screen is "+screen.width+"<br> width of window is "+window.innerWidth + "<br> width of canvas is " + canvas.width;
+		var x = window.matchMedia("(min-width: 601px)");
+		if (x.matches) {
+			canvas.width = windowWidth;
+					canvas.height= windowHeight/5;
+		} else {
+			canvas.width = (windowWidth/0.75);
+					canvas.height= windowHeight/8;
+		}
 		/*
 		/   Create the intial stars
 		*/
