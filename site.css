@@ -16,7 +16,9 @@
 
 
 #canvas {
-	display:none;
+	display: block;
+	width:75%;
+	background-color: rgb(0,0,51);
 }
 #main-nav-large {
 	display: none;
@@ -24,6 +26,8 @@
 
 #menu-i #hamburgerIcon {
     float: right;
+	display: inline;
+	width: 13%;
 }
 
     #main-nav {
@@ -89,10 +93,6 @@
         color: white;
 }
 
-
-    #menu-i #hamburgerIcon {
-        display: inline;
-    }
 
     #main-nav-i #closebtn {
         display: block;
