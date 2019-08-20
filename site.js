@@ -177,6 +177,7 @@ function getChildrenById(x) {
 		// these are websafe colours
 		*/
 		sizeFactor=1.0;
+		var textSize = 1.0;
 			var colorBlack = "rgb(0,0,0)";
 			var colorMidnight = "rgb(0,0,51)";
 			var colorLightBlue = "rgb(0,0,255)";
@@ -187,7 +188,8 @@ function getChildrenById(x) {
 			colorMidnight = "rgb(240,248,255)";
 			colorLightBlue = "rgb(0,0,255)";
 			colorWhite = "rgb(204,204,255)";
-			sizeFactor=0.9;
+			sizeFactor = 0.9;
+			textSize = canvas.width/600.0;		// change text size so it fits
 		}/*
 		else {	// desktop view
 			var colorBlack = "rgb(0,0,0)";
@@ -206,6 +208,8 @@ function getChildrenById(x) {
 		if ((windowHeight != window.innerHeight) && (window.innerHeight > 0)){
 			windowHeight=window.innerHeight;
 			canvas.height=(windowHeight*sizeFactor)/5;
+			if (canvas.height < 70)		// have a minimum canvas height
+				canvas.height = 70;		
 		}
 		/*
 		// declare varibles to help with placing of text and stars
@@ -262,7 +266,7 @@ function getChildrenById(x) {
 	  	  /*
 	  /    draw the heading text.
 	  */
-		var fontSize = parseInt(canvas.height/3.0);
+		var fontSize = parseInt(canvas.height * textSize/(2.75 * sizeFactor));
 		ctx.font= fontSize + "px Georgia, serif";
 		ctx.textAlign = "center";
 		//var textGradient = ctx.createRadialGradient(halfWidth, canvas.height/1.65, 0, halfWidth, canvas.height/1.65, canvas.height);
@@ -273,6 +277,7 @@ function getChildrenById(x) {
 		text_gradient.addColorStop(1,colorWhite);
 		ctx.fillStyle = text_gradient;
 		ctx.fillText("Star Life Technologies", halfWidth, canvas.height/1.65); 
+		document.getElementById("main-content-3").innerHTML = " width is " + canvas.width +"<br> sizeFactor is "+ sizeFactor + "<br> textSize is "+ textSize + "<br> height is " + canvas.height;
     }
 
 
