@@ -1,4 +1,4 @@
-﻿    MAX_DEPTH = 50;
+    MAX_DEPTH = 50;
  
     var canvas, ctx;
     var stars = new Array(512);
@@ -82,6 +82,7 @@ var currentImg;
 var imgArray;
 
 function initSlideshow() {
+
     currentImg = 0;
     imgArray = getChildrenById('slide-img');
     displaySlideButtons(true);
@@ -141,11 +142,15 @@ function getChildrenById(x) {
 		/*
 		/   Change the canvas width to be the same as screen width
 		*/
+
 		console.log("********** window.innerWidth is "+window.innerWidth);
 		windowWidth = (window.innerWidth > 0) ? window.innerWidth : screen.width;
 		canvas.width = windowWidth;
-					console.log("********** windowWidth is "+windowWidth);
-			console.log("********** canvas.width is "+canvas.width);	
+		console.log("********** windowWidth is "+windowWidth);
+		console.log("********** canvas.width is "+canvas.width);	
+		document.getElementById("main-content-1").innerHTML = "Width of screen is "+screen.width+"<br> width of window is "+window.innerWidth;
+		
+
 
 		/*
 		/   Change the canvas height to be 20% of the screen height
