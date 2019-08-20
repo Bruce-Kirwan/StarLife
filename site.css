@@ -1,4 +1,4 @@
-* {
+﻿* {
     margin: 0;
     padding: 0;
 	border:0;
@@ -14,112 +14,114 @@
     overflow: hidden;
 }
 
-
-#canvas {
-	display: block;
-	width:75%;
-	background-color: rgb(0,0,51);
-}
-#main-nav-large {
+#menu {
 	display: none;
 }
 
+#titlePicture {
+	display: none;
+}
+
+
+#canvas {
+	display: block;
+	width:100%;
+	background-color: rgb(0,0,51);
+}
+
+
+#main-contents {
+	
+	margin: auto;
+	background-color: red;
+	width:100%;
+	height: 50px;
+	text-decoration:none;
+	color: transparent;
+}
+
+#main-nav {
+		display: none;
+}
+    #main-nav-large {
+        display: block;
+        height: 50px;
+		background-image: linear-gradient(rgb(0,0,51), lightblue);
+		position: sticky;		/* position the main menu bar at the top of page, even if you scroll down */
+		top: 0;					/* this may not work for all browsers */
+    }
+
+        #main-nav-large ul {
+            list-style: none;
+			max-width: 1000px;
+			margin:auto;
+        }
+
+        #main-nav-large a {
+            display: block;
+            color: lightblue;
+            text-decoration: none;
+            height: 50px;
+			border: none;
+            /*border: 1px solid darkblue;*/
+            font-weight: bold;
+            text-align: center;
+            font-size: large;
+        }
+
+            #main-nav-large a:hover {
+                color: white;
+            }
+
+        #main-nav-large li {
+            float: left;
+            width: 20%;
+        }
+	    #color-fade {
+        display: block;
+        height: 20px;
+		background-image: linear-gradient(lightblue, rgb(240,248,255));
+		
+    }
+	
+	#titlePicture {
+		display: none;
+	}
+	
+#wrapper {
+	/*;
+	/**/
+}
+#main-page{
+	max-width: 1000px;
+    margin: auto;
+}
 #menu-i #hamburgerIcon {
-    float: right;
-	display: inline;
-	width: 13%;
+    display: none;
 }
 
-    #main-nav {
-        display: block;
-        height: 100%;
-        width: 0;
-        position: fixed;
-        top: 0;
-        right: 0;
-        z-index: 100;
-        background-color: rgb(0,0,0);
-        background-color: rgba(0,0,0, 0.9);
-        overflow-x: hidden;
-        transition: 0.5s;
-		margin : 0 auto;
-		vertical-align:text-top;
-    }
-    
-
-#main-nav-i ul {
-    position: relative;
-    height: 100%;
-	vertical-align:text-top;
-}
-
-#main-nav-i li {
-    height:100%;
-}
-
-#main-nav-i a {
-    display: block;
-    text-align: center;
-	vertical-align: top;
-    color: grey;
-    text-decoration: none;
-    height: 100%;
-    line-height: 100px;
-    font-weight: bold;
-	margin : 0 auto;
-	vertical-align: text-top;
-}
-
- #main-nav-i a:hover {
-        background-image: radial-gradient(darkslategrey,black);
-        color: white;
-			vertical-align: text-top;
-    }
-
-#closebtn {
-    display: block;
-	text-align:right;
-	color:grey;
-	position: absolute;
-	top: 0px;
-    right: 0px;
-    font-size: 50px;
-    z-index: 999;
-}
-
-
-#closebtn span:hover {
-        background-image: radial-gradient(darkslategrey,black);
-        color: white;
-}
-
-
-    #main-nav-i #closebtn {
-        display: block;
-    }
-
-    #main-content {
-        background-color: aliceblue;
-        float: left;
-        width: 100%;
-    }
-
-    #main-aside {
-        float: left;
-        width: 100%;
-    }
-
-#main-content-1 {
+#main-content-1{
 	width: 33%;
 	float: left;
 	list-style-position: inside;
 	list-style-type: circle;
-	font-size: xx-large;
-	font-weight: bold;
+	font-size: large;
+
 }
-	
+
+
+.formLabel {
+font-family:"OpenSans-Regular", "Helvetica Neue", Helvetica, Arial, sans-serif;
+font-weight:normal;
+font-size:16px;
+font-weight:600;
+line-height:1.13;
+color:#000000
+}
+
+
 #main-content-3 {
-	width: auto;
+	width: 33%;
 	float: right;
 }
 
@@ -128,9 +130,9 @@
 #slideshow {
     background-color: green;
 	background-color: aliceblue;
-    width: 33%;
+    width: 23%;
     position: relative;
-	float: left;
+	float: right;
 }
 
 
@@ -174,98 +176,6 @@
 
 
 
-@media only screen and (min-width: 600px) {
-
-
-#canvas {
-	display: block;
-	width:100%;
-	background-color: rgb(0,0,51);
-}
-#main-contents {
-	
-	margin: auto;
-	background-color: red;
-	width:100%;
-	height: 50px;
-	text-decoration:none;
-	color: transparent;
-}
-
-    #main-nav-large {
-        display: block;
-        height: 50px;
-		background-image: linear-gradient(rgb(0,0,51), lightblue);
-		position: sticky;		/* position the main menu bar at the top of page, even if you scroll down */
-		top: 0;					/* this may not work for all browsers */
-    }
-
-        #main-nav-large ul {
-            list-style: none;
-			max-width: 1000px;
-			margin:auto;
-        }
-
-        #main-nav-large a {
-            display: block;
-            color: lightblue;
-            text-decoration: none;
-            height: 50px;
-			border: none;
-            /*border: 1px solid darkblue;*/
-            font-weight: bold;
-            text-align: center;
-            font-size: large;
-        }
-
-            #main-nav-large a:hover {
-                color: white;
-            }
-
-        #main-nav-large li {
-            float: left;
-            width: 20%;
-        }
-	    #color-fade {
-        display: block;
-        height: 20px;
-		background-image: linear-gradient(lightblue, rgb(240,248,255));
-		
-    }
-#wrapper {
-	/*;
-	/**/
-}
-#main-page{
-	max-width: 1000px;
-    margin: auto;
-}
-#menu-i #hamburgerIcon {
-    float: right;
-    display: none;
-}
-
-main-content-1{
-	width: 100%;
-}
-
-.formLabel {
-font-family:"OpenSans-Regular", "Helvetica Neue", Helvetica, Arial, sans-serif;
-font-weight:normal;
-font-size:16px;
-font-weight:600;
-line-height:1.13;
-color:#000000
-}
-
-
-main-content-3 {
-	width:100%;
-}
-slideshow {
-	width:100%;
-}
-
 .input{
 height:48px;
 border:solid 2px #d7d7d7;
@@ -282,158 +192,3 @@ margin-bottom:24px;
 padding-left:16px;
 padding-right:30px
 }	
-
-}
-
-
-
-
-
-
-
-/*
-#slideshow, #slideshow img .slide-buttons {
-    // height: 140px;
-    line-height: 140px;
-    overflow: hidden;
-}
-body {
-    background-color: aliceblue;
-}
-img {
-    width: 45%;
-    float: right;
-}
-p {
-    float: left;
-}
-.lid {
-    clear: both;
-    height: 0px;
-    width: 100%;
-    overflow: hidden;
-}
-// Style the buttons that are used to open and close the accordion panel 
-.accordion {
-    background-color: #eee;
-    color: #444;
-    cursor: pointer;
-    padding: 18px;
-    width: 100%;
-    text-align: left;
-    border: none;
-    outline: none;
-    transition: 0.4s;
-}
-    // Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) 
-    .active, .accordion:hover {
-        background-color: #ccc;
-    }
-// Style the accordion panel. Note: hidden by default 
-.panel {
-    padding: 0 18px;
-    background-color: white;
-    display: none;
-    overflow: hidden;
-}
-    .panel ul {
-        position: relative;
-    }
-#main-nav {
-    display:none;
-//    width: 10%;
-//    float: left;
-}
-/*
-#main-nav-i ul {
-    position: relative;
-}
-#main-nav-i ul {
-    list-style: none;
-}
-#main-nav-i a {
-    display: block;
-    background-color: darkslategrey;
-    width: 120px;
-    text-align: center;
-    color: white;
-    text-decoration: none;
-    line-height: 35px;
-    border: 1px solid green;
-    font-weight: bold;
-}
-    #main-nav-i a:hover {
-        background-color: grey;
-        text-decoration: underline;
-    }
-#main-nav-i #closebtn {
-    position: absolute;
-    top: 40px;
-    right: 45px;
-    font-size: 60px;
-    z-index: 999;
-    display: none;
-}
-    */
-
-
-/*
-#main-content {
-    float: left;
-    width: 65%;
-    height: 100%;
-}
-#main-content-i p {
-    float: left;
-    width: 49%;
-}
-#main-content-i ul {
-    list-style-position: inside;
-}
-#main-aside {
-    width: 25%;
-    float: right;
-}
-.image-width {
-    width: 100%;
-}
-#slideshow {
-    //margin: none;
-    background-color: aliceblue;
-    width: 100%;
-    height: 400px;
-    position: relative;
-}
-    #slideshow img {
-        transition: 1.5s;
-        width: 100%;
-    }
-.slide-buttons {
-    display: none;
-    position: absolute;
-    background-color: rgba(0, 0, 0, 0);
-    color: white;
-    width: 30px;
-    text-align: center;
-    transition: 0.5s;
-}
-    .slide-buttons:hover {
-        background-color: rgba(0, 0, 0, 0.6);
-    }
-.prev {
-    left: 0;
-}
-.next {
-    right: 0;
-}
-#slide-img {
-}
-    #slide-img img {
-        position: absolute;
-        top: 0;
-        left: 0;
-    }
-#main-footer {
-    text-align: center;
-}
-*/

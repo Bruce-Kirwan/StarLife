@@ -1,9 +1,10 @@
-    MAX_DEPTH = 50;
+﻿    MAX_DEPTH = 50;
  
     var canvas, ctx;
     var stars = new Array(512);
 	var windowWidth = 1000;
 	var windowHeight=150;
+	var sizeFactor=1.0;			// this changes for mobile view
 
 
 console.log('... site.js has loaded ...');
@@ -82,7 +83,6 @@ var currentImg;
 var imgArray;
 
 function initSlideshow() {
-
     currentImg = 0;
     imgArray = getChildrenById('slide-img');
     displaySlideButtons(true);
@@ -142,33 +142,22 @@ function getChildrenById(x) {
 		/*
 		/   Change the canvas width to be the same as screen width
 		*/
-
 		console.log("********** window.innerWidth is "+window.innerWidth);
-		windowWidth = screen.width;
-		windowWidth = (window.innerWidth > 0 && window.innerWidth < screen.width) ? window.innerWidth : screen.width;		// if the window width is less than the screen width, use its width instead of the screen width
-
-		//canvas.width = windowWidth;
-				console.log("********** windowWidth is "+windowWidth);
-
+		windowWidth = (window.innerWidth > 0) ? window.innerWidth : screen.width;
+		var mobileView = window.matchMedia("(max-width: 600px)")
+		if (mobileView.matches) {	// mobile view size
+			sizeFactor = 0.9;
+		}
+		canvas.width = windowWidth*sizeFactor;
+					console.log("********** windowWidth is "+windowWidth);
+			console.log("********** canvas.width is "+canvas.width);	
 
 		/*
 		/   Change the canvas height to be 20% of the screen height
 		*/
 		windowHeight = (window.innerHeight > 0) ? window.innerHeight : screen.height;
 		console.log('height is '+windowHeight);
-		canvas.height= windowHeight/5;
-		
-
-		console.log("********** canvas.width is "+canvas.width);	
-		document.getElementById("main-content-1").innerHTML = "Width of screen is "+screen.width+"<br> width of window is "+window.innerWidth + "<br> width of canvas is " + canvas.width;
-		var x = window.matchMedia("(min-width: 601px)");
-		if (x.matches) {
-			canvas.width = windowWidth;
-					canvas.height= windowHeight/5;
-		} else {
-			canvas.width = (windowWidth/0.75);
-					canvas.height= windowHeight/8;
-		}
+		canvas.height=(windowHeight*sizeFactor)/5;
 		/*
 		/   Create the intial stars
 		*/
@@ -184,16 +173,39 @@ function getChildrenById(x) {
  
     function loop() {
 		/*
+		// declare varibles for colouring the canvas (background, stars, text)
+		// these are websafe colours
+		*/
+		sizeFactor=1.0;
+			var colorBlack = "rgb(0,0,0)";
+			var colorMidnight = "rgb(0,0,51)";
+			var colorLightBlue = "rgb(0,0,255)";
+			var colorWhite = "rgb(255,255,255)";
+		var mobileView = window.matchMedia("(max-width: 600px)")
+		if (mobileView.matches) {	// mobile view colours
+			colorBlack = "rgb(240,248,255)";
+			colorMidnight = "rgb(240,248,255)";
+			colorLightBlue = "rgb(0,0,255)";
+			colorWhite = "rgb(204,204,255)";
+			sizeFactor=0.9;
+		}/*
+		else {	// desktop view
+			var colorBlack = "rgb(0,0,0)";
+			var colorMidnight = "rgb(0,0,51)";
+			var colorLightBlue = "rgb(0,0,255)";
+			var colorWhite = "rgb(255,255,255)";
+		}*/
+		/*
 		//  first check if the dimensions of the window have changed
 		*/
 		if ((windowWidth != window.innerWidth) && (window.innerWidth > 0))
 		{
 			windowWidth=window.innerWidth;
-			canvas.width=windowWidth;
+			canvas.width=(windowWidth*sizeFactor);
 		}
 		if ((windowHeight != window.innerHeight) && (window.innerHeight > 0)){
 			windowHeight=window.innerHeight;
-			canvas.height=windowHeight/5;
+			canvas.height=(windowHeight*sizeFactor)/5;
 		}
 		/*
 		// declare varibles to help with placing of text and stars
@@ -201,14 +213,6 @@ function getChildrenById(x) {
 		var halfWidth  = canvas.width/2;
 		var halfHeight = canvas.height / 2;
 		var dimRatio = canvas.width/canvas.height;
-		/*
-		// declare varibles for colouring the canvas (background, stars, text)
-		// these are websafe colours
-		*/
-		var colorBlack = "rgb(0,0,0)";
-		var colorMidnight = "rgb(0,0,51)";
-		var colorLightBlue = "rgb(0,0,255)";
-		var colorWhite = "rgb(255,255,255)";
 	  	/*
 		/  make the backcolor black, but fade to dark blue (midnight) at bottom
 		*/
