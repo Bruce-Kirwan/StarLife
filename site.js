@@ -325,6 +325,7 @@ function plusSlides(x) {
     }
     console.log('Moved index to: ', currentImg)
     fadeImage(currentImg);
+	console.log('OOOOOOOOOOOOOOOOOOOOO',x);
 }
 
 
