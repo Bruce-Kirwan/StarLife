@@ -13,7 +13,6 @@ window.addEventListener('DOMContentLoaded', function (event) {
     console.log("DOM fully loaded and parsed");
 	document.getElementById("closebtn").style.display = "none";
     addEvents();
-    initSlideshow();
 
 
 });
@@ -63,74 +62,25 @@ canvas = document.getElementById("starfield");
         ctx = canvas.getContext("2d");
         initStars();
 		var timing = 35;		// timing is the time (in millisecons) between star movement (greater timing, slower speed)
-		var decelerate=10;				// rate of deceleration of stars at beginning
-		for (i=1; i<timing; i=i+decelerate)
-		{
-			if (decelerate>1)
-				decelerate--;			// reduce the rate of deceleration
-			for (j=1; j<(i*(10-decelerate)); j++)		// stay longer at the larger timings (so that deceleration is gradual)
+		var widerView = window.matchMedia("(min-width: 601px)")
+		if (widerView.matches) {	// no starburst for smaller widths
+			var decelerate=10;				// rate of deceleration of stars at beginning
+			for (i=1; i<timing; i=i+decelerate)
 			{
-				setTimeout(loop, i);
+				if (decelerate>1)
+					decelerate--;			// reduce the rate of deceleration
+				for (j=1; j<(i*(10-decelerate)); j++)		// stay longer at the larger timings (so that deceleration is gradual)
+				{
+					setTimeout(loop, i);
+				}
 			}
-		}
+		} else
+			timing = 100;
         setInterval(loop,timing);
     }
     document.getElementById("hamburgerIcon").addEventListener('click', function () {openNav();});
 }
 
-
-var currentImg;
-var imgArray;
-
-function initSlideshow() {
-    currentImg = 0;
-    imgArray = getChildrenById('slide-img');
-    displaySlideButtons(true);
-    fadeImage(currentImg);
-    setInterval(function () { plusSlides(1); }, 2000); // Change image every 2 seconds
-}
-
-
-function fadeImage(x) {
-    for (var i = 0; i < imgArray.length; i++) {
-        imgArray[i].style.opacity = 0;
-    }
-    imgArray[x].style.opacity = 1;
-}
-
-function displaySlideButtons(disp) {
-    var buttons = document.getElementsByClassName('slide-buttons');
-    for (var i = 0; i < buttons.length; i++) {
-        if (disp == true) {
-            buttons[i].style.display = 'block';
-        }
-        else {
-            buttons[i].style.display = 'none';
-        }
-    }
-}
-
-
-function plusSlides(x) {
-    //console.log('Move index by: ', x)
-    currentImg = currentImg + x;
-    if (currentImg == imgArray.length) {
-        currentImg = 0;
-    }
-    else if (currentImg < 0) {
-        currentImg = imgArray.length - 1;
-    }
-    //console.log('Moved index to: ', currentImg)
-    fadeImage(currentImg);
-}
-
-
-
-
-//This will return an array of all HTML elements of one parent element
-function getChildrenById(x) {
-    return document.getElementById(x).children;
-}
 
   /* Returns a random number in the range [minVal,maxVal] */
     function randomRange(minVal,maxVal) {
@@ -277,56 +227,8 @@ function getChildrenById(x) {
 		text_gradient.addColorStop(1,colorWhite);
 		ctx.fillStyle = text_gradient;
 		ctx.fillText("Star Life Technologies", halfWidth, canvas.height/1.65); 
-	    	console.log("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXx");
 		document.getElementById("main-content-3").innerHTML = " width is " + canvas.width +"<br> sizeFactor is "+ sizeFactor + "<br> textSize is "+ textSize + "<br> height is " + canvas.height;
     }
-
-
-var currentImg;
-var imgArray;
-
-function initSlideshow() {
-    currentImg = 0;
-    imgArray = getChildrenById('slide-img');
-    displaySlideButtons(true);
-    fadeImage(currentImg);
-    setInterval(function () { plusSlides(1); }, 2000); // Change image every 2 seconds
-}
-
-
-function fadeImage(x) {
-    for (var i = 0; i < imgArray.length; i++) {
-        imgArray[i].style.opacity = 0;
-    }
-    imgArray[x].style.opacity = 1;
-}
-
-function displaySlideButtons(disp) {
-    var buttons = document.getElementsByClassName('slide-buttons');
-    for (var i = 0; i < buttons.length; i++) {
-        if (disp == true) {
-            buttons[i].style.display = 'block';
-        }
-        else {
-            buttons[i].style.display = 'none';
-        }
-    }
-}
-
-
-function plusSlides(x) {
-    console.log('Move index by: ', x)
-    currentImg = currentImg + x;
-    if (currentImg == imgArray.length) {
-        currentImg = 0;
-    }
-    else if (currentImg < 0) {
-        currentImg = imgArray.length - 1;
-    }
-    console.log('Moved index to: ', currentImg)
-    fadeImage(currentImg);
-	console.log('OOOOOOOOOOOOOOOOOOOOO',x);
-}
 
 
 
