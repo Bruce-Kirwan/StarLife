@@ -5,14 +5,16 @@
     <title>Star Life Technologies</title>
 		<link rel="stylesheet" type="text/css" href="siteMobile.css" media="screen and (max-width:600px)">
     <link rel="stylesheet" type="text/css" href="site.css" media="screen and (min-width:601px)">
-
+    <link rel="stylesheet" type="text/css" href="availability.css" media="screen and (min-width:601px)">
 	<META name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
     <script src="calendar.js"></script>
 </head>
 <body id="body">
-		<div id="titlePicture">
+
+
+		<!--<div id="titlePicture">
 			<img src="titlePicture.png" alt="Star Life Technologies">
-		</div>
+		</div>-->
     <div id="menu">
         <div id="menu-i">
             <span id="hamburgerIcon" style="font-size:40px;cursor:pointer" onclick="openNav()">&#9776;</span>
@@ -22,7 +24,7 @@
 		<div id="canvas">
 			<div id="canvas-i">
 				<canvas id='starfield'>
-					<h1>Star Life Technologies</h1>
+					<img src="titlePicture.png" alt="Star Life Technologies">
 				</canvas>
 			</div>
 		</div>
@@ -79,14 +81,55 @@
     <div id="wrapper">
 		<div id="main-page">
         <div id="main-content">
-			<div class="container">
-				<div class="month-cal">
-					<span class="previous">< Prev</span>
-					August 2019
-					<span class="next">Next ></span>
-					<div>&nbsp;</div>
-					<table>
-						<tr>
+			<div id="container">
+				<div id="table-title">
+					<span id="previous" class="hover">< Prev</span>
+					<span id="year">August 2019</span>
+					<span id="next" class="hover">Next ></span>
+				</div>
+				<div id="table-sub-title">
+					<span id="returnToMonth" class="hover">&nbsp;</span>
+				</div>
+				<div id="month-cal">
+					<table id="day">
+						<tr><th>&nbsp;6.00am&nbsp;</th><td>FREE</td></tr>
+						<tr><th>6.30am</th><td>FREE</td></tr>
+						<tr><th>7.00am</th><td>FREE</td></tr>
+						<tr><th>7.30am</th><td>FREE</td></tr>
+						<tr><th>8.00am</th><td>FREE</td></tr>
+						<tr><th>8.30am</th><td>FREE</td></tr>
+						<tr><th>9.00am</th><td>FREE</td></tr>
+						<tr><th>9.30am</th><td>FREE</td></tr>
+						<tr><th>10.00am</th><td>FREE</td></tr>
+						<tr><th>10.30am</th><td>FREE</td></tr>
+						<tr><th>11.00am</th><td>FREE</td></tr>
+						<tr><th>11.30am</th><td>FREE</td></tr>
+						<tr><th>noon</th><td>FREE</td></tr>
+						<tr><th>12.30pm</th><td>FREE</td></tr>
+						<tr><th>1.00pm</th><td>FREE</td></tr>
+						<tr><th>1.30pm</th><td>FREE</td></tr>
+						<tr><th>2.00pm</th><td>FREE</td></tr>
+						<tr><th>2.30pm</th><td>FREE</td></tr>
+						<tr><th>3.00pm</th><td>FREE</td></tr>
+						<tr><th>3.30pm</th><td>FREE</td></tr>
+						<tr><th>4.00pm</th><td>FREE</td></tr>
+						<tr><th>4.30pm</th><td>FREE</td></tr>
+						<tr><th>5.00pm</th><td>FREE</td></tr>
+						<tr><th>5.30pm</th><td>FREE</td></tr>
+						<tr><th>1.30pm</th><td>FREE</td></tr>
+						<tr><th>6.00pm</th><td>FREE</td></tr>
+						<tr><th>6.30pm</th><td>FREE</td></tr>
+						<tr><th>7.00pm</th><td>FREE</td></tr>
+						<tr><th>7.30pm</th><td>FREE</td></tr>
+						<tr><th>8.00pm</th><td>FREE</td></tr>
+						<tr><th>8.30pm</th><td>FREE</td></tr>
+						<tr><th>9.00pm</th><td>FREE</td></tr>
+						<tr><th>9.30pm</th><td>FREE</td></tr>
+						<tr><th>10.00pm</th><td>FREE</td></tr>
+						<tr><th>10.30pm</th><td>FREE</td></tr>
+					</table>
+					<table id="month">
+						<tr id="daysOfWeek">
 							<th>Sun</th>
 							<th>Mon</th>
 							<th>Tue</th>
@@ -95,53 +138,9 @@
 							<th>Fri</th>
 							<th>Sat</th>							
 						</tr>
-						<tr>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td>1</td>
-							<td>2</td>
-							<td>3</td>
-						</tr>	
-						<tr>
-							<td>4</td>
-							<td>5</td>
-							<td>6</td>
-							<td>7</td>
-							<td>8</td>
-							<td>9</td>
-							<td>10</td>
-						</tr>	
-						<tr>
-							<td>11</td>
-							<td>12</td>
-							<td>13</td>
-							<td>14</td>
-							<td>15</td>
-							<td>16</td>
-							<td>17</td>
-						</tr>
-						<tr>
-							<td>18</td>
-							<td>19</td>
-							<td>20</td>
-							<td>21</td>
-							<td>22</td>
-							<td>23</td>
-							<td>24</td>
-						</tr>
-						<tr>
-							<td>25</td>
-							<td>26</td>
-							<td>27</td>
-							<td>28</td>
-							<td>29</td>
-														<td>30</td>
-							<td>31</td>
-						</tr>	
 					</table>
 				</div>
+
 			</div>
 <!--			<div id="calendar" style="position: relative; width: 100%; height: 100%;"></div>
 			<script src="MindFusion.Scheduling.js" type="text/javascript"></script>

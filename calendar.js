@@ -1,25 +1,213 @@
-    MAX_DEPTH = 50;
- 
-    var canvas, ctx;
-    var stars = new Array(512);
-	var windowWidth = 1000;
-	var windowHeight=150;
-	var sizeFactor=1.0;			// this changes for mobile view
 
-
+MAX_DEPTH = 50; 
+var canvas, ctx;
+var stars = new Array(512);
+var windowWidth = 1000;
+var windowHeight=150;
+var sizeFactor=1.0;			// this changes for mobile view
+var today = new Date();
+var currentWeekDay = today.getDay();
+var currentDay = today.getDate();
+var currentMonth = today.getMonth();
+var currentYear = today.getFullYear();
+var selectDate = today;
+var selectMonth = currentMonth;
+var selectYear = currentYear;
+var selectWeekDay = currentDay;
+var selectDay = currentDay;
+var firstOfMonth = today;
+var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+var days = ["Sun", "Mon", "Tues", "Wed", "Thurs", "Fri", "Sat"];
 console.log('... site.js has loaded ...');
 
 window.addEventListener('DOMContentLoaded', function (event) {
     console.log("DOM fully loaded and parsed");
 	document.getElementById("closebtn").style.display = "none";
+	initialiseCalendar();
     addEvents();
-
-
-
 });
 
+function addEvents() {
+	console.log(" ------------  in addEvents");
+canvas = document.getElementById("starfield");
+	if( canvas && canvas.getContext ) {
+		console.log("in if statement");
+        ctx = canvas.getContext("2d");
+        initStars();
+		var timing = 35;		// timing is the time (in millisecons) between star movement (greater timing, slower speed)
+		var decelerate=10;				// rate of deceleration of stars at beginning
+		for (i=1; i<timing; i=i+decelerate)
+		{
+			if (decelerate>1)
+				decelerate--;			// reduce the rate of deceleration
+			for (j=1; j<(i*(10-decelerate)); j++)		// stay longer at the larger timings (so that deceleration is gradual)
+			{
+				setTimeout(loop, i);
+			}
+		}
+        setInterval(loop,timing);
+    }
+    document.getElementById("hamburgerIcon").addEventListener('click', function () {openNav();});
+	
+	document.getElementById("month").onclick = function(e) {
+		e = e || event
+		var target = e.target || e.srcElement
+		// variable target has your clicked element
+		if (target.nodeName == "TD") {
+			initialiseDay(target.innerHTML);
+		}
+	}
+	document.getElementById("next").onclick = function() {
+		selectDate = new Date(firstOfMonth.setMonth(firstOfMonth.getMonth()+1));
+		selectYear = selectDate.getFullYear();
+		selectMonth = selectDate.getMonth();
+		selectDay = selectDate.getDay();
+		initialiseCalendar();
+	}
+	document.getElementById("previous").onclick = function() {
+		selectDate = new Date(firstOfMonth.setMonth(firstOfMonth.getMonth()-1));
+		selectYear = selectDate.getFullYear();
+		selectMonth = selectDate.getMonth();
+		selectDay = selectDate.getDay();
+		initialiseCalendar();
+	}
+	document.getElementById("returnToMonth").onclick = function() {
+		document.getElementById("day").style.display = "none";
+		document.getElementById("returnToMonth").innerHTML = "";
+		document.getElementById("canvas").style.display = "block";
+		document.getElementById("color-fade").style.display = "block";
+	}
+	
+}
 
+function initialiseDay(day) {
+		selectDate = new Date(selectYear + "-" + (selectMonth+1) + "-" + day);
+		selectYear = selectDate.getFullYear();
+		selectMonth = selectDate.getMonth();
+		selectDay = selectDate.getDay();
+		document.getElementById("canvas").style.display = "none";
+		document.getElementById("color-fade").style.display = "none";
+		document.getElementById("day").style.display = "block";
+		document.getElementById("year").innerHTML = day + " " + months[selectMonth];
+		document.getElementById("returnToMonth").innerHTML = "return to month";
+}
 
+function initialiseCalendar() { 
+	document.getElementById("canvas").style.display = "block";
+	document.getElementById("color-fade").style.display = "block";
+	if (selectDate < today)
+		selectDate = today;
+	selectDay = selectDate.getDate();
+		console.log("11111111111111111111 selectDay is "+selectDay+ ", startDay is "+startDay);
+	var startDay = selectDay;
+			console.log("22222222222222222 selectDay is "+selectDay+ ", startDay is "+startDay);
+	document.getElementById("year").innerHTML = months[selectMonth] + " " + selectYear;
+	console.log("Date is " + currentDay + ", month is " + currentMonth + ", year is " + currentYear);
+	/*
+	/   do not show previous button, if the month is before the current month
+	*/
+	if ((selectDate.getYear() <= today.getYear())&&(selectDate.getMonth() <= today.getMonth())) {
+		document.getElementById("previous").style.display = "none";
+	} else {
+		document.getElementById("previous").style.display = "block";
+	}
+	/*
+	/   do not show next button, if the month is after one year into the future
+	*/
+	if ((selectDate.getYear() > today.getYear())&&(selectMonth >= today.getMonth())) {
+		document.getElementById("next").style.display = "none";
+	} else {
+		document.getElementById("next").style.display = "block";
+	}
+	// get the first day of the month, so know what day of the week to start adding day of month numbers
+    firstOfMonth = new Date(selectYear+"-"+(selectMonth+1)+"-01");
+	var firstDayOfMonth = firstOfMonth.getDay();
+	console.log("firstDayOfMonth is "+firstDayOfMonth);
+	var selectDay = firstOfMonth.getDate();
+	// create the table of days of month
+	var tbl = document.getElementById("month");
+	tbl.innerHTML = "";		// body of the calendar
+	/*
+	// create and add the header for the days of the week
+	*/
+	var row = document.createElement("tr");
+	for (var i=0; i < 7; i++) {
+		var cell = document.createElement("th");
+		var cellText = document.createTextNode(days[i]);
+		cell.appendChild(cellText);
+        row.appendChild(cell);
+	}
+	tbl.appendChild(row);
+	/*
+	/   next, write out the first row of days of the month
+	*/
+	row = document.createElement("tr");
+	var day;
+	for (var i=0;i<firstDayOfMonth; i++) {
+		cell = document.createElement("th");
+		row.appendChild(cell);
+	}
+	for (var i=firstDayOfMonth; i < 7; i++) {
+		console.log("selectDay is "+selectDay+ ", startDay is "+startDay);
+		if (selectDay < startDay) {
+			cell = document.createElement("th");
+			cell.style.color = "rgb(0,0,153)";
+		} else {
+			cell = document.createElement("td");
+		}		
+		cellText = document.createTextNode(selectDay);
+		cell.appendChild(cellText);
+        row.appendChild(cell);
+		selectDay++;
+	}
+	tbl.appendChild(row);
+	/*
+	/   then write out the next 3 rows of days of the month
+	*/
+	for (var i = 0; i < 3; i++) {
+		row = document.createElement("tr");
+		//   create each cell in table of month dates
+		for (var j=0; j<7; j++) {
+			console.log("selectDay is "+selectDay+ ", startDay is "+startDay);
+			if (selectDay < startDay) {
+				cell = document.createElement("th");
+				cell.style.color = "rgb(0,0,153)";
+			} else {
+				cell = document.createElement("td");
+			}
+			cellText = document.createTextNode(selectDay);
+			cell.appendChild(cellText);
+			row.appendChild(cell);
+			selectDay++;
+		}
+		tbl.appendChild(row);
+	}
+	selectDate = new Date(selectYear+"-"+(selectMonth+1)+"-"+selectDay);
+	row = document.createElement("tr");
+	//   create each cell in table of month days
+	for (var j=0; j<7; j++) {
+		console.log("selectDay is "+selectDay+ ", startDay is "+startDay);
+		day = selectDate.getDate();
+		console.log("selectDate is "+ day);
+		cellText = document.createTextNode(day);		
+		if ( (day < 7) ||  (day < startDay) )  {
+			cell = document.createElement("th");
+			cell.style.color = "rgb(0,0,153)";
+		} else {
+			cell = document.createElement("td");
+		}
+		cell.appendChild(cellText);
+		row.appendChild(cell);
+		console.log("output");
+		selectDate.setDate(selectDate.getDate() + 1);
+		console.log("selectDate.getDate() is " + selectDate.getDate());
+		//selectDate = selectDate.add(1).day();
+		
+		console.log("selectDate.getDate() is " + selectDate.getDate());
+	}
+	//  add the new row to the table
+	tbl.appendChild(row);
+}
 
 function openNav() {
     console.log("Open Nav Clicked");
@@ -53,33 +241,6 @@ function accordion() {
         });
     }
 }
-
-
-function addEvents() {
-	console.log(" ------------  in addEvents");
-canvas = document.getElementById("starfield");
-	if( canvas && canvas.getContext ) {
-		console.log("in if statement");
-        ctx = canvas.getContext("2d");
-        initStars();
-		var timing = 35;		// timing is the time (in millisecons) between star movement (greater timing, slower speed)
-		var decelerate=10;				// rate of deceleration of stars at beginning
-		for (i=1; i<timing; i=i+decelerate)
-		{
-			if (decelerate>1)
-				decelerate--;			// reduce the rate of deceleration
-			for (j=1; j<(i*(10-decelerate)); j++)		// stay longer at the larger timings (so that deceleration is gradual)
-			{
-				setTimeout(loop, i);
-			}
-		}
-        setInterval(loop,timing);
-    }
-    document.getElementById("hamburgerIcon").addEventListener('click', function () {openNav();});
-}
-
-
-
 
 
 //This will return an array of all HTML elements of one parent element
@@ -236,11 +397,11 @@ function getChildrenById(x) {
 
 
 
-//This will return an array of all HTML elements of one parent element
+/*This will return an array of all HTML elements of one parent element
 function getChildrenById(x) {
     return document.getElementById(x).children;
 }
-
+/*
 var today = new Date();
 var currentMonth = today.getMonth();
 var currentYear = today.getFullYear();
@@ -324,4 +485,4 @@ function showCalendar(month, year) {
         tbl.appendChild(row); // appending each row into calendar body.
     }
 
-}
+}*/

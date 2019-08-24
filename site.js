@@ -11,6 +11,8 @@ console.log('... site.js has loaded ...');
 
 window.addEventListener('DOMContentLoaded', function (event) {
     console.log("DOM fully loaded and parsed");
+	document.getElementById("canvas").style.display = "block";
+	document.getElementById("color-fade").style.display = "block";
 	document.getElementById("closebtn").style.display = "none";
     addEvents();
 
@@ -79,6 +81,8 @@ canvas = document.getElementById("starfield");
         setInterval(loop,timing);
     }
     document.getElementById("hamburgerIcon").addEventListener('click', function () {openNav();});
+
+
 }
 
 
