@@ -28,14 +28,83 @@ var narrowView = window.matchMedia("(max-width: 600px)")
 if (narrowView.matches) 		// keep canvas for smaller widths
 	removeCanvas = false;
 
+/*
+$.ajax({
+  // The 'type' property sets the HTTP method.
+  // A value of 'PUT' or 'DELETE' will trigger a preflight request.
+  type: 'GET',
+
+  // The URL to make the request to.
+  url: 'https://github.com/Bruce-Kirwan/StarLife/blob/master/availability.json',
+
+  // The 'contentType' property sets the 'Content-Type' header.
+  // The JQuery default for this property is
+  // 'application/x-www-form-urlencoded; charset=UTF-8', which does not trigger
+  // a preflight. If you set this value to anything other than
+  // application/x-www-form-urlencoded, multipart/form-data, or text/plain,
+  // you will trigger a preflight request.
+  contentType: 'text/plain',
+
+  xhrFields: {
+    // The 'xhrFields' property sets additional fields on the XMLHttpRequest.
+    // This can be used to set the 'withCredentials' property.
+    // Set the value to 'true' if you'd like to pass cookies to the server.
+    // If this is enabled, your server must respond with the header
+    // 'Access-Control-Allow-Credentials: true'.
+    withCredentials: false
+  },
+
+  headers: {
+    // Set any custom headers here.
+    // If you set any non-simple headers, your server must include these
+    // headers in the 'Access-Control-Allow-Headers' response header.
+  },
+
+  success: function() {
+    // Here's where you handle a successful response.
+  },
+
+  error: function() {
+    // Here's where you handle an error response.
+    // Note that if the error was due to a CORS issue,
+    // this function will still fire, but there won't be any additional
+    // information about the error.
+  }
+});
+*/
+$.ajax({
+  method: 'GET',
+  url: 'http://crossorigin.me/https://github.com/Bruce-Kirwan/StarLife/blob/master/availability.jsonp',
+  dataType: 'jsonp', //change the datatype to 'jsonp' works in most cases
+  success: (res) => {
+	  console.log("success !!!!!!!!!!!!!!!!!!!!!! ");
+   console.log(res);
+  }
+})
+
+function fetchJsonDataFile() {
+	console.log("About to fetch JSON data file");
+	  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+     document.getElementById("wrapper").innerHTML = this.responseText;
+    }
+  };
+  xhttp.open("GET", "https://github.com/Bruce-Kirwan/StarLife/blob/master/availability.json", true);
+  xhttp.send();
+}
+
+function populateAvailability(data) {
+		console.log("populating availability");
+		console.log("data is "+ data);
+}
 
 window.addEventListener('DOMContentLoaded', function (event) {
     console.log("DOM fully loaded and parsed");
-	console.log("removeCanvas is "+removeCanvas);
 	oneYearFromToday = oneYearFromToday.setYear(oneYearFromToday.getFullYear()+1);		// get date exactly one year from today
-	console.log("todays year is "+today.getFullYear());
 	document.getElementById("closebtn").style.display = "none";
 	initialiseCalendar();
+	//fetchJsonDataFile();
     addEvents();
 });
 
@@ -43,7 +112,6 @@ function addEvents() {
 	console.log(" ------------  in addEvents");
 	canvas = document.getElementById("starfield");
 	if( canvas && canvas.getContext ) {
-		console.log("in if statement");
         ctx = canvas.getContext("2d");
         initStars();
 		var timing = 35;		// timing is the time (in millisecons) between star movement (greater timing, slower speed)
@@ -73,7 +141,6 @@ function addEvents() {
 	document.getElementById("next").onclick = function() {
 		if (displayingDay)  {
 			displayDate.setDate(displayDate.getDate() + 1);	
-			console.log("displayingDay is true");
 			if (displayDate.getDate()==1) {		// if have moved into next month,
 				selectDate = displayDate;
 				initialiseCalendar();			// also update the month calendar
@@ -81,11 +148,8 @@ function addEvents() {
 			initialiseDay();					
 		} else  {
 			var x = firstOfMonth.getMonth();
-			console.log("month is " + x);
 			selectDate = new Date(firstOfMonth.setMonth(firstOfMonth.getMonth()+1));
-			console.log("displayingDay is false");
 			x = selectDate.getMonth();
-			console.log("month is " + x);
 			initialiseCalendar();
 		}
 	}
@@ -99,13 +163,10 @@ function addEvents() {
 				displayDate.setDate(displayDate.getDate() - 1);	
 			}
 			initialiseDay();
-			console.log("displayingDay is true");
 
 		} else  {
 			var x = firstOfMonth.getMonth();
-			console.log("x is "+x);
 			selectDate = new Date(firstOfMonth.setMonth(firstOfMonth.getMonth()-1));
-			console.log("displayingDay is false");
 			initialiseCalendar();
 		}
 	}
@@ -123,7 +184,6 @@ function initialiseDay() {
 	selectYear = displayDate.getFullYear();
 	selectMonth = displayDate.getMonth();
 	selectDay = displayDate.getDate();;
-	console.log("removeCanvas is "+ removeCanvas);
 	if (removeCanvas)		// remove the canvas, unless we are in mobile view
 		document.getElementById("canvas").style.display = "none";
 	document.getElementById("color-fade").style.display = "none";
@@ -154,9 +214,7 @@ function initialiseCalendar() {
 	document.getElementById("color-fade").style.display = "block";
 	selectMonth = selectDate.getMonth();
 	selectYear = selectDate.getFullYear();
-	console.log("11111111111111111111 selectDay is "+selectDay+ ", startDay is "+startDay);
 	var startDay = 1;						// default show from 1st of month
-	console.log("22222222222222222 selectDay is "+selectDay+ ", startDay is "+startDay);
 	if (selectDate < today) 
 		selectDate = today;
 	selectDay = selectDate.getDate();
@@ -299,12 +357,12 @@ function getChildrenById(x) {
     return document.getElementById(x).children;
 }
 
-  /* Returns a random number in the range [minVal,maxVal] */
-    function randomRange(minVal,maxVal) {
-      return Math.floor(Math.random() * (maxVal - minVal - 1)) + minVal;
-    }
+/* Returns a random number in the range [minVal,maxVal] */
+function randomRange(minVal,maxVal) {
+	return Math.floor(Math.random() * (maxVal - minVal - 1)) + minVal;
+}
  
-    function initStars() {
+	function initStars() {
 		console.log(" ------------------------ in initStars");
 		/*
 		/   Change the canvas width to be the same as screen width
@@ -316,8 +374,8 @@ function getChildrenById(x) {
 			sizeFactor = 0.9;
 		}
 		canvas.width = windowWidth*sizeFactor;
-					console.log("********** windowWidth is "+windowWidth);
-			console.log("********** canvas.width is "+canvas.width);	
+		console.log("********** windowWidth is "+windowWidth);
+		console.log("********** canvas.width is "+canvas.width);	
 
 		/*
 		/   Change the canvas height to be 20% of the screen height
@@ -357,13 +415,7 @@ function getChildrenById(x) {
 			colorWhite = "rgb(204,204,255)";
 			sizeFactor = 0.9;
 			textSize = canvas.width/600.0;		// change text size so it fits
-		}/*
-		else {	// desktop view
-			var colorBlack = "rgb(0,0,0)";
-			var colorMidnight = "rgb(0,0,51)";
-			var colorLightBlue = "rgb(0,0,255)";
-			var colorWhite = "rgb(255,255,255)";
-		}*/
+		}
 		/*
 		//  first check if the dimensions of the window have changed
 		*/
@@ -447,93 +499,3 @@ function getChildrenById(x) {
    }
 
 
-
-/*This will return an array of all HTML elements of one parent element
-function getChildrenById(x) {
-    return document.getElementById(x).children;
-}
-/*
-var today = new Date();
-var currentMonth = today.getMonth();
-var currentYear = today.getFullYear();
-var selectYear = document.getElementById("year");
-var selectMonth = document.getElementById("month");
-
-var months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-
-var monthAndYear = document.getElementById("monthAndYear");
-showCalendar(currentMonth, currentYear);
-
-
-function next() {
-    currentYear = (currentMonth === 11) ? currentYear + 1 : currentYear;
-    currentMonth = (currentMonth + 1) % 12;
-    showCalendar(currentMonth, currentYear);
-}
-
-function previous() {
-    currentYear = (currentMonth === 0) ? currentYear - 1 : currentYear;
-    currentMonth = (currentMonth === 0) ? 11 : currentMonth - 1;
-    showCalendar(currentMonth, currentYear);
-}
-
-function jump() {
-    currentYear = parseInt(selectYear.value);
-    currentMonth = parseInt(selectMonth.value);
-    showCalendar(currentMonth, currentYear);
-}
-
-function showCalendar(month, year) {
-
-    let firstDay = (new Date(year, month)).getDay();
-    let daysInMonth = 32 - new Date(year, month, 32).getDate();
-
-    var tbl = document.getElementById("calendar-body"); // body of the calendar
-
-    // clearing all previous cells
-    document.getElementById("calendar-body").innerHTML = "test";
-
-    // filing data about month and in the page via DOM.
-    document.getElementById("monthAndYear").innerHTML = months[month] + " " + year;
-	console.log("year is "+year+", month is "+month);
-    document.getElementById("year").value = year;
-    document.getElementById("month").value = month;
-	console.log("YYYYYYYYYYY DDDDDDDDDDD");
-
-    // creating all cells
-    let date = 1;
-    for (let i = 0; i < 6; i++) {
-        // creates a table row
-        let row = document.createElement("tr");
-
-        //creating individual cells, filing them up with data.
-        for (let j = 0; j < 7; j++) {
-            if (i === 0 && j < firstDay) {
-                let cell = document.createElement("td");
-                let cellText = document.createTextNode(" ");
-                cell.appendChild(cellText);
-                row.appendChild(cell);
-				console.log("output");
-            }
-            else if (date > daysInMonth) {
-                break;
-            }
-
-            else {
-                let cell = document.createElement("td");
-                let cellText = document.createTextNode(date);
-                if (date === today.getDate() && year === today.getFullYear() && month === today.getMonth()) {
-                    cell.classList.add("bg-info");
-                } // color today's date
-                cell.appendChild(cellText);
-                row.appendChild(cell);
-                date++;
-            }
-
-
-        }
-
-        tbl.appendChild(row); // appending each row into calendar body.
-    }
-
-}*/

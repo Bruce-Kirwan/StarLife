@@ -231,7 +231,7 @@ canvas = document.getElementById("starfield");
 		text_gradient.addColorStop(1,colorWhite);
 		ctx.fillStyle = text_gradient;
 		ctx.fillText("Star Life Technologies", halfWidth, canvas.height/1.65); 
-		document.getElementById("main-content-3").innerHTML = " width is " + canvas.width +"<br> sizeFactor is "+ sizeFactor + "<br> textSize is "+ textSize + "<br> height is " + canvas.height;
+		//document.getElementById("main-content-3").innerHTML = " width is " + canvas.width +"<br> sizeFactor is "+ sizeFactor + "<br> textSize is "+ textSize + "<br> height is " + canvas.height;
     }
 
 
