@@ -19,7 +19,7 @@ var displayDate = new Date(today);
 var firstOfMonth = new Date(today);
 var oneYearFromToday = new Date(today);
 var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-var days = ["Sun", "Mon", "Tues", "Wed", "Thurs", "Fri", "Sat"];
+var days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 var displayingDay = false;
 console.log('... site.js has loaded ...');
 
