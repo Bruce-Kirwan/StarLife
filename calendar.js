@@ -23,12 +23,15 @@ var days = ["Sun", "Mon", "Tues", "Wed", "Thurs", "Fri", "Sat"];
 var displayingDay = false;
 console.log('... site.js has loaded ...');
 
-
-
+var removeCanvas = true;		// remove canvas when displaying schedule for one day
+var narrowView = window.matchMedia("(max-width: 600px)")
+if (narrowView.matches) 		// keep canvas for smaller widths
+	removeCanvas = false;
 
 
 window.addEventListener('DOMContentLoaded', function (event) {
     console.log("DOM fully loaded and parsed");
+	console.log("removeCanvas is "+removeCanvas);
 	oneYearFromToday = oneYearFromToday.setYear(oneYearFromToday.getFullYear()+1);		// get date exactly one year from today
 	console.log("todays year is "+today.getFullYear());
 	document.getElementById("closebtn").style.display = "none";
@@ -120,7 +123,9 @@ function initialiseDay() {
 	selectYear = displayDate.getFullYear();
 	selectMonth = displayDate.getMonth();
 	selectDay = displayDate.getDate();;
-	document.getElementById("canvas").style.display = "none";
+	console.log("removeCanvas is "+ removeCanvas);
+	if (removeCanvas)		// remove the canvas, unless we are in mobile view
+		document.getElementById("canvas").style.display = "none";
 	document.getElementById("color-fade").style.display = "none";
 	document.getElementById("day").style.display = "block";
 	document.getElementById("year").innerHTML = selectDay + " " + months[selectMonth];
