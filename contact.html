@@ -76,12 +76,12 @@
 		</div>
         <div class="lid">&nbsp;</div>
     <div id="wrapper">
-		<div id="main-page">
+	  <div id="main-page">
        <div id="main-content">
 			<div id="contact-link-images">
-				<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+				<span id="first-image">
 				<a href="#call">
-				<svg width="170" height="175" viewBox="0 0 170 170">
+				<svg width="170" height="170" viewBox="0 0 170 170">
 					<defs>
 						<path id="a" d="M85 170c-46.944 0-85-38.056-85-85S38.056 0 85 0s85 38.056 85 85-38.056 85-85 85zm0-10c41.421 0 75-33.579 75-75s-33.579-75-75-75-75 33.579-75 75 33.579 75 75 75z"/>
 					</defs>
@@ -105,10 +105,10 @@
 						/>
 				</svg>
 				</a>
-				<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-				<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+				</span>
+				<span id="second-image">
 				<a href="#message">
-				<svg width="170" height="175" viewBox="0 0 170 170">
+				<svg width="170" height="170" viewBox="0 0 170 170">
 					<defs>
 						<path id="a" d="M85 170c-46.944 0-85-38.056-85-85S38.056 0 85 0s85 38.056 85 85-38.056 85-85 85zm0-10c41.421 0 75-33.579 75-75s-33.579-75-75-75-75 33.579-75 75 33.579 75 75 75z"/>
 					</defs>
@@ -132,10 +132,10 @@
 						/>
 				</svg>
 				</a>
-				<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-				<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+				</span>
+				<span id="third-image">
 				<a href="#e-mail">
-				<svg width="170" height="175" viewBox="0 0 170 170">
+				<svg width="170" height="170" viewBox="0 0 170 170">
 					<defs>
 						<path id="a" d="M85 170c-46.944 0-85-38.056-85-85S38.056 0 85 0s85 38.056 85 85-38.056 85-85 85zm0-10c41.421 0 75-33.579 75-75s-33.579-75-75-75-75 33.579-75 75 33.579 75 75 75z"/>
 					</defs>
@@ -159,15 +159,19 @@
 						/>
 				</svg>
 				</a>
+				</span>
 			</div>
-			<div class="lid">&nbsp;</div>
 			<div id="call">
 				<div>&nbsp;</div>
 				<div>&nbsp;</div>
 				<div>&nbsp;</div>
+				<div>&nbsp;</div>
+				<h2>Phone Us</h2>
+				<div>&nbsp;</div>
 				<div>
-					Our phone number is <span id="phone">087 555 5577</span>
+					Our phone number is <span class="medium">087 555 5577</span>
 				</div>
+				<div>&nbsp;</div>
 				<div>
 					You can reach us from 6am to 11pm Monday to Friday
 				</div>
@@ -175,7 +179,6 @@
 					Our number from outside Ireland is +353 87 555 5577
 				</div>
 			</div>
-			<div class="lid">&nbsp;</div>
 			<div id="message">
 				<div>&nbsp;</div>
 				<div>&nbsp;</div>
@@ -183,50 +186,64 @@
 			    <form action="mailto:StarLifeTechnologies@yahoo@yahoo.com" method="post" enctype="text/plain">
                     <fieldset class="fieldset">
                         <h2>Send a message</h2>
+						<div>&nbsp;</div>
 						<div>
 							Send a quick message and we will get back to you as soon as we can.
 						</div>
 						<div>
 							Alternatively you can e-mail us at StarLifeTechnologies@yahoo.com.
 						</div>
-                        <div class="formField">
-						    <label for="nameField" class="inputLabel">Contact Name*</label>
+						<div>&nbsp;</div>
+                        <!--<div class="inputLabel">
+						    <label class="inputLabel">Contact Name*</label>
+						<div>
+						<div class="item">
                             <input class="input" type="text" name="nameField" id="nameField" required placeholder="enter your name" />
-						</div>
+						</div>-->
+						<div class="formField">
+							<label for="nameField" class="inputLabel">Name*</label>
+                            <input class="input" type="text" name="nameField" id="nameField" required placeholder="enter your name" />
+                        </div>
                         <div class="formField">
 							<label for="emailField" class="inputLabel">E-mail</label>
                             <input class="input" type="email" name="emailField" id="emailField" required placeholder="enter your e-mail" />
+                        </div>
+						<div class="formField">
+							<label for="subjectField" class="inputLabel">Subject*</label>
+                            <input class="input" type="text" name="subjectField" id="subjectField" />
                         </div>
 						<div class="formField">
 							<label for="phoneField" class="inputLabel">Phone Number</label>
                             <input class="input" type="email" name="emailField" id="emailField" required placeholder="enter your e-mail" />
                         </div>
                         <div class="formField">
-							<label for="subjectField" class="inputLabel">Subject</label>
-                            <input class="input" type="text" name="subjectField" id="subjectField" />
-                        </div>
-                        <div class="formField">
-							<label for="messageField" class="inputLabel">Message</label>
+							<label for="messageField" class="inputLabel">Message*</label>
                             <textarea class="input" name="messageField" id="messageField" required></textarea>
                         </div>
-						<div>
+						<div class="lid">&nbsp;</div>
+						<!--<div>
 							<input type="checkbox" name="terms" value="Car" checked> I agree to the terms and conditions<br>
-						</div>
+						</div>-->
                         <div class="formButtons">
-                            <input class=" input" type="submit" value="Submit Form">
+                            <input class="input" type="submit" value="Submit Form">
+						</div>
+						<div class="formButtons">
                             <input class="input" type="reset" value="Reset">
                         </div>
                     </fieldset>
                 </form>
 			</div>
-			<div class="lid">&nbsp;</div>
 			<div id="e-mail">
 				<div>&nbsp;</div>
 				<div>&nbsp;</div>
 				<div>&nbsp;</div>
+				<div>&nbsp;</div>
+				<h2>Email Us</h2>
+				<div>&nbsp;</div>
 				<div>
-					Our e-mail address is <span action = "mailto:StarLifeTechnologies@yahoo.com">StarLifeTechnologies@yahoo.com</span>
+					Our e-mail address is <span class="medium" action = "mailto:StarLifeTechnologies@yahoo.com">StarLifeTechnologies@yahoo.com</span>
 				</div>
+				<div>&nbsp;</div>
 				<div>
 					Please feel Free to contact us to make a booking or make any other queries.
 				<div>
@@ -234,7 +251,6 @@
         </div>
 
 
-        <div class="lid">&nbsp;</div>
         <footer id="main-footer">
             <div id="main-footer-i">
 				<div>&nbsp;</div>
@@ -329,7 +345,7 @@
 				<div>&nbsp;</div>
 			</div>
         </footer>
-		</div>
+	 </div>
     </div>
 </body>
 </html>

@@ -33,7 +33,6 @@
 #main-contents {
 	
 	margin: auto;
-	background-color: red;
 	width:100%;
 	height: 50px;
 	text-decoration:none;
@@ -117,6 +116,16 @@
 	color:#CEE4F0;
 }
 
+#first-image {
+	width: 33%;
+	float:left;
+}
+
+#third-image {
+	width: 33%;
+	float:right;
+}
+
 .small {
 	font-size:1.25em;
 	font-family: sans-serif;
@@ -126,16 +135,33 @@
 
 
 
-.formLabel {
+.inputLabel {
 font-family:"OpenSans-Regular", "Helvetica Neue", Helvetica, Arial, sans-serif;
 font-weight:normal;
 font-size:16px;
 font-weight:600;
-line-height:1.13;
-color:#000000
+/*line-height:1.13;*/
+color:#000000;
+width:45%;
 }
 
+.formField {
+	width: 45%;
+	float: left;
+	padding-right: 1.5em;
+}
 
+.formButtons {
+	width: 45%;
+	float: left;
+	padding-right: 1.5em;
+	
+}
+
+.medium {
+	font-size: 1.25em;
+	font-weight: bolder;
+}
 #main-content-3 {
 	width: 33%;
 	float: right;
@@ -188,10 +214,18 @@ color:#000000
     }
 	
 
+.item {
+	width: 100%;
+	float: right;
+}
+
+#messageField {
+	height: 10em;
+}
 
 
 .input{
-height:48px;
+height:3em;
 border:solid 2px #d7d7d7;
 margin-top:6px;
 font-family:"OpenSans-Regular", "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -203,6 +237,6 @@ box-sizing:border-box;
 width:100%;
 background-color:#fafafa;
 margin-bottom:24px;
-padding-left:16px;
-padding-right:30px
+padding-left:1.5em;
+padding-right:1.5em;
 }	
