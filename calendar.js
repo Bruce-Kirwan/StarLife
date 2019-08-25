@@ -10,18 +10,27 @@ var currentWeekDay = today.getDay();
 var currentDay = today.getDate();
 var currentMonth = today.getMonth();
 var currentYear = today.getFullYear();
-var selectDate = today;
+var selectDate = new Date(today);
+var selectWeekDay = currentWeekDay;
+var selectDay = currentDay;
 var selectMonth = currentMonth;
 var selectYear = currentYear;
-var selectWeekDay = currentDay;
-var selectDay = currentDay;
-var firstOfMonth = today;
+var displayDate = new Date(today);
+var firstOfMonth = new Date(today);
+var oneYearFromToday = new Date(today);
 var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 var days = ["Sun", "Mon", "Tues", "Wed", "Thurs", "Fri", "Sat"];
+var displayingDay = false;
 console.log('... site.js has loaded ...');
+
+
+
+
 
 window.addEventListener('DOMContentLoaded', function (event) {
     console.log("DOM fully loaded and parsed");
+	oneYearFromToday = oneYearFromToday.setYear(oneYearFromToday.getFullYear()+1);		// get date exactly one year from today
+	console.log("todays year is "+today.getFullYear());
 	document.getElementById("closebtn").style.display = "none";
 	initialiseCalendar();
     addEvents();
@@ -29,7 +38,7 @@ window.addEventListener('DOMContentLoaded', function (event) {
 
 function addEvents() {
 	console.log(" ------------  in addEvents");
-canvas = document.getElementById("starfield");
+	canvas = document.getElementById("starfield");
 	if( canvas && canvas.getContext ) {
 		console.log("in if statement");
         ctx = canvas.getContext("2d");
@@ -54,55 +63,99 @@ canvas = document.getElementById("starfield");
 		var target = e.target || e.srcElement
 		// variable target has your clicked element
 		if (target.nodeName == "TD") {
-			initialiseDay(target.innerHTML);
+			displayDate = new Date(selectYear + "-" + (selectMonth+1) + "-" + target.innerHTML);
+			initialiseDay();
 		}
 	}
 	document.getElementById("next").onclick = function() {
-		selectDate = new Date(firstOfMonth.setMonth(firstOfMonth.getMonth()+1));
-		selectYear = selectDate.getFullYear();
-		selectMonth = selectDate.getMonth();
-		selectDay = selectDate.getDay();
-		initialiseCalendar();
+		if (displayingDay)  {
+			displayDate.setDate(displayDate.getDate() + 1);	
+			console.log("displayingDay is true");
+			if (displayDate.getDate()==1) {		// if have moved into next month,
+				selectDate = displayDate;
+				initialiseCalendar();			// also update the month calendar
+			}				
+			initialiseDay();					
+		} else  {
+			var x = firstOfMonth.getMonth();
+			console.log("month is " + x);
+			selectDate = new Date(firstOfMonth.setMonth(firstOfMonth.getMonth()+1));
+			console.log("displayingDay is false");
+			x = selectDate.getMonth();
+			console.log("month is " + x);
+			initialiseCalendar();
+		}
 	}
 	document.getElementById("previous").onclick = function() {
-		selectDate = new Date(firstOfMonth.setMonth(firstOfMonth.getMonth()-1));
-		selectYear = selectDate.getFullYear();
-		selectMonth = selectDate.getMonth();
-		selectDay = selectDate.getDay();
-		initialiseCalendar();
+		if (displayingDay)  {
+			if (displayDate.getDate()==1) {		// if moving back to previous month,
+				displayDate.setDate(displayDate.getDate() - 1);	
+				selectDate = displayDate;
+				initialiseCalendar();			// also update the month calendar
+			} else {
+				displayDate.setDate(displayDate.getDate() - 1);	
+			}
+			initialiseDay();
+			console.log("displayingDay is true");
+
+		} else  {
+			var x = firstOfMonth.getMonth();
+			console.log("x is "+x);
+			selectDate = new Date(firstOfMonth.setMonth(firstOfMonth.getMonth()-1));
+			console.log("displayingDay is false");
+			initialiseCalendar();
+		}
 	}
 	document.getElementById("returnToMonth").onclick = function() {
 		document.getElementById("day").style.display = "none";
 		document.getElementById("returnToMonth").innerHTML = "";
 		document.getElementById("canvas").style.display = "block";
 		document.getElementById("color-fade").style.display = "block";
-	}
-	
+		document.getElementById("year").innerHTML = months[selectMonth] + " " + selectYear;
+		displayingDay = false;
+	}	
 }
 
-function initialiseDay(day) {
-		selectDate = new Date(selectYear + "-" + (selectMonth+1) + "-" + day);
-		selectYear = selectDate.getFullYear();
-		selectMonth = selectDate.getMonth();
-		selectDay = selectDate.getDay();
-		document.getElementById("canvas").style.display = "none";
-		document.getElementById("color-fade").style.display = "none";
-		document.getElementById("day").style.display = "block";
-		document.getElementById("year").innerHTML = day + " " + months[selectMonth];
-		document.getElementById("returnToMonth").innerHTML = "return to month";
+function initialiseDay() {
+	selectYear = displayDate.getFullYear();
+	selectMonth = displayDate.getMonth();
+	selectDay = displayDate.getDate();;
+	document.getElementById("canvas").style.display = "none";
+	document.getElementById("color-fade").style.display = "none";
+	document.getElementById("day").style.display = "block";
+	document.getElementById("year").innerHTML = selectDay + " " + months[selectMonth];
+	document.getElementById("returnToMonth").innerHTML = "return to month";
+	displayingDay = true;
+	/*
+	/   do not show previous button, if the month is before the current month
+	*/
+	if (displayDate <= today) {
+		document.getElementById("previous").style.display = "none";
+	} else {
+		document.getElementById("previous").style.display = "block";
+	}
+	/*
+	/   do not show next button, if after one year into the future
+	*/
+	if (displayDate >= oneYearFromToday) {
+		document.getElementById("next").style.display = "none";
+	} else {
+		document.getElementById("next").style.display = "block";
+	}
 }
 
 function initialiseCalendar() { 
 	document.getElementById("canvas").style.display = "block";
 	document.getElementById("color-fade").style.display = "block";
-	if (selectDate < today)
+	selectMonth = selectDate.getMonth();
+	selectYear = selectDate.getFullYear();
+	console.log("11111111111111111111 selectDay is "+selectDay+ ", startDay is "+startDay);
+	var startDay = 1;						// default show from 1st of month
+	console.log("22222222222222222 selectDay is "+selectDay+ ", startDay is "+startDay);
+	if (selectDate < today) 
 		selectDate = today;
 	selectDay = selectDate.getDate();
-		console.log("11111111111111111111 selectDay is "+selectDay+ ", startDay is "+startDay);
-	var startDay = selectDay;
-			console.log("22222222222222222 selectDay is "+selectDay+ ", startDay is "+startDay);
 	document.getElementById("year").innerHTML = months[selectMonth] + " " + selectYear;
-	console.log("Date is " + currentDay + ", month is " + currentMonth + ", year is " + currentYear);
 	/*
 	/   do not show previous button, if the month is before the current month
 	*/
@@ -121,8 +174,9 @@ function initialiseCalendar() {
 	}
 	// get the first day of the month, so know what day of the week to start adding day of month numbers
     firstOfMonth = new Date(selectYear+"-"+(selectMonth+1)+"-01");
+	if (firstOfMonth < today) 				// if first of month is before current date (today)
+		startDay = currentDay;				// then do not show days before current date (today)
 	var firstDayOfMonth = firstOfMonth.getDay();
-	console.log("firstDayOfMonth is "+firstDayOfMonth);
 	var selectDay = firstOfMonth.getDate();
 	// create the table of days of month
 	var tbl = document.getElementById("month");
@@ -148,7 +202,6 @@ function initialiseCalendar() {
 		row.appendChild(cell);
 	}
 	for (var i=firstDayOfMonth; i < 7; i++) {
-		console.log("selectDay is "+selectDay+ ", startDay is "+startDay);
 		if (selectDay < startDay) {
 			cell = document.createElement("th");
 			cell.style.color = "rgb(0,0,153)";
@@ -168,7 +221,6 @@ function initialiseCalendar() {
 		row = document.createElement("tr");
 		//   create each cell in table of month dates
 		for (var j=0; j<7; j++) {
-			console.log("selectDay is "+selectDay+ ", startDay is "+startDay);
 			if (selectDay < startDay) {
 				cell = document.createElement("th");
 				cell.style.color = "rgb(0,0,153)";
@@ -182,13 +234,12 @@ function initialiseCalendar() {
 		}
 		tbl.appendChild(row);
 	}
+	
 	selectDate = new Date(selectYear+"-"+(selectMonth+1)+"-"+selectDay);
 	row = document.createElement("tr");
 	//   create each cell in table of month days
 	for (var j=0; j<7; j++) {
-		console.log("selectDay is "+selectDay+ ", startDay is "+startDay);
 		day = selectDate.getDate();
-		console.log("selectDate is "+ day);
 		cellText = document.createTextNode(day);		
 		if ( (day < 7) ||  (day < startDay) )  {
 			cell = document.createElement("th");
@@ -198,12 +249,7 @@ function initialiseCalendar() {
 		}
 		cell.appendChild(cellText);
 		row.appendChild(cell);
-		console.log("output");
 		selectDate.setDate(selectDate.getDate() + 1);
-		console.log("selectDate.getDate() is " + selectDate.getDate());
-		//selectDate = selectDate.add(1).day();
-		
-		console.log("selectDate.getDate() is " + selectDate.getDate());
 	}
 	//  add the new row to the table
 	tbl.appendChild(row);
