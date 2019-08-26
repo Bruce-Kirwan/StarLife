@@ -273,19 +273,19 @@
 	},
 	"2020-08-13": {
 		"1": {
-			"time": "0800",
+			"time": 4,
 			"halfHours": 3
 		},
 		"2": {
-			"time": "1200",
+			"time": 12,
 			"halfHours": 1
 		},
 		"3": {
-			"time": "1800",
+			"time": 24,
 			"halfHours": 2
 		},
 		"4": {
-			"time": "2030",
+			"time": 29,
 			"halfHours": 1
 		}
 	}
