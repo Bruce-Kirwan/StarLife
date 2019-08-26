@@ -51,7 +51,7 @@ function fetchJsonDataFile() {
 		dataType: 'json',
 		success: function( data ) {
 			jsonData = data; 
-			if (jsonData!=null)
+			if (jsonData==null)
 				jsonNotFound = true;
 			else
 				jsonPresent = true;
