@@ -1,4 +1,4 @@
-﻿    MAX_DEPTH = 50;
+    MAX_DEPTH = 50;
  
     var canvas, ctx;
     var stars = new Array(512);
@@ -81,7 +81,6 @@ canvas = document.getElementById("starfield");
         setInterval(loop,timing);
     }
     document.getElementById("hamburgerIcon").addEventListener('click', function () {openNav();});
-
 
 }
 
@@ -241,3 +240,5 @@ canvas = document.getElementById("starfield");
 function getChildrenById(x) {
     return document.getElementById(x).children;
 }
+
+

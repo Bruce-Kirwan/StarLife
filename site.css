@@ -1,4 +1,4 @@
-﻿* {
+* {
     margin: 0;
     padding: 0;
 	border: 0;
@@ -134,11 +134,10 @@
 }
 
 
-
 .inputLabel {
 font-family:"OpenSans-Regular", "Helvetica Neue", Helvetica, Arial, sans-serif;
 font-weight:normal;
-font-size:16px;
+font-size:1em;
 font-weight:600;
 /*line-height:1.13;*/
 color:#000000;

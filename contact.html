@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -7,7 +7,9 @@
     <link rel="stylesheet" type="text/css" href="site.css" media="screen and (min-width:601px)">
 
 	<META name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="site.js"></script>
+	<script src="contact.js"></script>
 </head>
 <body id="body">
 		<div id="titlePicture">
@@ -47,13 +49,6 @@
 		<div id="color-fade">
 		</div>
 		
-        <!--<div id="main-contents">
-                <a href="default.html">Home</a>
-                <a href="Accomodations.html">Accomodations</a>
-                <a href="FoodAndDrink.html">Food and Drink</a>
-                <a href="GettingAround.html">Getting Around</a>
-                <a href="contact.html">Contact</a>
-        </div>-->
         <nav id="main-nav" vertical-align=top>
             <div id="main-nav-i" vertical-align=top>
                 <ul>
@@ -81,61 +76,64 @@
 			<div id="contact-link-images">
 				<span id="first-image">
 				<a href="#call">
-				<svg width="170" height="170" viewBox="0 0 170 170">
+				<svg class="svg-images" width="170" height="170" viewBox="0 0 170 170">
 					<defs>
 						<path id="a" d="M85 170c-46.944 0-85-38.056-85-85S38.056 0 85 0s85 38.056 85 85-38.056 85-85 85zm0-10c41.421 0 75-33.579 75-75s-33.579-75-75-75-75 33.579-75 75 33.579 75 75 75z"/>
 					</defs>
 					<g fill="none" fill-rule="evenodd">
 						<use fill="#CEE4F0" xlink:href="#a"/>
 						<circle  cx="85" cy="85" r="65" fill="#FFF"/>
-						<path id="phone-image" fill="#13394C" d="M49.9 73.343c-.448-1.263-.729-2.648-.84-4.153a22.107 22.107 0 0 1 .14-4.572 21.55 21.55 0 0 1 1.12-4.544 19.422 19.422 0 0 1 2.074-4.126 15.547 15.547 0 0 1 2.998-3.345 11.818 11.818 0 0 1 3.98-2.175c1.494-.483 2.867-.557 4.118-.223a8.877 8.877 0 0 1 3.419 1.784c1.027.855 1.952 1.924 2.774 3.206a25.806 25.806 0 0 1 2.13 4.098 37.573 37.573 0 0 1 1.513 4.433c.41 1.505.71 2.908.896 4.21l-7.79 7.805c.075 1.04.486 2.304 1.233 3.791.673 1.301 1.728 2.927 3.167 4.879 1.438 1.951 3.502 4.265 6.192 6.941 2.616 2.64 4.913 4.665 6.894 6.078 1.98 1.412 3.605 2.434 4.875 3.066 1.495.78 2.765 1.208 3.811 1.282l9.135-9.088c.71.15 1.504.39 2.382.725.878.335 1.784.716 2.718 1.143a66.82 66.82 0 0 1 2.858 1.394c.971.502 1.905.994 2.802 1.478a160.79 160.79 0 0 1 6.501 3.79c-.374 2.714-1.093 5.158-2.158 7.333-1.064 2.174-2.465 4.005-4.203 5.491-1.737 1.487-3.764 2.574-6.08 3.262-2.317.688-4.913.864-7.79.53-.598 0-1.57-.149-2.914-.446-1.345-.298-2.97-.78-4.876-1.45-1.906-.669-4.007-1.542-6.305-2.62s-4.698-2.426-7.201-4.043c-2.503-1.616-5.044-3.53-7.622-5.742-2.578-2.212-5.072-4.795-7.482-7.75s-4.68-6.282-6.809-9.98c-2.13-3.699-4.016-7.852-5.66-12.462z"/>
+						<path id="phone-image" fill="#13394C" d="M49.9 73.343c-.448-1.263-.729-2.648-.84-4.153a22.107 22.107 0 0 1 .14-4.572 21.55 21.55 0 0 1 1.12-4.544 19.422 19.422 0 0 1 2.074-4.126 15.547 15.547 0 0 1 2.998-3.345 11.818 11.818 0 0 1 3.98-2.175c1.494-.483 2.867-.557 4.118-.223a8.877 8.877 0 0 1 3.419 
+						1.784c1.027.855 1.952 1.924 2.774 3.206a25.806 25.806 0 0 1 2.13 4.098 37.573 37.573 0 0 1 1.513 4.433c.41 1.505.71 2.908.896 4.21l-7.79 7.805c.075 1.04.486 2.304 1.233 3.791.673 1.301 1.728 2.927 3.167 4.879 1.438 1.951 3.502 4.265 6.192 6.941 2.616 2.64 4.913 4.665 6.894 6.078 1.98 1.412 3.605 
+						2.434 4.875 3.066 1.495.78 2.765 1.208 3.811 1.282l9.135-9.088c.71.15 1.504.39 2.382.725.878.335 1.784.716 2.718 1.143a66.82 66.82 0 0 1 2.858 1.394c.971.502 1.905.994 2.802 1.478a160.79 160.79 0 0 1 6.501 3.79c-.374 2.714-1.093 5.158-2.158 7.333-1.064 2.174-2.465 4.005-4.203 5.491-1.737 1.487-3.764 
+						2.574-6.08 3.262-2.317.688-4.913.864-7.79.53-.598 0-1.57-.149-2.914-.446-1.345-.298-2.97-.78-4.876-1.45-1.906-.669-4.007-1.542-6.305-2.62s-4.698-2.426-7.201-4.043c-2.503-1.616-5.044-3.53-7.622-5.742-2.578-2.212-5.072-4.795-7.482-7.75s-4.68-6.282-6.809-9.98c-2.13-3.699-4.016-7.852-5.66-12.462z">
+							<animateTransform 
+								xlink:href="#phone-image"
+								attributeName="transform" 
+								attributeType="XML"
+								type="rotate"
+								from="-10 85 85"
+								to="10 85 85" 
+								dur="0.2s"
+								begin="indefinite"
+								RepeatCount="2";
+							/>
+						</path>
 					</g>
 					<text x="40" y="165" class="small">Phone Us</text>
-						<animateTransform 
-							xlink:href="#phone-image"
-							attributeName="transform" 
-							attributeType="XML"
-							type="rotate"
-							from="-9 85 85"
-							to="9 85 85" 
-							dur="0.2s"
-							begin="0s"
-							fill="freeze"
-							RepeatCount="2";
-						/>
 				</svg>
 				</a>
 				</span>
 				<span id="second-image">
 				<a href="#message">
-				<svg width="170" height="170" viewBox="0 0 170 170">
+				<svg class="svg-images" width="170" height="170" viewBox="0 0 170 170">
 					<defs>
 						<path id="a" d="M85 170c-46.944 0-85-38.056-85-85S38.056 0 85 0s85 38.056 85 85-38.056 85-85 85zm0-10c41.421 0 75-33.579 75-75s-33.579-75-75-75-75 33.579-75 75 33.579 75 75 75z"/>
 					</defs>
 					<g fill="none" fill-rule="evenodd">
 						<use fill="#CEE4F0" xlink:href="#a"/>
 						<circle cx="85" cy="85" r="65" fill="#FFF"/>
-						<path id="message-image" fill="#13394C" d="M52 62c0-1.105.896-2 2.005-2h62.99c1.107 0 2.005.896 2.005 2v47c0 1.105-.896 2-2.005 2h-62.99A2.003 2.003 0 0 1 52 109V62zm0 4v10.714l31.77 18.29c.951.548 2.505.55 3.46 0L119 76.714V66L85.5 85.286 52 66z"/>
+						<path id="message-image" fill="#13394C" d="M52 62c0-1.105.896-2 2.005-2h62.99c1.107 0 2.005.896 2.005 2v47c0 1.105-.896 2-2.005 2h-62.99A2.003 2.003 0 0 1 52 109V62zm0 4v10.714l31.77 18.29c.951.548 2.505.55 3.46 0L119 76.714V66L85.5 85.286 52 66z">
+							<animateTransform 
+								xlink:href="#message-image"
+								attributeName="transform" 
+								attributeType="XML"
+								type="rotate"
+								from="-10 85 85"
+								to="10 85 85" 
+								dur="0.2s"
+								begin="indefinite"
+								RepeatCount="2";
+							/>
+						</path>
 					</g>
 					<text x="32" y="165" class="small">Message Us</text>
-						<animateTransform 
-							xlink:href="#message-image"
-							attributeName="transform" 
-							attributeType="XML"
-							type="rotate"
-							from="-9 85 85"
-							to="9 85 85" 
-							dur="0.2s"
-							begin="0.5s"
-							fill="freeze"
-							RepeatCount="2";
-						/>
 				</svg>
 				</a>
 				</span>
 				<span id="third-image">
-				<a href="#e-mail">
-				<svg width="170" height="170" viewBox="0 0 170 170">
+				<a href="#map">
+				<svg class="svg-images" width="170" height="170" viewBox="0 0 170 170">
 					<defs>
 						<path id="a" d="M85 170c-46.944 0-85-38.056-85-85S38.056 0 85 0s85 38.056 85 85-38.056 85-85 85zm0-10c41.421 0 75-33.579 75-75s-33.579-75-75-75-75 33.579-75 75 33.579 75 75 75z"/>
 					</defs>
@@ -150,56 +148,38 @@
 							attributeName="transform" 
 							attributeType="XML"
 							type="rotate"
-							from="-9 85 85"
-							to="9 85 85" 
+							from="-10 85 85"
+							to="10 85 85" 
 							dur="0.2s"
-							begin="1s"
-							fill="freeze"
+							begin="indefinite"
 							RepeatCount="2";
 						/>
 				</svg>
 				</a>
 				</span>
 			</div>
-			<div id="call">
-				<div>&nbsp;</div>
-				<div>&nbsp;</div>
-				<div>&nbsp;</div>
-				<div>&nbsp;</div>
-				<h2>Phone Us</h2>
-				<div>&nbsp;</div>
-				<div>
-					Our phone number is <span class="medium">087 555 5577</span>
-				</div>
-				<div>&nbsp;</div>
-				<div>
-					You can reach us from 6am to 11pm Monday to Friday
-				</div>
-				<div>
-					Our number from outside Ireland is +353 87 555 5577
-				</div>
-			</div>
 			<div id="message">
 				<div>&nbsp;</div>
 				<div>&nbsp;</div>
 				<div>&nbsp;</div>
+				<div>&nbsp;</div>
+				<h2>Send a message</h2>
+				<div>&nbsp;</div>
+				<div>
+					Our e-mail address is <span class="medium" action = "mailto:StarLifeTechnologies@yahoo.com">StarLifeTechnologies@yahoo.com</span>
+				</div>
+				<div>&nbsp;</div>
+				<div>
+					Please feel Free to e-mail us to make a booking or make any other queries.
+				<div>
+				<div>&nbsp;</div>
+				<div>
+					Alternatively, please use the contact form below:
+				<div>
 			    <form action="mailto:StarLifeTechnologies@yahoo@yahoo.com" method="post" enctype="text/plain">
                     <fieldset class="fieldset">
-                        <h2>Send a message</h2>
+
 						<div>&nbsp;</div>
-						<div>
-							Send a quick message and we will get back to you as soon as we can.
-						</div>
-						<div>
-							Alternatively you can e-mail us at StarLifeTechnologies@yahoo.com.
-						</div>
-						<div>&nbsp;</div>
-                        <!--<div class="inputLabel">
-						    <label class="inputLabel">Contact Name*</label>
-						<div>
-						<div class="item">
-                            <input class="input" type="text" name="nameField" id="nameField" required placeholder="enter your name" />
-						</div>-->
 						<div class="formField">
 							<label for="nameField" class="inputLabel">Name*</label>
                             <input class="input" type="text" name="nameField" id="nameField" required placeholder="enter your name" />
@@ -233,8 +213,46 @@
                     </fieldset>
                 </form>
 			</div>
-			<div id="e-mail">
+			<div id="call">
 				<div>&nbsp;</div>
+				<div>&nbsp;</div>
+				<div>&nbsp;</div>
+				<div>&nbsp;</div>
+				<h2>Phone Us</h2>
+				<div>&nbsp;</div>
+				<div>
+					Our phone number is <span class="medium">087 555 5577</span>
+				</div>
+				<div>&nbsp;</div>
+				<div>
+					You can reach us from 6am to 11pm Monday to Friday
+				</div>
+				<div>
+					Our number from outside Ireland is +353 87 555 5577
+				</div>
+			</div>
+			<div id="map">
+				<div>&nbsp;</div>
+				<div>&nbsp;</div>
+				<div>&nbsp;</div>
+				<div>&nbsp;</div>
+				<h2>Find Us</h2>
+				<div>&nbsp;</div>
+				<div>
+					We are located at Finglas ETB, Dublin 11, Ireland.
+				</div>
+				<div>&nbsp;</div>
+				<div>
+					See map below:
+				</div>
+				<div>&nbsp;</div>
+				<div style="width: 100%">
+					<iframe width="100%" height="600" src="https://maps.google.com/maps?width=100%&amp;height=600&amp;hl=en&amp;q=Finglas%20ETB%2C%20Dublin%2011+(Star%20Life%20Technologies)&amp;ie=UTF8&amp;t=&amp;z=12&amp;iwloc=B&amp;output=embed" 
+					frameborder="0" scrolling="no" marginheight="0" marginwidth="0">
+					</iframe>
+				</div>
+			
+				<!--<div>&nbsp;</div>
 				<div>&nbsp;</div>
 				<div>&nbsp;</div>
 				<div>&nbsp;</div>
@@ -246,7 +264,7 @@
 				<div>&nbsp;</div>
 				<div>
 					Please feel Free to contact us to make a booking or make any other queries.
-				<div>
+				<div>-->
 			</div>
         </div>
 

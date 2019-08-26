@@ -19,6 +19,8 @@ var displayDate = new Date(today);
 var firstOfMonth = new Date(today);
 var oneYearFromToday = new Date(today);
 var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+var times = ["6.00am","6.30am","7.00am","7.30am","8.00am","8.30am","9.00am","9.30am","10.00am","10.30am","11.00am","11.30am","12 noon","12.30pm","1.00pm","1.30pm",
+	"2.00pm","2.30pm","3.00pm","3.30pm","4.00pm","4.30pm","5.00pm","5.30pm","6.00pm","6.30pm","7.00pm","7.30pm","8.00pm","8.30pm","9.00pm","9.30pm","10.00pm","10.30pm"];
 var days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 var displayingDay = false;
 console.log('... site.js has loaded ...');
@@ -28,83 +30,103 @@ var narrowView = window.matchMedia("(max-width: 600px)")
 if (narrowView.matches) 		// keep canvas for smaller widths
 	removeCanvas = false;
 
+var jsonData = null;
+
 /*
-$.ajax({
-  // The 'type' property sets the HTTP method.
-  // A value of 'PUT' or 'DELETE' will trigger a preflight request.
-  type: 'GET',
-
-  // The URL to make the request to.
-  url: 'https://github.com/Bruce-Kirwan/StarLife/blob/master/availability.json',
-
-  // The 'contentType' property sets the 'Content-Type' header.
-  // The JQuery default for this property is
-  // 'application/x-www-form-urlencoded; charset=UTF-8', which does not trigger
-  // a preflight. If you set this value to anything other than
-  // application/x-www-form-urlencoded, multipart/form-data, or text/plain,
-  // you will trigger a preflight request.
-  contentType: 'text/plain',
-
-  xhrFields: {
-    // The 'xhrFields' property sets additional fields on the XMLHttpRequest.
-    // This can be used to set the 'withCredentials' property.
-    // Set the value to 'true' if you'd like to pass cookies to the server.
-    // If this is enabled, your server must respond with the header
-    // 'Access-Control-Allow-Credentials: true'.
-    withCredentials: false
-  },
-
-  headers: {
-    // Set any custom headers here.
-    // If you set any non-simple headers, your server must include these
-    // headers in the 'Access-Control-Allow-Headers' response header.
-  },
-
-  success: function() {
-    // Here's where you handle a successful response.
-  },
-
-  error: function() {
-    // Here's where you handle an error response.
-    // Note that if the error was due to a CORS issue,
-    // this function will still fire, but there won't be any additional
-    // information about the error.
-  }
-});
+/	function to copy data from file 'availability.json' on my github account, to the variable jsonData
 */
-$.ajax({
-  method: 'GET',
-  url: 'http://crossorigin.me/https://github.com/Bruce-Kirwan/StarLife/blob/master/availability.jsonp',
-  dataType: 'jsonp', //change the datatype to 'jsonp' works in most cases
-  success: (res) => {
-	  console.log("success !!!!!!!!!!!!!!!!!!!!!! ");
-   console.log(res);
-  }
-})
-
-function fetchJsonDataFile() {
+function fetchJsonDataFile() {		
 	console.log("About to fetch JSON data file");
-	  var xhttp = new XMLHttpRequest();
-  xhttp.onreadystatechange = function() {
+	/*$.getJSON('https://raw.githubusercontent.com/Bruce-Kirwan/StarLife/master/availability.json',
+	function(data){
+		jsonData = data; 
+		console.log(jsonData);
+		console.log('above is jsonData');
+		window.localStorage('StarLifeAvailability.txt',jsonData.stringify);
+	});*/
+	$.ajax({
+		url: 'https://raw.githubusercontent.com/Bruce-Kirwan/StarLife/master/availability.json',
+		dataType: 'json',
+		success: function( data ) {
+			jsonData = data; 
+			console.log(jsonData);
+			console.log('above is jsonData');
+			var jsString = JSON.stringify(jsonData);
+			console.log("jsString is:"+jsString);
+			localStorage.setItem('StarLifeAvailability',jsString);
+			console.log('stored availability in StarLifeAvailability');
+		},
+		error: function( data ) {
+			console.log("error getting availability.json");
+			var jsString = localStorage.getItem('StarLifeAvailability');
+			console.log("jsString is:"+jsString);
+			jsonData = JSON.parse(jsString);
+			console.log("tried to get item from localStorage");
+			console.log(jsonData);
+		}
+	});
+/*	var xhttp = new XMLHttpRequest();
+	xhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
-     document.getElementById("wrapper").innerHTML = this.responseText;
+		document.getElementById("wrapper").innerHTML = this.responseText;
     }
   };
-  xhttp.open("GET", "https://github.com/Bruce-Kirwan/StarLife/blob/master/availability.json", true);
-  xhttp.send();
+  xhttp.open("GET", "https://raw.githubusercontent.com/Bruce-Kirwan/StarLife/master/availability.json", true);
+  xhttp.send();*/
 }
 
-function populateAvailability(data) {
-		console.log("populating availability");
-		console.log("data is "+ data);
-}
+
+/*
+function outData(data) {
+	//console.log(data);
+	jsonData = data;
+	console.log(jsonData);
+	console.log("above is jsonData");
+	$('#dataBox').html(jsonData);
+	var items = [];
+	var rowHtml = '';
+	var jsonDate = new Date();
+	var jsonCount = 0;
+	var jsonTime = 0;
+	/*$.each(data, function(key,value) {
+		$.each(value, function(key, value) {
+			rowHtml+='<tr>';
+			$.each(value, function(key,value) {
+				rowHtml = rowHtml +'<td>' + value + '</td>';
+			});
+			rowHtml+='</tr>'
+			items.push(rowHtml);
+		});
+	}); end comment here
+	$.each(data, function(key,value) {
+		jsonDate = new Date(key);
+		rowHtml+='<tr>'+'<td>'+key+'</td>';
+		$.each(value, function(key, value) {
+			rowHtml+='';
+			$.each(value, function(key,value) {
+				rowHtml = rowHtml +'<td>' + value + '</td>';
+			});
+		});
+		rowHtml+='</tr>'
+		items.push(rowHtml);
+	});
+	console.log(items);
+	$('#dataBox').html('');
+	$('<table>',{
+		'border': '1px solid navy', 
+		'id':'dataTable',
+		'html': 'items.join(\'jj\')'
+	}).appendTo('#dataBox');
+}*/
+
+
 
 window.addEventListener('DOMContentLoaded', function (event) {
     console.log("DOM fully loaded and parsed");
 	oneYearFromToday = oneYearFromToday.setYear(oneYearFromToday.getFullYear()+1);		// get date exactly one year from today
 	document.getElementById("closebtn").style.display = "none";
 	initialiseCalendar();
-	//fetchJsonDataFile();
+	fetchJsonDataFile();
     addEvents();
 });
 
@@ -177,18 +199,52 @@ function addEvents() {
 		document.getElementById("color-fade").style.display = "block";
 		document.getElementById("year").innerHTML = months[selectMonth] + " " + selectYear;
 		displayingDay = false;
+		/*
+		/   delete below section later
+		*/
+		console.log("error getting availability.json");
+		var jsString = localStorage.getItem('StarLifeAvailability');
+		console.log("jsString is:"+jsString);
+		jsonData = JSON.parse(jsString);
+		console.log("tried to get item from localStorage");
+		console.log(jsonData);
 	}	
 }
 
-function initialiseDay() {
+function addRow() {
+
+}
+
+function initialiseDay() {		
 	selectYear = displayDate.getFullYear();
 	selectMonth = displayDate.getMonth();
 	selectDay = displayDate.getDate();;
 	if (removeCanvas)		// remove the canvas, unless we are in mobile view
 		document.getElementById("canvas").style.display = "none";
 	document.getElementById("color-fade").style.display = "none";
-	document.getElementById("day").style.display = "block";
 	document.getElementById("year").innerHTML = selectDay + " " + months[selectMonth];
+	//document.getElementById("day").style.display = "block";
+	/*
+	/	create a table of the schedule
+	*/
+	$("#day").empty();						// first clear any existing rows
+	var createSchedule = document.getElementById("day");
+	createSchedule.style.display = "block";
+	var schedRow;
+	for (var i = 0, len = times.length; i < len; i++) {
+		schedRow = createSchedule.insertRow();
+		schedRow.innerHTML="<th>" + times[i] + "</th><td>FREE</td>";
+	}	
+	//times.foreach(addRow, createSchedule) 
+
+// Insert new cells (<td> elements) at the 1st and 2nd position of the "new" <tr> element:
+/*var cell1 = schedRow.insertCell(0);
+var cell2 = schedRow.insertCell(1);
+
+// Add some text to the new cells:
+cell1.innerHTML = "0600";
+cell2.innerHTML = "FREE";*/
+	//
 	document.getElementById("returnToMonth").innerHTML = "return to month";
 	displayingDay = true;
 	/*
@@ -207,7 +263,42 @@ function initialiseDay() {
 	} else {
 		document.getElementById("next").style.display = "block";
 	}
+	showBooked(displayDate);
 }
+
+function showBooked(searchDate) {
+	searchDate.setHours(12);			// make sure time is 12 noon so that next line won't decrement by one day
+	searchDate = searchDate.toISOString().substring(0,10);			// just get the first 10 characters (we do not need the time portion of the date)
+	console.log("Date 8 is "+searchDate);
+	$.each(jsonData, function(key, value) {
+        if (key == searchDate) {
+			var time = 0;
+			var count = 1;
+			console.log('date is '+key);
+			$.each(value, function(key, value) {
+				$.each(value, function(key,value) {
+					if (key=='time')
+						time = value;
+					else (key = 'halfHours')
+						count = value;
+				});
+				console.log('time is '+time+', count is '+count);
+				for (i=0; i<count; i++) {
+					var x = document.getElementById("day").rows[time];
+					x.style.backgroundColor = 'rgb(255,153,153)';
+					//document.getElementById("day").rows[time].style.background-color = 'pink';		// change colour of row to pink
+					//var x = document.getElementById("day").rows[time].cells;
+					//x[0].innerHTML = "Booked";									// change text of cell to Booked
+					x.cells[1].innerHTML = "Booked";								// change text from FREE to Booked
+					time++;
+				}
+			});
+		return false; // stops the loop
+        }
+	});
+}
+
+
 
 function initialiseCalendar() { 
 	document.getElementById("canvas").style.display = "block";
@@ -497,5 +588,4 @@ function randomRange(minVal,maxVal) {
 		ctx.fillStyle = text_gradient;
 		ctx.fillText("Star Life Technologies", halfWidth, canvas.height/1.65); 
    }
-
 
