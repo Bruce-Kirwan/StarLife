@@ -132,8 +132,11 @@
 	font-size: large;
 }
 	
+#main-content-b video {
+	width: 100%;
+}
 
-	.svg-images {
+.svg-images {
 	max-width: 6em;
 	max-height: 8em;
 }

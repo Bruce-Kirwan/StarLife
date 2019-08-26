@@ -23,6 +23,8 @@ var times = ["6.00am","6.30am","7.00am","7.30am","8.00am","8.30am","9.00am","9.3
 	"2.00pm","2.30pm","3.00pm","3.30pm","4.00pm","4.30pm","5.00pm","5.30pm","6.00pm","6.30pm","7.00pm","7.30pm","8.00pm","8.30pm","9.00pm","9.30pm","10.00pm","10.30pm"];
 var days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 var displayingDay = false;
+var jsonPresent = false;
+var jsonNotFound = false;
 console.log('... site.js has loaded ...');
 
 var removeCanvas = true;		// remove canvas when displaying schedule for one day
@@ -49,6 +51,10 @@ function fetchJsonDataFile() {
 		dataType: 'json',
 		success: function( data ) {
 			jsonData = data; 
+			if (jsonData!=null)
+				jsonNotFound = true;
+			else
+				jsonPresent = true;
 			console.log(jsonData);
 			console.log('above is jsonData');
 			var jsString = JSON.stringify(jsonData);
@@ -63,6 +69,12 @@ function fetchJsonDataFile() {
 			jsonData = JSON.parse(jsString);
 			console.log("tried to get item from localStorage");
 			console.log(jsonData);
+			if (jsonData==null) {
+				jsonPresent = false;
+				jsonNotFound = true;
+			}
+			else
+				jsonPresent = true;
 		}
 	});
 /*	var xhttp = new XMLHttpRequest();
@@ -219,34 +231,37 @@ function initialiseDay() {
 	selectYear = displayDate.getFullYear();
 	selectMonth = displayDate.getMonth();
 	selectDay = displayDate.getDate();;
+	/*
+	/	create a table of the schedule
+	*/
+	$("#day").empty();						// first clear any existing rows from day table
+	
 	if (removeCanvas)		// remove the canvas, unless we are in mobile view
 		document.getElementById("canvas").style.display = "none";
 	document.getElementById("color-fade").style.display = "none";
 	document.getElementById("year").innerHTML = selectDay + " " + months[selectMonth];
-	//document.getElementById("day").style.display = "block";
-	/*
-	/	create a table of the schedule
-	*/
-	$("#day").empty();						// first clear any existing rows
 	var createSchedule = document.getElementById("day");
 	createSchedule.style.display = "block";
 	var schedRow;
-	for (var i = 0, len = times.length; i < len; i++) {
+	if (jsonPresent) {
+		for (var i = 0, len = times.length; i < len; i++) {
+			schedRow = createSchedule.insertRow();
+			schedRow.innerHTML="<th>" + times[i] + "</th><td>FREE</td>";
+		}	
+		displayingDay = true;
+	} else {
+		console.log("in exception coding...");
 		schedRow = createSchedule.insertRow();
-		schedRow.innerHTML="<th>" + times[i] + "</th><td>FREE</td>";
-	}	
-	//times.foreach(addRow, createSchedule) 
-
-// Insert new cells (<td> elements) at the 1st and 2nd position of the "new" <tr> element:
-/*var cell1 = schedRow.insertCell(0);
-var cell2 = schedRow.insertCell(1);
-
-// Add some text to the new cells:
-cell1.innerHTML = "0600";
-cell2.innerHTML = "FREE";*/
-	//
+		if (jsonNotFound) 
+			schedRow.innerHTML = "<td><h3>Unable to retrieve schedule of bookings for Star Life.</h3>-</td><td></td>";
+		else {
+			schedRow.innerHTML = "<td><h3>Schedule of bookings not loaded to this website yet.</h3> Please try again later.</td><td></td>";
+		}
+	}
+	/*
+	/   now, display button to return to the month
+	*/
 	document.getElementById("returnToMonth").innerHTML = "return to month";
-	displayingDay = true;
 	/*
 	/   do not show previous button, if the month is before the current month
 	*/

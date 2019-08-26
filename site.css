@@ -106,7 +106,23 @@
 	list-style-position: inside;
 	list-style-type: circle;
 	font-size: large;
+}
 
+#main-content-a {
+	width: 49%;
+	float: left;
+	overflow: hidden;
+}
+
+#main-content-b {
+	width: 50%;
+	max-width: 500px;
+	float: right;
+	overflow: hidden;
+}
+
+#main-content-b video {
+	width: 100%;
 }
 
 #email-image {
@@ -165,6 +181,11 @@ width:45%;
 	width: 33%;
 	float: right;
 }
+
+#google-map {
+	max-width: 650px;
+}
+
 
 #slideshow {
     background-color: green;

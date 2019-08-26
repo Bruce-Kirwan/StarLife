@@ -10,6 +10,10 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="site.js"></script>
 	<script src="contact.js"></script>
+	<!--<script async defer
+		src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap">
+    </script>-->
+
 </head>
 <body id="body">
 		<div id="titlePicture">
@@ -132,7 +136,7 @@
 				</a>
 				</span>
 				<span id="third-image">
-				<a href="#map">
+				<a href="#find">
 				<svg class="svg-images" width="170" height="170" viewBox="0 0 170 170">
 					<defs>
 						<path id="a" d="M85 170c-46.944 0-85-38.056-85-85S38.056 0 85 0s85 38.056 85 85-38.056 85-85 85zm0-10c41.421 0 75-33.579 75-75s-33.579-75-75-75-75 33.579-75 75 33.579 75 75 75z"/>
@@ -190,15 +194,15 @@
                         </div>
 						<div class="formField">
 							<label for="subjectField" class="inputLabel">Subject*</label>
-                            <input class="input" type="text" name="subjectField" id="subjectField" />
+                            <input class="input" type="text" name="subjectField" id="subjectField"  required placeholder="enter subject"/>
                         </div>
 						<div class="formField">
 							<label for="phoneField" class="inputLabel">Phone Number</label>
-                            <input class="input" type="email" name="emailField" id="emailField" required placeholder="enter your e-mail" />
+                            <input class="input" name="emailField" id="phoneField" required placeholder="enter your phone number" />
                         </div>
                         <div class="formField">
 							<label for="messageField" class="inputLabel">Message*</label>
-                            <textarea class="input" name="messageField" id="messageField" required></textarea>
+                            <textarea class="input" type= "text" name="messageField" id="messageField" required placeholder="enter message"></textarea>
                         </div>
 						<div class="lid">&nbsp;</div>
 						<!--<div>
@@ -231,8 +235,7 @@
 					Our number from outside Ireland is +353 87 555 5577
 				</div>
 			</div>
-			<div id="map">
-				<div>&nbsp;</div>
+			<div id="find">
 				<div>&nbsp;</div>
 				<div>&nbsp;</div>
 				<div>&nbsp;</div>
@@ -241,30 +244,14 @@
 				<div>
 					We are located at Finglas ETB, Dublin 11, Ireland.
 				</div>
-				<div>&nbsp;</div>
-				<div>
-					See map below:
+				<div id="map-title">
+					See map below for our location:
 				</div>
 				<div>&nbsp;</div>
-				<div style="width: 100%">
-					<iframe width="100%" height="600" src="https://maps.google.com/maps?width=100%&amp;height=600&amp;hl=en&amp;q=Finglas%20ETB%2C%20Dublin%2011+(Star%20Life%20Technologies)&amp;ie=UTF8&amp;t=&amp;z=12&amp;iwloc=B&amp;output=embed" 
-					frameborder="0" scrolling="no" marginheight="0" marginwidth="0">
-					</iframe>
+				<div id="google-map">
+					<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d38069.74817893816!2d-6.309414584522008!3d53.390513036395014!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x48670dc475e5c117%3A0x7baa038425845b41!2sFinglas%20Training%20Centre%20CDETB!5e0!3m2!1sen!2suk!4v1566850076764!5m2!1sen!2suk" 
+					width="100%" height="500" frameborder="0" style="border:0;" allowfullscreen=""></iframe>
 				</div>
-			
-				<!--<div>&nbsp;</div>
-				<div>&nbsp;</div>
-				<div>&nbsp;</div>
-				<div>&nbsp;</div>
-				<h2>Email Us</h2>
-				<div>&nbsp;</div>
-				<div>
-					Our e-mail address is <span class="medium" action = "mailto:StarLifeTechnologies@yahoo.com">StarLifeTechnologies@yahoo.com</span>
-				</div>
-				<div>&nbsp;</div>
-				<div>
-					Please feel Free to contact us to make a booking or make any other queries.
-				<div>-->
 			</div>
         </div>
 
