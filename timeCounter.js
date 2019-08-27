@@ -3,12 +3,14 @@
 */
 
 var timer = 0;			// start timer at 0 seconds
+console.log(".........in timeCounter.js.............");
 
 /*
 *	web-worker function to increment a timer every 1 second and display in page footer.
 */
 function timedCount() {
 	timer += 1;		// increment timer by one second
+	console.log("timer is "+timer);
 	/*
 	/	function to accept time counted after navigation from previous internal Star Life webpage
 	*/
@@ -17,7 +19,7 @@ function timedCount() {
 		i=passedTime;
 	};
 	//
-	postMessage(i);						// post the time into the page footer 
+	postMessage(timer);						// post the time into the page footer 
 	//
 	setTimeout("timedCount()",1000);	// call itself every 1000 milliseconds (i.e. every 1 second)
 }
