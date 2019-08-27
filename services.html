@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -8,6 +8,7 @@
 
 	<META name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
     <script src="site.js"></script>
+	<script src="webSocket.js"></script>
 </head>
 <body id="body">
 		<div id="titlePicture">
@@ -29,19 +30,19 @@
 		<div id="main-nav-large">
             <ul>
                 <li>
-                    <a href="index.html">Home</a>
+                    <a id="link1" href="#">Home</a>
                 </li>
                 <li>
-                    <a href="services.html">Services</a>
+                    <a id="link2" href="#">Services</a>
                 </li>
                 <li>
-                    <a href="availability.html">Check Availability</a>
+                    <a id="link3" href="#">Check Availability</a>
                 </li>
                 <li>
-                    <a href="contact.html">Contact Us</a>
+                    <a id="link4" href="#">Contact Us</a>
                 </li>
                 <li>
-                    <a href="about.html">About Us</a>
+                    <a id="link5" href="#">About Us</a>
                 </li>
             </ul>
         </div>
@@ -58,11 +59,11 @@
         <nav id="main-nav" vertical-align=top>
             <div id="main-nav-i" vertical-align=top>
                 <ul>
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="services.html">Services</a></li>
-                    <li><a href="availability.html">Check Availability</a></li>
-					<li><a href="contact.html">Contact Us</a></li>
-                    <li><a href="about.html">About Us</a></li>
+                    <li><a class="linksMobile" href="index.html">Home</a></li>
+                    <li><a class="linksMobile" href="services.html">Services</a></li>
+                    <li><a class="linksMobile" href="availability.html">Check Availability</a></li>
+					<li><a class="linksMobile" href="contact.html">Contact Us</a></li>
+                    <li><a class="linksMobile" href="about.html">About Us</a></li>
 
                 </ul>
             </div>
@@ -76,42 +77,39 @@
 			</span>
 		</div>
         <div class="lid">&nbsp;</div>
-    <div id="wrapper">
-		<div id="main-page">
-        <div id="main-content">
-            <div id="main-content-1">
-					C
-            </div>
-
-			<div id="main-content-3">
-				L
+		<div id="wrapper">
+			<div id="main-page">
+				<div id="main-content">
+					<h2>WebSocket Test</h2>
+					<div id="output"></div>
 				</div>
+			</div>
+			<aside id="main-aside">
+				<div id="main-aside-i">
+					<div>
+						<strong>Fill out later</strong>
+					</div>
+				</div>
+			</aside>
+			<div class="lid">&nbsp;</div>
+			<footer id="main-footer">
+				<div id="main-footer-i">
+					<h3>Website details</h3>
+					<div>
+						Author: Bruce Kirwan
+					</div>
+					<div>
+						Web Development Assignment - Part A
+					</div>
+					<div>
+						Time Spent on site is:  <output id="timeOnSite"></output>seconds.
+					</div>
+					<div>
+						copyright Bruce Kirwan
+					</div>
+				</div>
+			</footer>
 		</div>
-        <aside id="main-aside">
-            <div id="main-aside-i">
-                <div>
-                    <strong>Fill out later</strong>
-                </div>
-            </div>
-        </aside>
-        <div class="lid">&nbsp;</div>
-        <footer id="main-footer">
-            <div id="main-footer-i">
-                <div>
-                    Author: Bruce Kirwan
-                </div>
-                <div>
-                    Web Development Assignment - Star Life Technologies
-                </div>
-                <div>
-                    August 2019
-                </div>
-                <div>
-                    copyright Bruce Kirwan
-                </div>
-            </div>
-        </footer>
-		</div>
-    </div>
+	</div>
 </body>
 </html>
