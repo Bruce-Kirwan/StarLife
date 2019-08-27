@@ -39,13 +39,6 @@ var jsonData = null;
 */
 function fetchJsonDataFile() {		
 	console.log("About to fetch JSON data file");
-	/*$.getJSON('https://raw.githubusercontent.com/Bruce-Kirwan/StarLife/master/availability.json',
-	function(data){
-		jsonData = data; 
-		console.log(jsonData);
-		console.log('above is jsonData');
-		window.localStorage('StarLifeAvailability.txt',jsonData.stringify);
-	});*/
 	$.ajax({
 		url: 'https://raw.githubusercontent.com/Bruce-Kirwan/StarLife/master/availability.json',
 		dataType: 'json',
@@ -88,61 +81,7 @@ function fetchJsonDataFile() {
 				jsonPresent = true;
 		}
 	});
-/*	var xhttp = new XMLHttpRequest();
-	xhttp.onreadystatechange = function() {
-    if (this.readyState == 4 && this.status == 200) {
-		document.getElementById("wrapper").innerHTML = this.responseText;
-    }
-  };
-  xhttp.open("GET", "https://raw.githubusercontent.com/Bruce-Kirwan/StarLife/master/availability.json", true);
-  xhttp.send();*/
 }
-
-
-/*
-function outData(data) {
-	//console.log(data);
-	jsonData = data;
-	console.log(jsonData);
-	console.log("above is jsonData");
-	$('#dataBox').html(jsonData);
-	var items = [];
-	var rowHtml = '';
-	var jsonDate = new Date();
-	var jsonCount = 0;
-	var jsonTime = 0;
-	/*$.each(data, function(key,value) {
-		$.each(value, function(key, value) {
-			rowHtml+='<tr>';
-			$.each(value, function(key,value) {
-				rowHtml = rowHtml +'<td>' + value + '</td>';
-			});
-			rowHtml+='</tr>'
-			items.push(rowHtml);
-		});
-	}); end comment here
-	$.each(data, function(key,value) {
-		jsonDate = new Date(key);
-		rowHtml+='<tr>'+'<td>'+key+'</td>';
-		$.each(value, function(key, value) {
-			rowHtml+='';
-			$.each(value, function(key,value) {
-				rowHtml = rowHtml +'<td>' + value + '</td>';
-			});
-		});
-		rowHtml+='</tr>'
-		items.push(rowHtml);
-	});
-	console.log(items);
-	$('#dataBox').html('');
-	$('<table>',{
-		'border': '1px solid navy', 
-		'id':'dataTable',
-		'html': 'items.join(\'jj\')'
-	}).appendTo('#dataBox');
-}*/
-
-
 
 window.addEventListener('DOMContentLoaded', function (event) {
     console.log("DOM fully loaded and parsed");
@@ -150,36 +89,21 @@ window.addEventListener('DOMContentLoaded', function (event) {
 	document.getElementById("closebtn").style.display = "none";
 	initialiseCalendar();
 	fetchJsonDataFile();
-    addEvents();
+    addMoreEvents();
 });
 
-function addEvents() {
-	console.log(" ------------  in addEvents");
-	canvas = document.getElementById("starfield");
-	if( canvas && canvas.getContext ) {
-        ctx = canvas.getContext("2d");
-        initStars();
-		var timing = 35;		// timing is the time (in millisecons) between star movement (greater timing, slower speed)
-		var decelerate=10;				// rate of deceleration of stars at beginning
-		for (i=1; i<timing; i=i+decelerate)
-		{
-			if (decelerate>1)
-				decelerate--;			// reduce the rate of deceleration
-			for (j=1; j<(i*(10-decelerate)); j++)		// stay longer at the larger timings (so that deceleration is gradual)
-			{
-				setTimeout(loop, i);
-			}
-		}
-        setInterval(loop,timing);
-    }
-    document.getElementById("hamburgerIcon").addEventListener('click', function () {openNav();});
-	
+function addMoreEvents() {
 	document.getElementById("month").onclick = function(e) {
 		e = e || event
 		var target = e.target || e.srcElement
 		// variable target has your clicked element
 		if (target.nodeName == "TD") {
-			displayDate = new Date(selectYear + "-" + monthText(selectMonth) + "-" + target.innerHTML);
+			console.log("selectYear is "+selectYear);
+			console.log("selectMonth is "+selectMonth);
+			console.log("target.innerHTML is "+target.innerHTML);
+			var dayNum = parseInt(target.innerHTML, 10);
+			displayDate = new Date(selectYear + "-" + twoDigit(selectMonth+1) + "-" + twoDigit(dayNum));
+			console.log("****************   displayDate is " + displayDate);
 			initialiseDay();
 		}
 	}
@@ -317,16 +241,15 @@ function showBooked(inpDate) {
 }
 
 /*
-/		function to convert integer month to text value for use in creating a new Date object
+/		function to convert integer month or day to text value for use in creating a new Date object
 */
-function monthText(inpMonth) {
-	inpMonth++;						// integer month starts at 0 to 11, text month goes from 1 to 12
-	var textMonth = "";				// variable containing the return value
-	if (inpMonth > 9)				// if two digit month....
-		textMonth += inpMonth;		// simply return the text value of the month
+function twoDigit(inpNum) {
+	var textNum = "";					// variable containing the return value
+	if (inpNum > 9)						// if two digit month....
+		textNum += inpNum;				// simply return the text value of the month
 	else
-		textMonth = "0" + inpMonth;	//otherwise, add a 0 before the month
-	return textMonth;
+		textNum = "0" + inpNum;			//otherwise, add a 0 before the month
+	return textNum;
 }
 
 function initialiseCalendar() { 
@@ -368,12 +291,12 @@ function initialiseCalendar() {
 		document.getElementById("next").style.display = "block";
 	}
 	// get the first day of the month, so know what day of the week to start adding day of month numbers
-	var dateText = selectYear +  monthText(selectMonth) + "-01";
+	var dateText = selectYear + "-" + twoDigit(selectMonth+1) + "-01";
 	console.log("dateText is "+dateText);
     //firstOfMonth = new Date(selectYear+"-"+(selectMonth+1)+"-01");
 	firstOfMonth = new Date("2019-08-01");
 	console.log("firstOfMonth is "+ firstOfMonth);
-	firstOfMonth=new Date(selectYear + "-" +  monthText(selectMonth) + "-01");	// get Date object for the first day of the current month
+	firstOfMonth=new Date(selectYear + "-" +  twoDigit(selectMonth+1) + "-01");	// get Date object for the first day of the current month
 	console.log("firstOfMonth is "+ firstOfMonth)
 	console.log(firstOfMonth);
 	if (firstOfMonth < today) 				// if first of month is before current date (today)
@@ -438,7 +361,7 @@ function initialiseCalendar() {
 		tbl.appendChild(row);
 	}
 	
-	selectDate = new Date(selectYear+"-"+monthText(selectMonth)+"-"+selectDay);
+	selectDate = new Date(selectYear+"-"+twoDigit(selectMonth+1)+"-"+selectDay);
 	row = document.createElement("tr");
 	//   create each cell in table of month days
 	for (var j=0; j<7; j++) {
@@ -458,183 +381,5 @@ function initialiseCalendar() {
 	tbl.appendChild(row);
 }
 
-function openNav() {
-    console.log("Open Nav Clicked");
-	setTimeout(function(){document.getElementById("closebtn").style.display = "block";}, 100);		// show close button after waiting 0.5 seconds
-    document.getElementById("main-nav").style.width = "100%";
 
-
-	//	document.getElementById("closebtn").style.vertical-align = "top";
-	
-}
-
-function closeNav() {
-    console.log("Close Nav Clicked");
-    document.getElementById("main-nav").style.width = "0%";
-		document.getElementById("closebtn").style.display = "none";
-}
-
-function accordion() {
-
-    var acc = document.getElementsByClassName("accordion");
-    var i;
-    for (i = 0; i < acc.length; i++) {
-        acc[i].addEventListener("click", function () {
-            this.classList.toggle("active");
-            var panel = this.nextElementSibling;
-            if (panel.style.display === "block") {
-                panel.style.display = "none";
-            } else {
-                panel.style.display = "block";
-            }
-        });
-    }
-}
-
-
-//This will return an array of all HTML elements of one parent element
-function getChildrenById(x) {
-    return document.getElementById(x).children;
-}
-
-/* Returns a random number in the range [minVal,maxVal] */
-function randomRange(minVal,maxVal) {
-	return Math.floor(Math.random() * (maxVal - minVal - 1)) + minVal;
-}
- 
-	function initStars() {
-		console.log(" ------------------------ in initStars");
-		/*
-		/   Change the canvas width to be the same as screen width
-		*/
-		console.log("********** window.innerWidth is "+window.innerWidth);
-		windowWidth = (window.innerWidth > 0) ? window.innerWidth : screen.width;
-		var mobileView = window.matchMedia("(max-width: 600px)")
-		if (mobileView.matches) {	// mobile view size
-			sizeFactor = 0.9;
-		}
-		canvas.width = windowWidth*sizeFactor;
-		console.log("********** windowWidth is "+windowWidth);
-		console.log("********** canvas.width is "+canvas.width);	
-
-		/*
-		/   Change the canvas height to be 20% of the screen height
-		*/
-		windowHeight = (window.innerHeight > 0) ? window.innerHeight : screen.height;
-		console.log('height is '+windowHeight);
-		canvas.height=(windowHeight*sizeFactor)/5;
-		/*
-		/   Create the intial stars
-		*/
-      for( var i = 0; i < stars.length; i++ ) {
-        stars[i] = {
-          x: randomRange(-canvas.width/4, canvas.width/4),
-          y: randomRange(-canvas.height/4,canvas.height/4),
-          z: randomRange(1,MAX_DEPTH)
-         }
-      }
-
-    }
- 
-    function loop() {
-		/*
-		// declare varibles for colouring the canvas (background, stars, text)
-		// these are websafe colours
-		*/
-		sizeFactor=1.0;
-		var textSize = 1.0;
-			var colorBlack = "rgb(0,0,0)";
-			var colorMidnight = "rgb(0,0,51)";
-			var colorLightBlue = "rgb(0,0,255)";
-			var colorWhite = "rgb(255,255,255)";
-		var mobileView = window.matchMedia("(max-width: 600px)")
-		if (mobileView.matches) {	// mobile view colours
-			colorBlack = "rgb(240,248,255)";
-			colorMidnight = "rgb(240,248,255)";
-			colorLightBlue = "rgb(0,0,255)";
-			colorWhite = "rgb(204,204,255)";
-			sizeFactor = 0.9;
-			textSize = canvas.width/600.0;		// change text size so it fits
-		}
-		/*
-		//  first check if the dimensions of the window have changed
-		*/
-		if ((windowWidth != window.innerWidth) && (window.innerWidth > 0))
-		{
-			windowWidth=window.innerWidth;
-			canvas.width=(windowWidth*sizeFactor);
-		}
-		if ((windowHeight != window.innerHeight) && (window.innerHeight > 0)){
-			windowHeight=window.innerHeight;
-			canvas.height=(windowHeight*sizeFactor)/5;
-			if (canvas.height < 70)		// have a minimum canvas height
-				canvas.height = 70;		
-		}
-		/*
-		// declare varibles to help with placing of text and stars
-		*/
-		var halfWidth  = canvas.width/2;
-		var halfHeight = canvas.height / 2;
-		var dimRatio = canvas.width/canvas.height;
-	  	/*
-		/  make the backcolor black, but fade to dark blue (midnight) at bottom
-		*/
-	  var fill_gradient = ctx.createLinearGradient(0, 0, 0, canvas.height);
-	  fill_gradient.addColorStop(0, colorBlack);
-	  fill_gradient.addColorStop(1, colorMidnight);
-	  ctx.fillStyle = fill_gradient;
-      ctx.fillRect(0,0,canvas.width,canvas.height);
-	   
-      for( var i = 0; i < stars.length; i++ ) {
-        stars[i].z -= 0.2;			//  reduce the depth for this star
-		/*
-		/  if the star is too big, replace with a new star, at a random position on the canvas,
-		/  the star should be at maximum depth (i.e. smallest size)
-		*/
-        if( stars[i].z <= 0 ) {
-          stars[i].x = randomRange(-halfWidth/2, halfWidth/2);
-          stars[i].y = randomRange(-halfHeight/2,halfHeight/2);
-          stars[i].z = MAX_DEPTH;
-        }
-		/*
-		/  move the star from its current position at a speed that increases with reducing depth (or increasing size)
-		*/
-        var k  = 128.0/stars[i].z;
-        var px = stars[i].x * k + halfWidth;
-        var py = stars[i].y * k + halfHeight;
-		/*
-		/  check that the position of the current star is within the canvas
-		/  if so, then draw the star
-		*/
-        if( px >= 0 && px <= canvas.width && py >= 0 && py <= canvas.height ) {
-			var size = (1.0 - stars[i].z / MAX_DEPTH) * 10;
-			var pxc = px + (size/2)		// x co-ordinate of the centre of radial gradient of star
-			var pyc = py + (size/2)		// y co-ordinate of the center of radial gradent of star
-			var starGradient = ctx.createRadialGradient(pxc, pyc, 0, pxc, pyc, size/2);	// create a radial gradient, so that the star is a circle
-			starGradient.addColorStop(1, colorBlack);	// outer edge of square is black (same color as sky)
-			if (Math.random()<0.1)				// give star a blue tinge 10% of time for "twinkling" effect
-				starGradient.addColorStop(0,colorLightBlue);
-			else
-				starGradient.addColorStop(0, colorWhite);	// star is white most of the time
-
-			// Fill with gradient
-			ctx.fillStyle = starGradient;	// apply the gradient to the star square
-			ctx.fillRect(px,py,size,size);	// colour the star within its square so that it is circular
-        }
-      }
-	  	  /*
-	  /    draw the heading text.
-	  */
-		var fontSize = parseInt(canvas.height * textSize/(2.75 * sizeFactor));
-		ctx.font= fontSize + "px Georgia, serif";
-		ctx.textAlign = "center";
-		//var textGradient = ctx.createRadialGradient(halfWidth, canvas.height/1.65, 0, halfWidth, canvas.height/1.65, canvas.height);
-		//textGradient.addColorStop(0,"white");
-		//textGradient.addColorStop(1,colorLightBlue);
-		var text_gradient = ctx.createLinearGradient(0, 0, 0, canvas.height);
-		text_gradient.addColorStop(0,colorLightBlue);
-		text_gradient.addColorStop(1,colorWhite);
-		ctx.fillStyle = text_gradient;
-		ctx.fillText("Star Life Technologies", halfWidth, canvas.height/1.65); 
-   }
 

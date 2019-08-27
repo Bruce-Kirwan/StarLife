@@ -10,18 +10,17 @@ console.log(".........in timeCounter.js.............");
 */
 function timedCount() {
 	timer += 1;		// increment timer by one second
-	console.log("timer is "+timer);
+	//
+	setTimeout("timedCount()",1000);		// call function recursively every 1000 milliseconds (i.e. every 1 second)
 	/*
 	/	function to accept time counted after navigation from previous internal Star Life webpage
 	*/
 	onmessage = function(e) {		
 		var passedTime = parseInt(e.data, 10)		// the passed-in time from previous webpage is available via e.data
-		i=passedTime;
+		timer=passedTime;
 	};
 	//
 	postMessage(timer);						// post the time into the page footer 
-	//
-	setTimeout("timedCount()",1000);	// call itself every 1000 milliseconds (i.e. every 1 second)
 }
 
 timedCount();		// initial call of web-worker function

@@ -27,27 +27,27 @@
 		<div id="canvas">
 			<div id="canvas-i">
 				<canvas id='starfield'>
-					<h1>Star Life Technologies</h1>
+					<img src="titlePicture.png" alt="Star Life Technologies">
 				</canvas>
 			</div>
 		</div>
 		<div id="main-nav-large">
             <ul>
-                <li>
-                    <a href="index.html">Home</a>
-                </li>
-                <li>
-                    <a href="services.html">Services</a>
-                </li>
-                <li>
-                    <a href="availability.html">Check Availability</a>
-                </li>
-                <li>
-                    <a href="contact.html">Contact Us</a>
-                </li>
-                <li>
-                    <a href="about.html">About Us</a>
-                </li>
+			<li>
+				<a id="home" href="#">Home</a>
+			</li>
+			<li id="link2">
+				<a id="services" href="#">Services</a>
+			</li>
+			<li>
+				<a id="availability" href="#">Check Availability</a>
+			</li>
+			<li>
+				<a id="contact" href="#">Contact Us</a>
+			</li>
+			<li>
+				<a id="about" href="#">About Us</a>
+			</li>
             </ul>
         </div>
 		<div id="color-fade">
@@ -96,11 +96,11 @@
 								attributeName="transform" 
 								attributeType="XML"
 								type="rotate"
-								from="-10 85 85"
-								to="10 85 85" 
-								dur="0.2s"
+								from="-15 85 85"
+								to="15 85 85" 
+								dur="0.1s"
 								begin="0s"
-								RepeatCount="2";
+								RepeatCount="3";
 							/>
 						</path>
 					</g>
@@ -122,9 +122,9 @@
 								xlink:href="#message-image"
 								attributeName="transform" 
 								attributeType="XML"
-								type="rotate"
-								from="-10 85 85"
-								to="10 85 85" 
+								type="scale"
+								from="1 1"
+								to="0.3 0.3" 
 								dur="0.2s"
 								begin="0s"
 								RepeatCount="2";
@@ -158,32 +158,20 @@
 								c17.237,0,31.26,14.025,31.26,31.264c0,17.238-14.023,31.262-31.26,31.262C93.519,146.02,79.494,131.996,79.494,114.759z"/>
 						</g>
 					</g>
-					<!--<text id="email-image" x="45" y="117">@</text>-->
-					<text x="40" y="165" class="small">E-mail Us</text>
+					<text x="40" y="165" class="small">Find Us</text>
 						<animateTransform 
 							xlink:href="#map2"
 							attributeName="transform" 
 							attributeType="XML"
 							type="scale"
 							from="1 1"
-							to="0.7 0.7" 
+							to="0.7 0.6" 
 							dur="0.1s"
 							begin="0s"
 							RepeatCount="2";
 							fill="freeze";
 							
 						/>
-						<!--<animateTransform 
-							xlink:href="#email-image"
-							attributeName="transform" 
-							attributeType="XML"
-							type="rotate"
-							from="-10 85 85"
-							to="10 85 85" 
-							dur="0.2s"
-							begin="indefinite"
-							RepeatCount="2";
-						/>-->
 				</svg>
 				</a>
 				</span>
@@ -308,7 +296,7 @@
                     Web Development Assignment - Part A
                 </div>
                 <div>
-                    Time Spent on site is:  <<output id="timeOnSite"></output>seconds.
+                    Time Spent on site is:  <output id="timeOnSite"></output>seconds.
                 </div>
                 <div>
                     copyright Bruce Kirwan

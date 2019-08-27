@@ -1,15 +1,14 @@
-    MAX_DEPTH = 50;
- 
-    var canvas, ctx;
-    var stars = new Array(512);
-	var windowWidth = 1000;
-	var windowHeight=150;
-	var sizeFactor=1.0;			// this changes for mobile view
-	var links = ["index.html", "services.html", "availability.html", "contact.html", "about.html"];
-	
-	var w;
-	var currentTimer = 0;		// value of current timer count from the web-worker timer
-	var linkTo = "";
+
+MAX_DEPTH = 50; 
+var canvas, ctx;
+var stars = new Array(512);
+var windowWidth = 1000;
+var windowHeight=150;
+var sizeFactor=1.0;			// this changes for mobile view
+
+var w;
+var currentTimer = 0;		// value of current timer count from the web-worker timer
+
 
 
 
@@ -23,31 +22,34 @@ window.addEventListener('DOMContentLoaded', function (event) {
 	var existingTimer = getUrlParameter('timer');
 	console.log("    *******************           existingTimer is " + existingTimer);
 	addEvents();
+	console.log("XXXXXXXXXXXXXX");
 	if (existingTimer == "")
 		startWorker(0)
 	else
 		startWorker(existingTimer);
+	
 });
 
 /*
-/	add query string to the internal navigation link before navigating
+/	add query string to the internal navigation link before navigating to internal Star Life page
 */
-function addUrlParameter(linkIndex) {
-	var queryStr = "?timer=" + currentTimer;		// set up query string to add to end of URL (in order to pass current value of timer)
-	linkTo = links[linkIndex];
-	if (currentTimer > 0)							// if timer is a positive number
-		linkTo += url;								// add the query string
-	window.location.href = linkTo;					// navigate to internal webpage
+function addUrlParameter(linkPage) {
+	var queryStr = "?timer=" + currentTimer;					// set up query string to add to end of URL (in order to pass current value of timer)
+	console.log("in addURLParameter, queryStr is "+queryStr+",  linkPage is  "+linkPage);
+	if (currentTimer > 0)										// if timer is a positive number
+		linkPage += queryStr;									// add the query string
+	console.log("linkPage is "+linkPage);
+	window.location.href = linkPage;							// navigate to internal webpage
 };
 
 /*
 /	function to retrieve the timer value from any query string that may be passed in
 */
 function getUrlParameter(name) {
-    name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
-    var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
-    var results = regex.exec(location.search);
-    return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+	var regex = new RegExp('[?&]' + name + '=([^&#]*)');		// create regular expression to search for the input parameter,
+																//	preceded by either ? or & and having = afterwards 
+    var results = regex.exec(location.search);					// execute the search 
+	return results === null ? '' : results[1];					// return the item one space after the result set
 };
 
 /*
@@ -58,7 +60,7 @@ function startWorker(inpTime) {
 	//
 		var workerCreated = false;								// assume no worker got created
 		if (typeof(w) == "undefined") {							// test if any worker was already created
-			console.log("create new worker...........");
+			//
 			try {
 				w = new Worker("timeCounter.js");				// create web-worker in file timeCounter.js
 				workerCreated = true;							// indicate web-worker was created
@@ -67,30 +69,22 @@ function startWorker(inpTime) {
 				console.log(e);									// output error message
 				workerCreated = false;							// indicate worker was not created
 			}
-			console.log("          	       after creating new worker...........");
 		}
-		console.log("in startWorker 22222222...........");
-		if (workerCreated)  {
-			w.onmessage = function(event) {
-				//console.log("Worker received data ..........."+event.data);
-				currentTimer = event.data;
-				document.getElementById("timeOnSite").innerHTML = event.data;
+		if (workerCreated)  {									// if worker created sucessfully
+			w.onmessage = function(event) {						// message received from timeCounter.js web-worker
+				currentTimer = event.data;						// save the time in global variable 
+																// (needed in query string if navigating to an internal link)
+				document.getElementById("timeOnSite").innerHTML = event.data;		// update field in the footer with the time
 			}
-			if (inpTime != 0)
-				w.postMessage(inpTime);
+			if (inpTime > 0)									// if a positive number from query string after navigating from other internal apge
+				w.postMessage(inpTime);							// post the number from query string to the web-worker 
+																// (so web worker does not start from 0)
 		}
 		//
-	} else {												// output error message if browser does not support web-Workers
+	} else {													// output error message if browser does not support web-Workers
 		document.getElementById("result").innerHTML = "Sorry! No Web Worker support.";
 	}
 }
-
-function stopWorker() { 
-	console.log("in stopWorker...........");
-	w.terminate();
-	w = undefined;
-}
-
 
 function openNav() {
     console.log("Open Nav Clicked");
@@ -127,6 +121,7 @@ function accordion() {
 
 
 function addEvents() {
+	console.log("UUUUUUUUUUUUUUUUU");
 	console.log(" ------------  in addEvents");
 	canvas = document.getElementById("starfield");
 	if( canvas && canvas.getContext ) {
@@ -150,45 +145,31 @@ function addEvents() {
 			timing = 100;
         setInterval(loop,timing);
     }
+	console.log("11111111111");
     document.getElementById("hamburgerIcon").addEventListener('click', function () {openNav();});
-	document.getElementById("link1").addEventListener('click', function() {
-		addUrlParameter(0);
+	console.log("22222222222222");
+	document.getElementById("home").addEventListener('click', function() {
+		console.log("333333333333");
+		addUrlParameter("index.html");
 	});
-	document.getElementById("link2").addEventListener('click', function() {
-		addUrlParameter(1);
+	document.getElementById("services").addEventListener('click', function() {
+		console.log("333333333333");
+		console.log ("added eventListerner for services.html");
+		addUrlParameter("services.html");
 	});
-	document.getElementById("link3").addEventListener('click', function() {
-		addUrlParameter(2);
+	document.getElementById("availability").addEventListener('click', function() {
+		console.log("333333333333");
+		addUrlParameter("availability.html");
 	});
-	document.getElementById("link4").addEventListener('click', function() {
-		addUrlParameter(3);
+	document.getElementById("contact").addEventListener('click', function() {
+		console.log("333333333333");
+		addUrlParameter("contact.html");
 	});
-	document.getElementById("link5").addEventListener('click', function() {
-		addUrlParameter(4);
+	document.getElementById("about").addEventListener('click', function() {
+		console.log("333333333333");
+		addUrlParameter("about.html");
 	});
-	
-/*	for (var i = 0; i < classname.length; i++) {
-		console.log("in clicked link..............");
-		var x = i;
-		classname[i].addEventListener('click', function() {
-			console.log("x is "+x);
-
-		});
-	}
-	/*
-	/  I think below is rubbish - delete later
-	/document.getElementById("main-nav-i").onclick = function(e) {
-	console.log('XXXXXXXXXXXXXXXXXXXXXXXXXXXXXX');
-	e = e || event
-		var target = e.target || e.srcElement
-		// variable target has your clicked element
-		alert("target.nodeName is "+nodeName);
-		if (target.nodeName == "TD") {
-			displayDate = new Date(selectYear + "-" + monthText(selectMonth) + "-" + target.innerHTML);
-			initialiseDay();
-		}
-	}*/
-
+	console.log("4444444444444");
 }
 
 

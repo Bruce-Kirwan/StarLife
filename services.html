@@ -8,108 +8,96 @@
 
 	<META name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
     <script src="site.js"></script>
-	<script src="webSocket.js"></script>
+	<!--<script src="webSocket.js"></script>-->
 </head>
 <body id="body">
-		<div id="titlePicture">
-			<img src="titlePicture.png" alt="Star Life Technologies">
-		</div>
+	<div id="titlePicture">
+		<img src="titlePicture.png" alt="Star Life Technologies">
+	</div>
     <div id="menu">
         <div id="menu-i">
             <span id="hamburgerIcon" style="font-size:40px;cursor:pointer" onclick="openNav()">&#9776;</span>
         </div>
     </div>
-
-		<div id="canvas">
-			<div id="canvas-i">
-				<canvas id='starfield'>
-					<h1>Star Life Technologies</h1>
-				</canvas>
+	<div id="canvas">
+		<div id="canvas-i">
+			<canvas id='starfield'>
+				<img src="titlePicture.png" alt="Star Life Technologies">
+			</canvas>
+		</div>
+	</div>
+	<div id="main-nav-large">
+		<ul>
+			<li>
+				<a id="home" href="#">Home</a>
+			</li>
+			<li id="link2">
+				<a id="services" href="#">Services</a>
+			</li>
+			<li>
+				<a id="availability" href="#">Check Availability</a>
+			</li>
+			<li>
+				<a id="contact" href="#">Contact Us</a>
+			</li>
+			<li>
+				<a id="about" href="#">About Us</a>
+			</li>
+		</ul>
+	</div>
+	<div id="color-fade">
+	</div>
+	<nav id="main-nav" vertical-align=top>
+		<div id="main-nav-i" vertical-align=top>
+			<ul>
+				<li><a class="linksMobile" href="index.html">Home</a></li>
+				<li><a class="linksMobile" href="services.html">Services</a></li>
+				<li><a class="linksMobile" href="availability.html">Check Availability</a></li>
+				<li><a class="linksMobile" href="contact.html">Contact Us</a></li>
+				<li><a class="linksMobile" href="about.html">About Us</a></li>
+			</ul>
+		</div>
+	</nav>
+	<div id="closebtn"  onclick="closeNav()">
+		<span>
+			&nbsp;
+			&times;
+			&nbsp;
+		</span>
+	</div>
+	<div class="lid">&nbsp;</div>
+	<div id="wrapper">
+		<div id="main-page">
+			<div id="main-content">
+				<h2>WebSocket Test</h2>
+				<div id="output"></div>
 			</div>
 		</div>
-		<div id="main-nav-large">
-            <ul>
-                <li>
-                    <a id="link1" href="#">Home</a>
-                </li>
-                <li>
-                    <a id="link2" href="#">Services</a>
-                </li>
-                <li>
-                    <a id="link3" href="#">Check Availability</a>
-                </li>
-                <li>
-                    <a id="link4" href="#">Contact Us</a>
-                </li>
-                <li>
-                    <a id="link5" href="#">About Us</a>
-                </li>
-            </ul>
-        </div>
-		<div id="color-fade">
-		</div>
-		
-        <!--<div id="main-contents">
-                <a href="default.html">Home</a>
-                <a href="Accomodations.html">Accomodations</a>
-                <a href="FoodAndDrink.html">Food and Drink</a>
-                <a href="GettingAround.html">Getting Around</a>
-                <a href="contact.html">Contact</a>
-        </div>-->
-        <nav id="main-nav" vertical-align=top>
-            <div id="main-nav-i" vertical-align=top>
-                <ul>
-                    <li><a class="linksMobile" href="index.html">Home</a></li>
-                    <li><a class="linksMobile" href="services.html">Services</a></li>
-                    <li><a class="linksMobile" href="availability.html">Check Availability</a></li>
-					<li><a class="linksMobile" href="contact.html">Contact Us</a></li>
-                    <li><a class="linksMobile" href="about.html">About Us</a></li>
-
-                </ul>
-            </div>
-        </nav>
-
-		<div id="closebtn"  onclick="closeNav()">
-			<span>
-				&nbsp;
-				&times;
-				&nbsp;
-			</span>
-		</div>
-        <div class="lid">&nbsp;</div>
-		<div id="wrapper">
-			<div id="main-page">
-				<div id="main-content">
-					<h2>WebSocket Test</h2>
-					<div id="output"></div>
+		<aside id="main-aside">
+			<div id="main-aside-i">
+				<div>
+					<strong>Fill out later</strong>
 				</div>
 			</div>
-			<aside id="main-aside">
-				<div id="main-aside-i">
-					<div>
-						<strong>Fill out later</strong>
-					</div>
+		</aside>
+		<div class="lid">&nbsp;</div>
+		<footer id="main-footer">
+			<div id="main-footer-i">
+				<h3>Website details</h3>
+				<div>
+					Author: Bruce Kirwan
 				</div>
-			</aside>
-			<div class="lid">&nbsp;</div>
-			<footer id="main-footer">
-				<div id="main-footer-i">
-					<h3>Website details</h3>
-					<div>
-						Author: Bruce Kirwan
-					</div>
-					<div>
-						Web Development Assignment - Part A
-					</div>
-					<div>
-						Time Spent on site is:  <output id="timeOnSite"></output>seconds.
-					</div>
-					<div>
-						copyright Bruce Kirwan
-					</div>
+				<div>
+					Web Development Assignment - Part A
 				</div>
-			</footer>
-		</div>
+				<div>
+					Time Spent on site is:  <output id="timeOnSite"></output>seconds.
+				</div>
+				<div>
+					copyright Bruce Kirwan
+				</div>
+			</div>
+		</footer>
 	</div>
 </body>
 </html>
