@@ -59,17 +59,28 @@ function fetchJsonDataFile() {
 			console.log('above is jsonData');
 			var jsString = JSON.stringify(jsonData);
 			console.log("jsString is:"+jsString);
-			localStorage.setItem('StarLifeAvailability',jsString);
+			
+			try {
+				localStorage.setItem('StarLifeAvailability',jsString);			// store json availability string in local storage
+			} catch (e) {
+				console.log(e);	// output message to console if error
+			}
+			
 			console.log('stored availability in StarLifeAvailability');
 		},
 		error: function( data ) {
 			console.log("error getting availability.json");
-			var jsString = localStorage.getItem('StarLifeAvailability');
+			var jsString = "";
+			try {
+				jsString = localStorage.getItem('StarLifeAvailability');			// try to retrieve json availability data from local storage
+			} catch (e) {
+				console.log(e);	// output message to console if error
+			}
 			console.log("jsString is:"+jsString);
 			jsonData = JSON.parse(jsString);
 			console.log("tried to get item from localStorage");
 			console.log(jsonData);
-			if (jsonData==null) {
+			if (jsonData=="") {
 				jsonPresent = false;
 				jsonNotFound = true;
 			}
@@ -168,7 +179,7 @@ function addEvents() {
 		var target = e.target || e.srcElement
 		// variable target has your clicked element
 		if (target.nodeName == "TD") {
-			displayDate = new Date(selectYear + "-" + (selectMonth+1) + "-" + target.innerHTML);
+			displayDate = new Date(selectYear + "-" + monthText(selectMonth) + "-" + target.innerHTML);
 			initialiseDay();
 		}
 	}
@@ -211,21 +222,10 @@ function addEvents() {
 		document.getElementById("color-fade").style.display = "block";
 		document.getElementById("year").innerHTML = months[selectMonth] + " " + selectYear;
 		displayingDay = false;
-		/*
-		/   delete below section later
-		*/
-		console.log("error getting availability.json");
-		var jsString = localStorage.getItem('StarLifeAvailability');
-		console.log("jsString is:"+jsString);
-		jsonData = JSON.parse(jsString);
-		console.log("tried to get item from localStorage");
-		console.log(jsonData);
 	}	
 }
 
-function addRow() {
 
-}
 
 function initialiseDay() {		
 	selectYear = displayDate.getFullYear();
@@ -278,13 +278,16 @@ function initialiseDay() {
 	} else {
 		document.getElementById("next").style.display = "block";
 	}
+	console.log("displayDate is " + displayDate);
 	showBooked(displayDate);
 }
 
-function showBooked(searchDate) {
-	searchDate.setHours(12);			// make sure time is 12 noon so that next line won't decrement by one day
-	searchDate = searchDate.toISOString().substring(0,10);			// just get the first 10 characters (we do not need the time portion of the date)
-	console.log("Date 8 is "+searchDate);
+function showBooked(inpDate) {
+	console.log("input Date is " + inpDate);
+	inpDate.setHours(12);			// make sure time is 12 noon so that next line won't decrement by one day
+	console.log("input Date is " + inpDate);
+	searchDate = inpDate.toISOString().substring(0,10);			// just get the first 10 characters (we do not need the time portion of the date)
+	console.log("searchDate is "+searchDate);
 	$.each(jsonData, function(key, value) {
         if (key == searchDate) {
 			var time = 0;
@@ -313,17 +316,40 @@ function showBooked(searchDate) {
 	});
 }
 
-
+/*
+/		function to convert integer month to text value for use in creating a new Date object
+*/
+function monthText(inpMonth) {
+	inpMonth++;						// integer month starts at 0 to 11, text month goes from 1 to 12
+	var textMonth = "";				// variable containing the return value
+	if (inpMonth > 9)				// if two digit month....
+		textMonth += inpMonth;		// simply return the text value of the month
+	else
+		textMonth = "0" + inpMonth;	//otherwise, add a 0 before the month
+	return textMonth;
+}
 
 function initialiseCalendar() { 
+	console.log("in initialiseCalendar..............");
+	console.log("today is "+today);
+	console.log(today);
+	console.log("selectDate is "+selectDate);
+	console.log(selectDate);
 	document.getElementById("canvas").style.display = "block";
 	document.getElementById("color-fade").style.display = "block";
 	selectMonth = selectDate.getMonth();
+	console.log("selectDate.getMonth() is "+ selectMonth);
 	selectYear = selectDate.getFullYear();
+	console.log("selectDate.getFullYear() is "+ selectYear);
 	var startDay = 1;						// default show from 1st of month
 	if (selectDate < today) 
 		selectDate = today;
+	console.log("today is "+today);
+	console.log(today);
+	console.log("selectDate is "+selectDate);
+	console.log(selectDate);
 	selectDay = selectDate.getDate();
+	console.log("selectDate.getDate() is "+ selectDay);
 	document.getElementById("year").innerHTML = months[selectMonth] + " " + selectYear;
 	/*
 	/   do not show previous button, if the month is before the current month
@@ -342,11 +368,19 @@ function initialiseCalendar() {
 		document.getElementById("next").style.display = "block";
 	}
 	// get the first day of the month, so know what day of the week to start adding day of month numbers
-    firstOfMonth = new Date(selectYear+"-"+(selectMonth+1)+"-01");
+	var dateText = selectYear +  monthText(selectMonth) + "-01";
+	console.log("dateText is "+dateText);
+    //firstOfMonth = new Date(selectYear+"-"+(selectMonth+1)+"-01");
+	firstOfMonth = new Date("2019-08-01");
+	console.log("firstOfMonth is "+ firstOfMonth);
+	firstOfMonth=new Date(selectYear + "-" +  monthText(selectMonth) + "-01");	// get Date object for the first day of the current month
+	console.log("firstOfMonth is "+ firstOfMonth)
+	console.log(firstOfMonth);
 	if (firstOfMonth < today) 				// if first of month is before current date (today)
 		startDay = currentDay;				// then do not show days before current date (today)
 	var firstDayOfMonth = firstOfMonth.getDay();
 	var selectDay = firstOfMonth.getDate();
+	console.log("selectDay is " + selectDay);
 	// create the table of days of month
 	var tbl = document.getElementById("month");
 	tbl.innerHTML = "";		// body of the calendar
@@ -404,7 +438,7 @@ function initialiseCalendar() {
 		tbl.appendChild(row);
 	}
 	
-	selectDate = new Date(selectYear+"-"+(selectMonth+1)+"-"+selectDay);
+	selectDate = new Date(selectYear+"-"+monthText(selectMonth)+"-"+selectDay);
 	row = document.createElement("tr");
 	//   create each cell in table of month days
 	for (var j=0; j<7; j++) {

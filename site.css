@@ -125,11 +125,10 @@
 	width: 100%;
 }
 
-#email-image {
-	font-size: 6em;
-	font-family: sans-serif;
-	font-weight: 900;
-	color:#CEE4F0;
+#map2 {
+	background-size: 10px 10px;
+	/*color:#CEE4F0;*/
+	color: red;
 }
 
 #first-image {
@@ -140,6 +139,12 @@
 #third-image {
 	width: 33%;
 	float:right;
+}
+
+#timeOnSite {
+	font-size: 5em;
+	font-weight: bold;
+	color: red;
 }
 
 .small {

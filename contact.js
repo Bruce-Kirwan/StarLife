@@ -24,7 +24,12 @@ function addEvents2() {
 	console.log(" ------------  in addEvents2 for contact.js");
 	$(".svg-images").hover(function(){console.log("hovering............");
 		var x = this.getElementsByTagName("animateTransform");  
-		x[0].beginElement();
+		try {
+			x[0].beginElement();			// initiate animation
+		} catch (e) {
+			console.log(e);	// output message to console if error
+		}
+		console.log("after begin element started......................");
 	}, function(){});
 }
 /*

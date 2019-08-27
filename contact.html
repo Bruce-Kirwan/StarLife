@@ -99,7 +99,7 @@
 								from="-10 85 85"
 								to="10 85 85" 
 								dur="0.2s"
-								begin="indefinite"
+								begin="0s"
 								RepeatCount="2";
 							/>
 						</path>
@@ -117,7 +117,7 @@
 					<g fill="none" fill-rule="evenodd">
 						<use fill="#CEE4F0" xlink:href="#a"/>
 						<circle cx="85" cy="85" r="65" fill="#FFF"/>
-						<path id="message-image" fill="#13394C" d="M52 62c0-1.105.896-2 2.005-2h62.99c1.107 0 2.005.896 2.005 2v47c0 1.105-.896 2-2.005 2h-62.99A2.003 2.003 0 0 1 52 109V62zm0 4v10.714l31.77 18.29c.951.548 2.505.55 3.46 0L119 76.714V66L85.5 85.286 52 66z">
+						<path id="message-image" width="20" height="20" fill="#13394C" d="M52 62c0-1.105.896-2 2.005-2h62.99c1.107 0 2.005.896 2.005 2v47c0 1.105-.896 2-2.005 2h-62.99A2.003 2.003 0 0 1 52 109V62zm0 4v10.714l31.77 18.29c.951.548 2.505.55 3.46 0L119 76.714V66L85.5 85.286 52 66z">
 							<animateTransform 
 								xlink:href="#message-image"
 								attributeName="transform" 
@@ -126,7 +126,7 @@
 								from="-10 85 85"
 								to="10 85 85" 
 								dur="0.2s"
-								begin="indefinite"
+								begin="0s"
 								RepeatCount="2";
 							/>
 						</path>
@@ -137,29 +137,43 @@
 				</span>
 				<span id="third-image">
 				<a href="#find">
-				<svg class="svg-images" width="170" height="170" viewBox="0 0 170 170">
+				<svg id="mapsvg" class="svg-images" width="170" height="170" viewBox="0 0 170 170">
 					<defs>
 						<path id="a" d="M85 170c-46.944 0-85-38.056-85-85S38.056 0 85 0s85 38.056 85 85-38.056 85-85 85zm0-10c41.421 0 75-33.579 75-75s-33.579-75-75-75-75 33.579-75 75 33.579 75 75 75z"/>
 					</defs>
 					<g fill="none" fill-rule="evenodd">
 						<use fill="#CEE4F0" xlink:href="#a"/>
 						<circle cx="85" cy="85" r="65" fill="#FFF"/>
-							<path id="#email-image" fill="#13394C" d="M234.362,24.818c-2.009-1.403-4.576-1.736-6.879-0.89l-71.607,26.306L84.272,23.927c-1.671-0.614-3.504-0.614-5.173,0
-		L4.914,51.183C1.962,52.268,0,55.079,0,58.223v148.379c0,2.451,1.198,4.748,3.207,6.15c1.276,0.891,2.778,1.35,4.293,1.35
-		c0.871,0,1.747-0.152,2.586-0.46l71.599-26.306l71.604,26.306c1.669,0.613,3.502,0.613,5.173,0l74.193-27.256
-		c2.952-1.084,4.914-3.895,4.914-7.04V30.968C237.569,28.516,236.372,26.22,234.362,24.818z M222.569,174.112l-66.693,24.5
-		l-71.604-26.306c-0.835-0.307-1.711-0.46-2.586-0.46c-0.876,0-1.752,0.153-2.587,0.46L15,195.857V63.458l66.686-24.5l71.604,26.306
-		c1.669,0.613,3.502,0.613,5.173,0l64.107-23.551V174.112z"/>
-	<path id="#email-image" fill="#13394C" d="M157.018,114.759c0-25.51-20.752-46.264-46.26-46.264c-25.51,0-46.264,20.754-46.264,46.264
-		c0,25.509,20.754,46.262,46.264,46.262c10.053,0,19.359-3.233,26.955-8.701l22.563,22.559c1.464,1.464,3.383,2.196,5.303,2.196
-		c1.919,0,3.839-0.732,5.304-2.197c2.929-2.929,2.928-7.678-0.001-10.606l-22.562-22.559
-		C153.785,134.116,157.018,124.811,157.018,114.759z M79.494,114.759c0-17.239,14.025-31.264,31.264-31.264
-		c17.237,0,31.26,14.025,31.26,31.264c0,17.238-14.023,31.262-31.26,31.262C93.519,146.02,79.494,131.996,79.494,114.759z"/>
-
+						<g id="map2">
+							<path class="map2" fill="#13394C" d="M234.362,24.818c-2.009-1.403-4.576-1.736-6.879-0.89l-71.607,26.306L84.272,23.927c-1.671-0.614-3.504-0.614-5.173,0
+							L4.914,51.183C1.962,52.268,0,55.079,0,58.223v148.379c0,2.451,1.198,4.748,3.207,6.15c1.276,0.891,2.778,1.35,4.293,1.35
+							c0.871,0,1.747-0.152,2.586-0.46l71.599-26.306l71.604,26.306c1.669,0.613,3.502,0.613,5.173,0l74.193-27.256
+							c2.952-1.084,4.914-3.895,4.914-7.04V30.968C237.569,28.516,236.372,26.22,234.362,24.818z M222.569,174.112l-66.693,24.5
+							l-71.604-26.306c-0.835-0.307-1.711-0.46-2.586-0.46c-0.876,0-1.752,0.153-2.587,0.46L15,195.857V63.458l66.686-24.5l71.604,26.306
+								c1.669,0.613,3.502,0.613,5.173,0l64.107-23.551V174.112z"/>
+							<path id="email-image" class="map2" fill="#13394C" d="M157.018,114.759c0-25.51-20.752-46.264-46.26-46.264c-25.51,0-46.264,20.754-46.264,46.264
+								c0,25.509,20.754,46.262,46.264,46.262c10.053,0,19.359-3.233,26.955-8.701l22.563,22.559c1.464,1.464,3.383,2.196,5.303,2.196
+								c1.919,0,3.839-0.732,5.304-2.197c2.929-2.929,2.928-7.678-0.001-10.606l-22.562-22.559
+								C153.785,134.116,157.018,124.811,157.018,114.759z M79.494,114.759c0-17.239,14.025-31.264,31.264-31.264
+								c17.237,0,31.26,14.025,31.26,31.264c0,17.238-14.023,31.262-31.26,31.262C93.519,146.02,79.494,131.996,79.494,114.759z"/>
+						</g>
 					</g>
 					<!--<text id="email-image" x="45" y="117">@</text>-->
 					<text x="40" y="165" class="small">E-mail Us</text>
 						<animateTransform 
+							xlink:href="#map2"
+							attributeName="transform" 
+							attributeType="XML"
+							type="scale"
+							from="1 1"
+							to="0.7 0.7" 
+							dur="0.1s"
+							begin="0s"
+							RepeatCount="2";
+							fill="freeze";
+							
+						/>
+						<!--<animateTransform 
 							xlink:href="#email-image"
 							attributeName="transform" 
 							attributeType="XML"
@@ -169,7 +183,7 @@
 							dur="0.2s"
 							begin="indefinite"
 							RepeatCount="2";
-						/>
+						/>-->
 				</svg>
 				</a>
 				</span>
@@ -286,81 +300,20 @@
 				<div>&nbsp;</div>
 				<div>&nbsp;</div>
 				<div>&nbsp;</div>
-				<div>&nbsp;</div>
-				<div>&nbsp;</div>
-				<div>&nbsp;</div>
-				<div>&nbsp;</div>
-				<div>&nbsp;</div>
-				<div>&nbsp;</div>
-				<div>&nbsp;</div>
-				<div>&nbsp;</div>
-				<div>&nbsp;</div>
-				<div>&nbsp;</div>
-				<div>&nbsp;</div>
-				<div>&nbsp;</div>
-				<div>&nbsp;</div>
-				<div>&nbsp;</div>
-				<div>&nbsp;</div>
-				<div>&nbsp;</div>
-				<div>&nbsp;</div>
-				<div>&nbsp;</div>
-				<div>&nbsp;</div>
-				<div>&nbsp;</div>
-				<div>&nbsp;</div>
-				<div>&nbsp;</div>
-				<div>&nbsp;</div>
-				<div>&nbsp;</div>
-				<div>&nbsp;</div>
-				<div>&nbsp;</div>
-				<div>&nbsp;</div>
-				<div>&nbsp;</div>
-				<div>&nbsp;</div>
-				<div>&nbsp;</div>
-				<div>&nbsp;</div>
-				<div>&nbsp;</div>
-				<div>&nbsp;</div>
-				<div>&nbsp;</div>
-				<div>&nbsp;</div>
-				<div>&nbsp;</div>
-				<div>&nbsp;</div>
-				<div>&nbsp;</div>
-				<div>&nbsp;</div>
-				<div>&nbsp;</div>
-				<div>&nbsp;</div>
-				<div>&nbsp;</div>
-				<div>&nbsp;</div>
-				<div>&nbsp;</div>
-				<div>&nbsp;</div>
-				<div>&nbsp;</div>
-				<div>&nbsp;</div>
-				<div>&nbsp;</div>
-				<div>&nbsp;</div>
-				<div>&nbsp;</div>
-				<div>&nbsp;</div>
-				<div>&nbsp;</div>
-				<div>&nbsp;</div>
-				<div>&nbsp;</div>
-				<div>&nbsp;</div>
-				<div>&nbsp;</div>
-				<div>&nbsp;</div>
-				<div>&nbsp;</div>
-				<div>&nbsp;</div>
-				<div>&nbsp;</div>
-				<div>&nbsp;</div>
-				<div>&nbsp;</div>
-				<div>&nbsp;</div>
-				<div>&nbsp;</div>
-				<div>&nbsp;</div>
-				<div>&nbsp;</div>
-				<div>&nbsp;</div>
-				<div>&nbsp;</div>
-				<div>&nbsp;</div>
-				<div>&nbsp;</div>
-				<div>&nbsp;</div>
-				<div>&nbsp;</div>
-				<div>&nbsp;</div>
-				<div>&nbsp;</div>
-			</div>
+				<h3>Website details</h3>
+                <div>
+                    Author: Bruce Kirwan
+                </div>
+                <div>
+                    Web Development Assignment - Part A
+                </div>
+                <div>
+                    Time Spent on site is:  <<output id="timeOnSite"></output>seconds.
+                </div>
+                <div>
+                    copyright Bruce Kirwan
+                </div>
+            </div>
         </footer>
 	 </div>
     </div>
