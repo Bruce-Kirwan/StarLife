@@ -1,5 +1,12 @@
 /*
-/	webworker javascript file to iterate the time spent on the website in the page footer
+/	Author: Bruce Kirwan
+/	Web development Assignment A part 1
+/	August 2019
+/
+/	This file contains the javascript for the webworker 
+/	which iterate the time spent on the website.
+/   It is called by 'site.js' (which then displays the passed time in the page footer)
+/
 */
 
 var timer = 0;			// start timer at 0 seconds

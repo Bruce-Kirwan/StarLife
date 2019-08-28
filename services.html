@@ -1,3 +1,17 @@
+<!--
+/	Author: Bruce Kirwan
+/	Web development Assignment A part 1
+/	August 2019
+/
+/	This file contains the HTML for the page that describes the services offerred by Star Life technologies
+/	It also contains a Web Socket functionality.
+/	The webpage uses stylesheets siteMobile.css and site.css
+/	It also uses site.js javascript
+/
+-->
+
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,7 +22,7 @@
 
 	<META name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
     <script src="site.js"></script>
-	<!--<script src="webSocket.js"></script>-->
+	<script src="webSocket.js"></script>
 </head>
 <body id="body">
 	<div id="titlePicture">
@@ -69,17 +83,63 @@
 	<div id="wrapper">
 		<div id="main-page">
 			<div id="main-content">
-				<h2>WebSocket Test</h2>
-				<div id="output"></div>
+
+                <button class="accordion"> + CCTV installation</button>
+                <div class="panel">
+					<img src="slideshowImages/CCTV.jpg" alt="CCTV installation" />
+					<div>
+                        At StarLife we specialise in the installation of CCTV equipment on your premises.
+                    </div>
+					<div>
+                        We cater for outdoor installation as well as installation of CCTV on the outside of your premises.
+                    </div>
+                </div>
+
+                <button class="accordion"> + Network installation and configuration</button>
+                <div class="panel">
+					<img src="slideshowImages/router.png" alt="network installation and configuration" />
+                    <div>
+                        At StarLife we install IT networks including cabling, configuration of switches and routers.  
+                    </div>
+					<div>
+						We also install wireless networks and configure routers for domestic use.
+					</div>
+                </div>
+
+                <button class="accordion"> + Operating system installation</button>
+                <div class="panel">
+					<img src="slideshowImages/Windows.jpg" alt="Operating System installation and configuration" />
+                    <div>
+                        At StarLife we install and configure Windows (as well as Linux) operating systems on your PC, laptop or network.
+                    </div>
+                </div>
+				<button class="accordion" id="hdBtn"> + Helpdesk</button>
+                <div class="panel">
+					<div id="hd">&nbsp;</div>
+					<img src="slideshowImages/helpdesk.jpg" alt="Helpdesk" />
+                    <div>
+                        We also offer a helpdesk facility at StarLife for IT or CCTV problems.
+                    </div>
+                </div>
+				<button class="accordion" id="wsTest"> + Web Socket Test</button>
+                <div class="panel">
+					<div id="webSocketTest">&nbsp;</div>
+					<h2>WebSocket Test</h2>
+					<div>&nbsp;</div>
+					<label for="messageField" class="inputLabel">Enter message to echo test below:</label>
+					<textarea class="input" type= "text" name="messageField" id="messageField" required placeholder="enter message to echo test"></textarea>					
+					<div>&nbsp;</div>
+					<label for="socketTest" class="inputLabel">Press button below to echo test to website websocket.org:</label>
+					<div>
+						<button id="socketTest">Echo Test</button>
+					</div>
+					<div>&nbsp;</div>
+					<div id="output"></div>
+					<div>&nbsp;</div>
+                    <button id="">
+                </div>
 			</div>
 		</div>
-		<aside id="main-aside">
-			<div id="main-aside-i">
-				<div>
-					<strong>Fill out later</strong>
-				</div>
-			</div>
-		</aside>
 		<div class="lid">&nbsp;</div>
 		<footer id="main-footer">
 			<div id="main-footer-i">

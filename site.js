@@ -1,3 +1,14 @@
+/*
+/	Author: Bruce Kirwan
+/	Web development Assignment A part 1
+/	August 2019
+/
+/	This file contains the javascript for larger screen displays (>600px width)
+/	It displays a title canvas of a moving starfield (that accelerates upon page navigation)
+/	and also a timer (in seconds) that works with web-worker file timeCounter.js
+/	to display the time spent on the site in the footer of each webpage.
+/
+*/
 
 MAX_DEPTH = 50; 
 var canvas, ctx;
@@ -145,6 +156,10 @@ function addEvents() {
 			timing = 100;
         setInterval(loop,timing);
     }
+	/*
+	/	events below to call functions that pass a query string with the timer for
+	/	total time spend on the site when navigating to an internal link
+	*/
 	console.log("11111111111");
     document.getElementById("hamburgerIcon").addEventListener('click', function () {openNav();});
 	console.log("22222222222222");

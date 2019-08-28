@@ -1,3 +1,12 @@
+/*
+/	Author: Bruce Kirwan
+/	Web development Assignment A part 1
+/	August 2019
+/
+/	This file contains the javascript for the slideshow displayed on the
+/	home page (index.html)
+/
+*/
 	
 var currentImg;				// variable containing the image being currently displayed
 var imgArray;				// array of all images in the slideshow

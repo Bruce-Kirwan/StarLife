@@ -1,3 +1,14 @@
+/*
+/	Author: Bruce Kirwan
+/	Web development Assignment A part 1
+/	August 2019
+/
+/	This file contains the javascript for the calendar/scheduling function of 
+/	my website on the Availability page (availability.html)
+/
+*/
+
+
 
 MAX_DEPTH = 50; 
 var canvas, ctx;
