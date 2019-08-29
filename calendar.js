@@ -8,8 +8,6 @@
 /
 */
 
-
-
 MAX_DEPTH = 50; 
 var canvas, ctx;
 var stars = new Array(512);
@@ -40,69 +38,26 @@ console.log('... site.js has loaded ...');
 
 var removeCanvas = true;		// remove canvas when displaying schedule for one day
 var narrowView = window.matchMedia("(max-width: 600px)")
-if (narrowView.matches) 		// keep canvas for smaller widths
-	removeCanvas = false;
 
 var jsonData = null;
 
 /*
-/	function to copy data from file 'availability.json' on my github account, to the variable jsonData
+/	below is executed upon page load 
 */
-function fetchJsonDataFile() {		
-	console.log("About to fetch JSON data file");
-	$.ajax({
-		url: 'https://raw.githubusercontent.com/Bruce-Kirwan/StarLife/master/availability.json',
-		dataType: 'json',
-		success: function( data ) {
-			jsonData = data; 
-			if (jsonData==null)
-				jsonNotFound = true;
-			else
-				jsonPresent = true;
-			console.log(jsonData);
-			console.log('above is jsonData');
-			var jsString = JSON.stringify(jsonData);
-			console.log("jsString is:"+jsString);
-			
-			try {
-				localStorage.setItem('StarLifeAvailability',jsString);			// store json availability string in local storage
-			} catch (e) {
-				console.log(e);											// output message to console if error
-			}
-			
-			console.log('stored availability in StarLifeAvailability');
-		},
-		error: function( data ) {
-			console.log("error getting availability.json");
-			var jsString = "";
-			try {
-				jsString = localStorage.getItem('StarLifeAvailability');			// try to retrieve json availability data from local storage
-			} catch (e) {
-				console.log(e);	// output message to console if error
-			}
-			console.log("jsString is:"+jsString);
-			jsonData = JSON.parse(jsString);
-			console.log("tried to get item from localStorage");
-			console.log(jsonData);
-			if (jsonData=="") {
-				jsonPresent = false;
-				jsonNotFound = true;
-			}
-			else
-				jsonPresent = true;
-		}
-	});
-}
-
 window.addEventListener('DOMContentLoaded', function (event) {
     console.log("DOM fully loaded and parsed");
+	if (narrowView.matches) 		// keep canvas for smaller widths
+		removeCanvas = false;
 	oneYearFromToday = oneYearFromToday.setYear(oneYearFromToday.getFullYear()+1);		// get date exactly one year from today
-	document.getElementById("closebtn").style.display = "none";
 	initialiseCalendar();
 	fetchJsonDataFile();
     addMoreEvents();
 });
 
+/*
+/	add more javascript listener events (in addition to those already added
+/	by site.js or siteMobile.js 
+*/
 function addMoreEvents() {
 	document.getElementById("month").onclick = function(e) {
 		e = e || event
@@ -160,110 +115,11 @@ function addMoreEvents() {
 	}	
 }
 
-
-
-function initialiseDay() {		
-	selectYear = displayDate.getFullYear();
-	selectMonth = displayDate.getMonth();
-	selectDay = displayDate.getDate();;
-	/*
-	/	create a table of the schedule
-	*/
-	$("#day").empty();						// first clear any existing rows from day table
-	
-	if (removeCanvas)		// remove the canvas, unless we are in mobile view
-		document.getElementById("canvas").style.display = "none";
-	document.getElementById("color-fade").style.display = "none";
-	document.getElementById("year").innerHTML = selectDay + " " + months[selectMonth];
-	var createSchedule = document.getElementById("day");
-	createSchedule.style.display = "block";
-	var schedRow;
-	if (jsonPresent) {
-		for (var i = 0, len = times.length; i < len; i++) {
-			schedRow = createSchedule.insertRow();
-			schedRow.innerHTML="<th>" + times[i] + "</th><td>FREE</td>";
-		}	
-		displayingDay = true;
-	} else {
-		console.log("in exception coding...");
-		schedRow = createSchedule.insertRow();
-		if (jsonNotFound) 
-			schedRow.innerHTML = "<td><h3>Unable to retrieve schedule of bookings for Star Life.</h3>-</td><td></td>";
-		else {
-			schedRow.innerHTML = "<td><h3>Schedule of bookings not loaded to this website yet.</h3> Please try again later.</td><td></td>";
-		}
-	}
-	/*
-	/   now, display button to return to the month
-	*/
-	document.getElementById("returnToMonth").innerHTML = "return to month";
-	/*
-	/   do not show previous button, if the month is before the current month
-	*/
-	if (displayDate <= today) {
-		document.getElementById("previous").style.display = "none";
-	} else {
-		document.getElementById("previous").style.display = "block";
-	}
-	/*
-	/   do not show next button, if after one year into the future
-	*/
-	if (displayDate >= oneYearFromToday) {
-		document.getElementById("next").style.display = "none";
-	} else {
-		document.getElementById("next").style.display = "block";
-	}
-	console.log("displayDate is " + displayDate);
-	showBooked(displayDate);
-	document.body.scrollTop = document.documentElement.scrollTop = 0;	// scroll to very top of page
-}
-
-function showBooked(inpDate) {
-	console.log("input Date is " + inpDate);
-	inpDate.setHours(12);			// make sure time is 12 noon so that next line won't decrement by one day
-	console.log("input Date is " + inpDate);
-	searchDate = inpDate.toISOString().substring(0,10);			// just get the first 10 characters (we do not need the time portion of the date)
-	console.log("searchDate is "+searchDate);
-	$.each(jsonData, function(key, value) {
-        if (key == searchDate) {
-			var time = 0;
-			var count = 1;
-			console.log('date is '+key);
-			$.each(value, function(key, value) {
-				$.each(value, function(key,value) {
-					if (key=='time')
-						time = value;
-					else (key = 'halfHours')
-						count = value;
-				});
-				console.log('time is '+time+', count is '+count);
-				for (i=0; i<count; i++) {
-					var x = document.getElementById("day").rows[time];
-					x.style.backgroundColor = 'rgb(255,153,153)';
-					//document.getElementById("day").rows[time].style.background-color = 'pink';		// change colour of row to pink
-					//var x = document.getElementById("day").rows[time].cells;
-					//x[0].innerHTML = "Booked";									// change text of cell to Booked
-					x.cells[1].innerHTML = "Booked";								// change text from FREE to Booked
-					time++;
-				}
-			});
-		return false; // stops the loop
-        }
-	});
-}
-
 /*
-/		function to convert integer month or day to text value for use in creating a new Date object
+/	function to display a month of the year
+/	fade out dates before current date 
+/	(and dates that belong to the next month).
 */
-function twoDigit(inpNum) {
-	var textNum = "";					// variable containing the return value
-	if (inpNum > 9)						// if two digit month....
-		textNum += inpNum;				// simply return the text value of the month
-	else
-		textNum = "0" + inpNum;			//otherwise, add a 0 before the month
-	return textNum;
-}
-
 function initialiseCalendar() { 
 	console.log("in initialiseCalendar..............");
 	console.log("today is "+today);
@@ -392,6 +248,163 @@ function initialiseCalendar() {
 	//  add the new row to the table
 	tbl.appendChild(row);
 }
+/*
+/	function to copy data from file 'availability.json' on my github account, to the variable jsonData
+*/
+function fetchJsonDataFile() {		
+	console.log("About to fetch JSON data file");
+	$.ajax({
+		url: 'https://raw.githubusercontent.com/Bruce-Kirwan/StarLife/master/availability.json',
+		dataType: 'json',
+		success: function( data ) {
+			jsonData = data; 
+			if (jsonData==null)
+				jsonNotFound = true;
+			else
+				jsonPresent = true;
+			console.log(jsonData);
+			console.log('above is jsonData');
+			var jsString = JSON.stringify(jsonData);
+			console.log("jsString is:"+jsString);
+			
+			try {
+				localStorage.setItem('StarLifeAvailability',jsString);			// store json availability string in local storage
+			} catch (e) {
+				console.log(e);											// output message to console if error
+			}
+			
+			console.log('stored availability in StarLifeAvailability');
+		},
+		error: function( data ) {
+			console.log("error getting availability.json");
+			var jsString = "";
+			try {
+				jsString = localStorage.getItem('StarLifeAvailability');			// try to retrieve json availability data from local storage
+			} catch (e) {
+				console.log(e);	// output message to console if error
+			}
+			console.log("jsString is:"+jsString);
+			jsonData = JSON.parse(jsString);
+			console.log("tried to get item from localStorage");
+			console.log(jsonData);
+			if (jsonData=="") {
+				jsonPresent = false;
+				jsonNotFound = true;
+			}
+			else
+				jsonPresent = true;
+		}
+	});
+}
+
+
+/*
+/	function to set up and build a schedule for a selected date 
+/	(stored in variable "displayDate") 
+*/
+function initialiseDay() {		
+	selectYear = displayDate.getFullYear();
+	selectMonth = displayDate.getMonth();
+	selectDay = displayDate.getDate();;
+	/*
+	/	create a table of the schedule
+	*/
+	$("#day").empty();						// first clear any existing rows from day table
+	console.log("removeCanvas is "+ removeCanvas);
+	if (removeCanvas)		// remove the canvas, unless we are in mobile view
+		document.getElementById("canvas").style.display = "none";
+	document.getElementById("color-fade").style.display = "none";
+	document.getElementById("year").innerHTML = selectDay + " " + months[selectMonth];
+	var createSchedule = document.getElementById("day");
+	createSchedule.style.display = "block";
+	var schedRow;
+	if (jsonPresent) {
+		for (var i = 0, len = times.length; i < len; i++) {
+			schedRow = createSchedule.insertRow();
+			schedRow.innerHTML="<th>" + times[i] + "</th><td>FREE</td>";
+		}	
+		displayingDay = true;
+	} else {
+		console.log("in exception coding...");
+		schedRow = createSchedule.insertRow();
+		if (jsonNotFound) 
+			schedRow.innerHTML = "<td><h3>Unable to retrieve schedule of bookings for Star Life.</h3>-</td><td></td>";
+		else {
+			schedRow.innerHTML = "<td><h3>Schedule of bookings not loaded to this website yet.</h3> Please try again later.</td><td></td>";
+		}
+	}
+	/*
+	/   now, display button to return to the month
+	*/
+	document.getElementById("returnToMonth").innerHTML = "return to month";
+	/*
+	/   do not show previous button, if the month is before the current month
+	*/
+	if (displayDate <= today) {
+		document.getElementById("previous").style.display = "none";
+	} else {
+		document.getElementById("previous").style.display = "block";
+	}
+	/*
+	/   do not show next button, if after one year into the future
+	*/
+	if (displayDate >= oneYearFromToday) {
+		document.getElementById("next").style.display = "none";
+	} else {
+		document.getElementById("next").style.display = "block";
+	}
+	console.log("displayDate is " + displayDate);
+	showBooked(displayDate);
+	document.body.scrollTop = document.documentElement.scrollTop = 0;	// scroll to very top of page
+}
+
+/*
+/	function to update schedule with times booked according to information received
+	from the JSON file
+*/
+function showBooked(inpDate) {
+	console.log("input Date is " + inpDate);
+	inpDate.setHours(12);			// make sure time is 12 noon so that next line won't decrement by one day
+	console.log("input Date is " + inpDate);
+	searchDate = inpDate.toISOString().substring(0,10);			// just get the first 10 characters (we do not need the time portion of the date)
+	console.log("searchDate is "+searchDate);
+	$.each(jsonData, function(key, value) {
+        if (key == searchDate) {
+			var time = 0;
+			var count = 1;
+			console.log('date is '+key);
+			$.each(value, function(key, value) {
+				$.each(value, function(key,value) {
+					if (key=='time')
+						time = value;
+					else (key = 'halfHours')
+						count = value;
+				});
+				console.log('time is '+time+', count is '+count);
+				for (i=0; i<count; i++) {
+					var x = document.getElementById("day").rows[time];
+					x.style.backgroundColor = 'rgb(255,153,153)';
+					x.cells[1].innerHTML = "Booked";								// change text from FREE to Booked
+					time++;
+				}
+			});
+		return false; // stops the loop
+        }
+	});
+}
+
+/*
+/		function to convert integer month or day to text value for use in creating a new Date object
+*/
+function twoDigit(inpNum) {
+	var textNum = "";					// variable containing the return value
+	if (inpNum > 9)						// if two digit month....
+		textNum += inpNum;				// simply return the text value of the month
+	else
+		textNum = "0" + inpNum;			//otherwise, add a 0 before the month
+	return textNum;
+}
+
 
 
 

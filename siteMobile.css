@@ -1,14 +1,25 @@
+/*
+/	Author: Bruce Kirwan
+/	Web development Assignment A part 1
+/	August 2019
+/
+/	This file contains the cascading style sheet for smaller screen displays (<=600px width)
+/	it sizes, positions and colors elements
+/	it also hides some elements that should only be displayed in larger screens
+*/
+
+/*	remove margins, padding and borders by default*/
 * {
     margin: 0;
     padding: 0;
 	border:0;
-	/*color: rgb(0,0,51);		// very dark blue by default*/
 }
 #body {
 	background-color: rgb(240,248,255);
 	height: 100%;
 }
 
+/*	 lid to seperate elements from top to bottom of page  */
 .lid {
     clear: both;
     height: 0px;
@@ -27,9 +38,10 @@
 	display: none;
 }
 
-/*
-/	hamburger menu on top right all the time, so can use main menu
-*/
+/*	stylings below are for the interactive "hamburger menu"
+/	
+/
+/	hamburger menu on top right all the time, so can use main menu*/
 #menu {
   	position: fixed;
 	top: 0px;
@@ -88,7 +100,7 @@
 		vertical-align: text-top;
     }
 
-#closebtn {
+#closeBtn {
 	position: fixed;
 	top: 0px;
     right: 0px;
@@ -107,6 +119,9 @@
 }
 
 
+/*
+/	styling for the body of the page
+*/
 #main-content {
 	position: relative;
 	height: 100%;
@@ -134,7 +149,9 @@
 	padding-left: 2em;
 }
 
-
+/*
+/	styling for the slideshow on the home page
+*/
 #slideshow {
     width: 100%;
 }
@@ -142,27 +159,6 @@
 #slideshow img {
 	transition: 1.5s;
 	width: 100%;
-}
-
-.slide-buttons {
-    display: none;
-    background-color: rgba(0, 0, 0, 0);
-    color: white;
-    width: 30px;
-    text-align: center;
-    transition: 0.5s;
-}
-
-.slide-buttons:hover {
-	background-color: rgba(0, 0, 0, 0.6);
-}
-
-.prev {
-    left: 0;
-}
-
-.next {
-    right: 0;
 }
 
 #slide-img {
@@ -176,35 +172,14 @@
 }
 
 
-
+/*
+/	styling for about page
+*/
 	
-
 #main-content-b video {
 	width: 100%;
 }
 
-.svg-images {
-	max-width: 6em;
-	max-height: 8em;
-}
-	
-	
-#email-image {
-	font-size: 6em;
-	font-family: sans-serif;
-	font-weight: 900;
-	color:  rgb(206,228,240);
-}
-
-#first-image {
-	width: 33%;
-	float:left;
-}
-
-#third-image {
-	width: 33%;
-	float:right;
-}
 
 .small {
 	font-size:1.25em;
@@ -317,6 +292,39 @@
 	border: 2px solid black;
 }
 
+/*
+/	contact page images
+/	not enough time to make separate SVG images for mobile
+*/
+.svg-images {
+	display: none;
+}
+
+.png-images {
+	width: 100%;
+}
+
+
+#first-image {
+	width: 25%;
+	float:left;
+}
+
+#third-image {
+	width: 30%;
+	float:right;
+}
+
+
+#second-image {
+	width: 30%;
+	float: left;
+	padding-left: 10%;
+}
+
+/*
+/	make sure footer stays at bottom and there is space for stuff above it
+*/
 
 #main-footer {
 	clear: both;

@@ -1,4 +1,19 @@
 <!DOCTYPE html>
+
+<!--
+/	Author: Bruce Kirwan
+/	Web development Assignment A part 1
+/	August 2019
+/
+/	This file contains the HTML for the availability page of Star Life technologies
+/	This shows bookings on selected dates (the JSON file containing the bookings is on github)
+/	The webpage uses stylesheets siteMobile.css (screens <=600px) and site.css (screen >600px)
+/	It also uses site.js javascript for a webworker timer and canvas title animation.
+/	Finally, it uses calendar.js javascript to show the months (up to a year after the current date)
+/	and the bookings made on a selected date (from clicking on day in the month calendar)
+/
+-->
+
 <html>
 <head>
     <meta charset="utf-8" />
@@ -17,7 +32,7 @@
 <body id="body">
     <div id="menu">
         <div id="menu-i">
-            <span id="hamburgerIcon" style="font-size:40px;cursor:pointer" onclick="openNav()">&#9776;</span>
+            <span id="hamburgerIcon">&#9776;</span>
         </div>
     </div>
 
@@ -54,17 +69,16 @@
         <nav id="main-nav" vertical-align=top>
             <div id="main-nav-i" vertical-align=top>
                 <ul>
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="services.html">Services</a></li>
-                    <li><a href="availability.html">Check Availability</a></li>
-					<li><a href="contact.html">Contact Us</a></li>
-                    <li><a href="about.html">About Us</a></li>
-
+                    <li><a id="homeM" href="#">Home</a></li>
+                    <li><a id="servicesM" href="#">Services</a></li>
+                    <li><a id="availabilityM" href="#">Check Availability</a></li>
+					<li><a id="contactM" href="#">Contact Us</a></li>
+                    <li><a id="aboutM" href="#">About Us</a></li>
                 </ul>
             </div>
         </nav>
 
-		<div id="closebtn"  onclick="closeNav()">
+		<div id="closeBtn">
 			<span>
 				&nbsp;
 				&times;

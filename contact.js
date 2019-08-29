@@ -12,16 +12,21 @@
 
 
 
-//var map, infoWindow;			// variable for the map
-
-//var x = document.getElementById("map");
-
-
-
-
 window.addEventListener('DOMContentLoaded', function (event) {
     console.log("DOM fully loaded and parsed");
     addMoreEvents();
+	/*
+	/	do not show images if small screen
+	*/
+	var smallView = window.matchMedia("(max-width: 199px)")
+	if (smallView.matches) {	//
+		document.getElementById("first-image").style.display="none";
+		document.getElementById("second-image").style.display="none";
+		document.getElementById("third-image").style.display="none";
+	}
+	/*
+	/	detect location and show route to Finglas ETB on the google map
+	*/
 	getLocation();
 
 
