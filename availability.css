@@ -1,24 +1,23 @@
 /*
-.container {
-	width: 100%;
-	margin: auto;
-	font-family: sans-serif;
-	text-align: center;
-}*/
+/	Author: Bruce Kirwan
+/	Web development Assignment A part 1
+/	August 2019
+/
+/	This file contains the stylesheet for the monthly calendar and daily schedule.
+/	It is used by the availability page availability.html in the Star Life website.
+/
+*/
 
-* {
-    margin: 0;
-    padding: 0;
-	border: 0;
+
+#main-content {
+	width: 100%;
+	text-align: center;
+	font-family: sans-serif;
+	color: lightblue;
 }
 
 #container {
-	width: 100%;
-	text-align: center;
-	font-family: sans-serif;
-	background-color: rgb(0,0,51);
-	color: lightblue;
-	border: 2px solid rgb(0,0,51);
+		background-color: rgb(0,0,51);
 }
 
 #table-title {

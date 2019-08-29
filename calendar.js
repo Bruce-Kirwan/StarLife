@@ -67,7 +67,7 @@ function fetchJsonDataFile() {
 			try {
 				localStorage.setItem('StarLifeAvailability',jsString);			// store json availability string in local storage
 			} catch (e) {
-				console.log(e);	// output message to console if error
+				console.log(e);											// output message to console if error
 			}
 			
 			console.log('stored availability in StarLifeAvailability');
@@ -215,6 +215,7 @@ function initialiseDay() {
 	}
 	console.log("displayDate is " + displayDate);
 	showBooked(displayDate);
+	document.body.scrollTop = document.documentElement.scrollTop = 0;	// scroll to very top of page
 }
 
 function showBooked(inpDate) {

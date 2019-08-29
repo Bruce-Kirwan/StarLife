@@ -41,6 +41,65 @@ window.addEventListener('DOMContentLoaded', function (event) {
 	
 });
 
+
+
+function addEvents() {
+	console.log("UUUUUUUUUUUUUUUUU");
+	console.log(" ------------  in addEvents");
+	canvas = document.getElementById("starfield");
+	if( canvas && canvas.getContext ) {
+		console.log("in if statement");
+        ctx = canvas.getContext("2d");
+        initStars();
+		var timing = 35;		// timing is the time (in millisecons) between star movement (greater timing, slower speed)
+		var widerView = window.matchMedia("(min-width: 601px)")
+		if (widerView.matches) {	// no starburst for smaller widths
+			var decelerate=10;				// rate of deceleration of stars at beginning
+			for (i=1; i<timing; i=i+decelerate)
+			{
+				if (decelerate>1)
+					decelerate--;			// reduce the rate of deceleration
+				for (j=1; j<(i*(10-decelerate)); j++)		// stay longer at the larger timings (so that deceleration is gradual)
+				{
+					setTimeout(loop, i);
+				}
+			}
+		} else
+			timing = 100;
+        setInterval(loop,timing);
+    }
+	/*
+	/	events below to call functions that pass a query string with the timer for
+	/	total time spend on the site when navigating to an internal link
+	*/
+	console.log("11111111111");
+    document.getElementById("hamburgerIcon").addEventListener('click', function () {openNav();});
+	console.log("22222222222222");
+	document.getElementById("home").addEventListener('click', function() {
+		console.log("333333333333");
+		addUrlParameter("index.html");
+	});
+	document.getElementById("services").addEventListener('click', function() {
+		console.log("333333333333");
+		console.log ("added eventListerner for services.html");
+		addUrlParameter("services.html");
+	});
+	document.getElementById("availability").addEventListener('click', function() {
+		console.log("333333333333");
+		addUrlParameter("availability.html");
+	});
+	document.getElementById("contact").addEventListener('click', function() {
+		console.log("333333333333");
+		addUrlParameter("contact.html");
+	});
+	document.getElementById("about").addEventListener('click', function() {
+		console.log("333333333333");
+		addUrlParameter("about.html");
+	});
+	console.log("4444444444444");
+}
+
+
 /*
 /	add query string to the internal navigation link before navigating to internal Star Life page
 */
@@ -111,80 +170,6 @@ function closeNav() {
     console.log("Close Nav Clicked");
     document.getElementById("main-nav").style.width = "0%";
 		document.getElementById("closebtn").style.display = "none";
-}
-
-function accordion() {
-
-    var acc = document.getElementsByClassName("accordion");
-    var i;
-    for (i = 0; i < acc.length; i++) {
-        acc[i].addEventListener("click", function () {
-            this.classList.toggle("active");
-            var panel = this.nextElementSibling;
-            if (panel.style.display === "block") {
-                panel.style.display = "none";
-            } else {
-                panel.style.display = "block";
-            }
-        });
-    }
-}
-
-
-function addEvents() {
-	console.log("UUUUUUUUUUUUUUUUU");
-	console.log(" ------------  in addEvents");
-	canvas = document.getElementById("starfield");
-	if( canvas && canvas.getContext ) {
-		console.log("in if statement");
-        ctx = canvas.getContext("2d");
-        initStars();
-		var timing = 35;		// timing is the time (in millisecons) between star movement (greater timing, slower speed)
-		var widerView = window.matchMedia("(min-width: 601px)")
-		if (widerView.matches) {	// no starburst for smaller widths
-			var decelerate=10;				// rate of deceleration of stars at beginning
-			for (i=1; i<timing; i=i+decelerate)
-			{
-				if (decelerate>1)
-					decelerate--;			// reduce the rate of deceleration
-				for (j=1; j<(i*(10-decelerate)); j++)		// stay longer at the larger timings (so that deceleration is gradual)
-				{
-					setTimeout(loop, i);
-				}
-			}
-		} else
-			timing = 100;
-        setInterval(loop,timing);
-    }
-	/*
-	/	events below to call functions that pass a query string with the timer for
-	/	total time spend on the site when navigating to an internal link
-	*/
-	console.log("11111111111");
-    document.getElementById("hamburgerIcon").addEventListener('click', function () {openNav();});
-	console.log("22222222222222");
-	document.getElementById("home").addEventListener('click', function() {
-		console.log("333333333333");
-		addUrlParameter("index.html");
-	});
-	document.getElementById("services").addEventListener('click', function() {
-		console.log("333333333333");
-		console.log ("added eventListerner for services.html");
-		addUrlParameter("services.html");
-	});
-	document.getElementById("availability").addEventListener('click', function() {
-		console.log("333333333333");
-		addUrlParameter("availability.html");
-	});
-	document.getElementById("contact").addEventListener('click', function() {
-		console.log("333333333333");
-		addUrlParameter("contact.html");
-	});
-	document.getElementById("about").addEventListener('click', function() {
-		console.log("333333333333");
-		addUrlParameter("about.html");
-	});
-	console.log("4444444444444");
 }
 
 

@@ -5,8 +5,8 @@
 /
 /	This file contains the javascript for the contact webpage (contact.html)
 /	It contains SVG images with animation and location services
-/   The location services consists of a google map embedded map which shows 
-/	how to get from your location to Finglas ETB.
+/   The location services consists of a google embedded map which shows 
+/	how to get from your detected location to Finglas ETB.
 /
 */
 

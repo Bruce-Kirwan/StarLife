@@ -2,6 +2,7 @@
     margin: 0;
     padding: 0;
 	border:0;
+	/*color: rgb(0,0,51);		// very dark blue by default*/
 }
 #body {
 	background-color: rgb(240,248,255);
@@ -15,8 +16,9 @@
     overflow: hidden;
 }
 
-
-
+/*
+/	display canvas after making room for hamburger menu
+*/
 #canvas {
 	display: block;
 }
@@ -25,25 +27,19 @@
 	display: none;
 }
 
- #titlePicture img{
-	 display: none;
-	 /*float: left;
-	 width: 90%;*/
- }
-
+/*
+/	hamburger menu on top right all the time, so can use main menu
+*/
 #menu {
-  position: fixed;
-  top: 0;
-  right: 0;
-  width: 300px;
-}
-
-
-
-#menu-i #hamburgerIcon {
-    float: right;
-	display: inline;
-	width: 13%;
+  	position: fixed;
+	top: 0px;
+    right: 0px;
+    display: block;
+    z-index: 990;		/* make sure on top/above everything else*/
+	padding-right: 10px;
+	font-size: 3em;
+	cursor: pointer;
+	color: black;
 }
 
 #main-nav {
@@ -93,13 +89,14 @@
     }
 
 #closebtn {
+	position: fixed;
+	top: 0px;
+    right: 0px;
     display: block;
 	text-align:right;
 	color:grey;
-	position: absolute;
-	top: 0px;
-    right: 0px;
     font-size: 50px;
+	cursor: pointer;
     z-index: 999;
 }
 
@@ -110,17 +107,9 @@
 }
 
 
-#main-nav-i #closebtn {
-	display: block;
-}
-
-
-#main-page{
+#main-content {
 	position: relative;
 	height: 100%;
-}
-
-#main-content {;
 	padding-bottom: 20rem;
 }
 
@@ -135,16 +124,59 @@
 	list-style-type: circle;
 	font-size: large;
 	padding-bottom: 3em;
+	padding-left: 2em;
 }
 
 
 #main-content-3 {
-	position: relative;
 	width: 100%;
 	float: left;
-	left: 0;
-	top: 0;
+	padding-left: 2em;
 }
+
+
+#slideshow {
+    width: 100%;
+}
+
+#slideshow img {
+	transition: 1.5s;
+	width: 100%;
+}
+
+.slide-buttons {
+    display: none;
+    background-color: rgba(0, 0, 0, 0);
+    color: white;
+    width: 30px;
+    text-align: center;
+    transition: 0.5s;
+}
+
+.slide-buttons:hover {
+	background-color: rgba(0, 0, 0, 0.6);
+}
+
+.prev {
+    left: 0;
+}
+
+.next {
+    right: 0;
+}
+
+#slide-img {
+	padding-top: 30em;
+}
+
+#slide-img img {
+	/*padding-top: 20em;*/
+	position: absolute;
+	top: 30rem;
+}
+
+
+
 	
 
 #main-content-b video {
@@ -181,27 +213,37 @@
 	color: rgb(206,228,240);
 }
 
+/*
+*	labels, textboxes and buttons in contact page
+*/
+.input {
+	width: 100%;
+	height: 2.5em;
+	margin-bottom: 2.5em;
+	border: 1px solid black;
+}
 
 .inputLabel {
-font-family:"OpenSans-Regular", "Helvetica Neue", Helvetica, Arial, sans-serif;
-font-weight:normal;
-font-size:1em;
-font-weight:600;
-/*line-height:1.13;*/
-color: rgb(0,0,0);
-width:100%;
+	font-family: Arial, sans-serif;
+	font-weight:normal;
+	font-size:1em;
+	color: black;
+	width:100%;
 }
 
-.formField {
-	width: 100%;
-}
-
-.formButtons {
+.formText {
 	width: 95%;
-	float: left;
-	padding-left: 1.5em;
-	
 }
+
+.formTextRight {
+	width: 95%;
+}
+
+#messageText {
+	height: 7em;
+}
+
+
 
 .medium {
 	font-size: 1.25em;
@@ -215,50 +257,6 @@ width:100%;
 
 
 
-
-#slideshow {
-    width: 100%;
-}
-
-
-#slideshow img {
-	transition: 1.5s;
-	width: 100%;
-}
-
-
-.slide-buttons {
-    display: none;
-    /*position: absolute;*/
-    background-color: rgba(0, 0, 0, 0);
-    color: white;
-    width: 30px;
-    text-align: center;
-    transition: 0.5s;
-}
-
-.slide-buttons:hover {
-	background-color: rgba(0, 0, 0, 0.6);
-}
-
-.prev {
-    left: 0;
-}
-
-.next {
-    right: 0;
-}
-
-#slide-img {
-		padding-top: 30em;
-}
-
-#slide-img img {
-	padding-top: 10em;
-	position: absolute;
-	bottom: 10rem;
-	left: 0;
-}
 
 /* Style the buttons that are used to open and close the accordion panel */
 .accordion {
@@ -294,14 +292,36 @@ width:100%;
 	width: 35%;
 }
 
-.panel div {
-	float: left;
-	width: 63%
+
+/*
+/ 
+
+.webSocketTest {
+	width: 99%;
+}*/
+/*
+/	input textbox for websocket test in services page
+*/
+#messageField {			
+	height: 7em;
+	width: 98%;
 }
-	
+
+/*
+/	/button to initiate websocket test in services page
+*/
+#socketTest {
+	width: 85%;
+	height: 3em;
+	background-color: rgb(204,204,255);
+	border: 2px solid black;
+}
+
+
 #main-footer {
 	clear: both;
     position: relative;
     height: 8rem;
     margin-top: -8rem;
+	text-align: center;
 }	

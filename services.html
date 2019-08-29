@@ -25,13 +25,8 @@
 	<script src="webSocket.js"></script>
 </head>
 <body id="body">
-	<div id="titlePicture">
-		<img src="titlePicture.png" alt="Star Life Technologies">
-	</div>
     <div id="menu">
-        <div id="menu-i">
-            <span id="hamburgerIcon" style="font-size:40px;cursor:pointer" onclick="openNav()">&#9776;</span>
-        </div>
+		<span id="hamburgerIcon" style="font-size:40px;cursor:pointer" onclick="openNav()">&#9776;</span>
     </div>
 	<div id="canvas">
 		<div id="canvas-i">
@@ -81,65 +76,61 @@
 	</div>
 	<div class="lid">&nbsp;</div>
 	<div id="wrapper">
-		<div id="main-page">
 			<div id="main-content">
-
                 <button class="accordion"> + CCTV installation</button>
                 <div class="panel">
-					<img src="slideshowImages/CCTV.jpg" alt="CCTV installation" />
-					<div>
+					<span><img src="slideshowImages/CCTV.jpg" alt="CCTV installation" /></span>
+					<span>
                         At StarLife we specialise in the installation of CCTV equipment on your premises.
-                    </div>
-					<div>
+                    <br />
                         We cater for outdoor installation as well as installation of CCTV on the outside of your premises.
-                    </div>
+                    </span>
                 </div>
 
                 <button class="accordion"> + Network installation and configuration</button>
                 <div class="panel">
-					<img src="slideshowImages/router.png" alt="network installation and configuration" />
-                    <div>
+					<span><img src="slideshowImages/router.png" alt="network installation and configuration" /></span>
+                    <span>
                         At StarLife we install IT networks including cabling, configuration of switches and routers.  
-                    </div>
-					<div>
+                    <br />
 						We also install wireless networks and configure routers for domestic use.
-					</div>
+					</span>
                 </div>
 
                 <button class="accordion"> + Operating system installation</button>
                 <div class="panel">
-					<img src="slideshowImages/Windows.jpg" alt="Operating System installation and configuration" />
-                    <div>
+					<span><img src="slideshowImages/Windows.jpg" alt="Operating System installation and configuration" /></span>
+                    <span>
                         At StarLife we install and configure Windows (as well as Linux) operating systems on your PC, laptop or network.
-                    </div>
+                    </span>
                 </div>
 				<button class="accordion" id="hdBtn"> + Helpdesk</button>
                 <div class="panel">
 					<div id="hd">&nbsp;</div>
-					<img src="slideshowImages/helpdesk.jpg" alt="Helpdesk" />
-                    <div>
+					<span><img src="slideshowImages/helpdesk.jpg" alt="Helpdesk" /></span>
+                    <span>
                         We also offer a helpdesk facility at StarLife for IT or CCTV problems.
-                    </div>
+                    </span>
                 </div>
 				<button class="accordion" id="wsTest"> + Web Socket Test</button>
-                <div class="panel">
-					<div id="webSocketTest">&nbsp;</div>
-					<h2>WebSocket Test</h2>
+                <div class="panel" id="webSocketTest">
 					<div>&nbsp;</div>
-					<label for="messageField" class="inputLabel">Enter message to echo test below:</label>
-					<textarea class="input" type= "text" name="messageField" id="messageField" required placeholder="enter message to echo test"></textarea>					
+					<div><h2>WebSocket Test</h2></div>
 					<div>&nbsp;</div>
-					<label for="socketTest" class="inputLabel">Press button below to echo test to website websocket.org:</label>
+					<div>Enter message to echo test below:</div>
+					<div>
+						<textarea class="input" type= "text" name="messageField" id="messageField" required placeholder="enter message to echo test"></textarea>	
+					</div>
+					<div>&nbsp;</div>
+					<div>Press button below to echo test to website websocket.org:</div>
 					<div>
 						<button id="socketTest">Echo Test</button>
 					</div>
 					<div>&nbsp;</div>
 					<div id="output"></div>
 					<div>&nbsp;</div>
-                    <button id="">
                 </div>
 			</div>
-		</div>
 		<div class="lid">&nbsp;</div>
 		<footer id="main-footer">
 			<div id="main-footer-i">
