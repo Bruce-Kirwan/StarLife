@@ -241,7 +241,7 @@
     padding: 18px;
     width: 100%;
     text-align: left;
-    border: none;
+    border: 1px solid black;
     outline: none;
     transition: 0.4s;
 }

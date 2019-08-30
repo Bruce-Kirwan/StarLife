@@ -13,7 +13,7 @@
 
 
 window.addEventListener('DOMContentLoaded', function (event) {
-    console.log("DOM fully loaded and parsed");
+    console.log("DOM fully loaded and parsed and in contact.js...");
     addMoreEvents();
 	/*
 	/	do not show images if small screen
@@ -36,7 +36,7 @@ window.addEventListener('DOMContentLoaded', function (event) {
 /	add the event to animate the SVG images upon mouse over (hover)
 */
 function addMoreEvents() {
-	$(".svg-images").hover(function(){console.log("hovering............");
+	$(".svg-images").hover(function(){
 		var x = this.getElementsByTagName("animateTransform");  
 		try {
 			x[0].beginElement();			// initiate animation

@@ -34,7 +34,7 @@ var days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 var displayingDay = false;
 var jsonPresent = false;
 var jsonNotFound = false;
-console.log('... site.js has loaded ...');
+console.log('... calendar.js has loaded ...');
 
 var removeCanvas = true;		// remove canvas when displaying schedule for one day
 var narrowView = window.matchMedia("(max-width: 600px)")
@@ -45,7 +45,7 @@ var jsonData = null;
 /	below is executed upon page load 
 */
 window.addEventListener('DOMContentLoaded', function (event) {
-    console.log("DOM fully loaded and parsed");
+    console.log("DOM fully loaded and parsed and in calendar.js...");
 	if (narrowView.matches) 		// keep canvas for smaller widths
 		removeCanvas = false;
 	oneYearFromToday = oneYearFromToday.setYear(oneYearFromToday.getFullYear()+1);		// get date exactly one year from today
@@ -64,12 +64,8 @@ function addMoreEvents() {
 		var target = e.target || e.srcElement
 		// variable target has your clicked element
 		if (target.nodeName == "TD") {
-			console.log("selectYear is "+selectYear);
-			console.log("selectMonth is "+selectMonth);
-			console.log("target.innerHTML is "+target.innerHTML);
 			var dayNum = parseInt(target.innerHTML, 10);
 			displayDate = new Date(selectYear + "-" + twoDigit(selectMonth+1) + "-" + twoDigit(dayNum));
-			console.log("****************   displayDate is " + displayDate);
 			initialiseDay();
 		}
 	}
@@ -121,26 +117,14 @@ function addMoreEvents() {
 /	(and dates that belong to the next month).
 */
 function initialiseCalendar() { 
-	console.log("in initialiseCalendar..............");
-	console.log("today is "+today);
-	console.log(today);
-	console.log("selectDate is "+selectDate);
-	console.log(selectDate);
 	document.getElementById("canvas").style.display = "block";
 	document.getElementById("color-fade").style.display = "block";
 	selectMonth = selectDate.getMonth();
-	console.log("selectDate.getMonth() is "+ selectMonth);
 	selectYear = selectDate.getFullYear();
-	console.log("selectDate.getFullYear() is "+ selectYear);
 	var startDay = 1;						// default show from 1st of month
 	if (selectDate < today) 
 		selectDate = today;
-	console.log("today is "+today);
-	console.log(today);
-	console.log("selectDate is "+selectDate);
-	console.log(selectDate);
 	selectDay = selectDate.getDate();
-	console.log("selectDate.getDate() is "+ selectDay);
 	document.getElementById("year").innerHTML = months[selectMonth] + " " + selectYear;
 	/*
 	/   do not show previous button, if the month is before the current month
@@ -160,18 +144,13 @@ function initialiseCalendar() {
 	}
 	// get the first day of the month, so know what day of the week to start adding day of month numbers
 	var dateText = selectYear + "-" + twoDigit(selectMonth+1) + "-01";
-	console.log("dateText is "+dateText);
     //firstOfMonth = new Date(selectYear+"-"+(selectMonth+1)+"-01");
 	firstOfMonth = new Date("2019-08-01");
-	console.log("firstOfMonth is "+ firstOfMonth);
 	firstOfMonth=new Date(selectYear + "-" +  twoDigit(selectMonth+1) + "-01");	// get Date object for the first day of the current month
-	console.log("firstOfMonth is "+ firstOfMonth)
-	console.log(firstOfMonth);
 	if (firstOfMonth < today) 				// if first of month is before current date (today)
 		startDay = currentDay;				// then do not show days before current date (today)
 	var firstDayOfMonth = firstOfMonth.getDay();
 	var selectDay = firstOfMonth.getDate();
-	console.log("selectDay is " + selectDay);
 	// create the table of days of month
 	var tbl = document.getElementById("month");
 	tbl.innerHTML = "";		// body of the calendar
@@ -262,15 +241,12 @@ function fetchJsonDataFile() {
 				jsonNotFound = true;
 			else
 				jsonPresent = true;
-			console.log(jsonData);
-			console.log('above is jsonData');
 			var jsString = JSON.stringify(jsonData);
-			console.log("jsString is:"+jsString);
-			
+//	now try to store the fetched data in localStorage		
 			try {
-				localStorage.setItem('StarLifeAvailability',jsString);			// store json availability string in local storage
+				localStorage.setItem('StarLifeAvailability',jsString);	// store json availability string in local storage
 			} catch (e) {
-				console.log(e);											// output message to console if error
+				console.log(e);											// output message to console if error writing to localStorage
 			}
 			
 			console.log('stored availability in StarLifeAvailability');
@@ -283,7 +259,6 @@ function fetchJsonDataFile() {
 			} catch (e) {
 				console.log(e);	// output message to console if error
 			}
-			console.log("jsString is:"+jsString);
 			jsonData = JSON.parse(jsString);
 			console.log("tried to get item from localStorage");
 			console.log(jsonData);
@@ -310,7 +285,6 @@ function initialiseDay() {
 	/	create a table of the schedule
 	*/
 	$("#day").empty();						// first clear any existing rows from day table
-	console.log("removeCanvas is "+ removeCanvas);
 	if (removeCanvas)		// remove the canvas, unless we are in mobile view
 		document.getElementById("canvas").style.display = "none";
 	document.getElementById("color-fade").style.display = "none";
@@ -325,7 +299,6 @@ function initialiseDay() {
 		}	
 		displayingDay = true;
 	} else {
-		console.log("in exception coding...");
 		schedRow = createSchedule.insertRow();
 		if (jsonNotFound) 
 			schedRow.innerHTML = "<td><h3>Unable to retrieve schedule of bookings for Star Life.</h3>-</td><td></td>";
@@ -353,7 +326,6 @@ function initialiseDay() {
 	} else {
 		document.getElementById("next").style.display = "block";
 	}
-	console.log("displayDate is " + displayDate);
 	showBooked(displayDate);
 	document.body.scrollTop = document.documentElement.scrollTop = 0;	// scroll to very top of page
 }
@@ -363,16 +335,12 @@ function initialiseDay() {
 	from the JSON file
 */
 function showBooked(inpDate) {
-	console.log("input Date is " + inpDate);
 	inpDate.setHours(12);			// make sure time is 12 noon so that next line won't decrement by one day
-	console.log("input Date is " + inpDate);
 	searchDate = inpDate.toISOString().substring(0,10);			// just get the first 10 characters (we do not need the time portion of the date)
-	console.log("searchDate is "+searchDate);
 	$.each(jsonData, function(key, value) {
-        if (key == searchDate) {
+        if (key == searchDate) {								// search for a match on the date we are looking at
 			var time = 0;
 			var count = 1;
-			console.log('date is '+key);
 			$.each(value, function(key, value) {
 				$.each(value, function(key,value) {
 					if (key=='time')
@@ -380,8 +348,7 @@ function showBooked(inpDate) {
 					else (key = 'halfHours')
 						count = value;
 				});
-				console.log('time is '+time+', count is '+count);
-				for (i=0; i<count; i++) {
+				for (i=0; i<count; i++) {				// change text and background color for times booked
 					var x = document.getElementById("day").rows[time];
 					x.style.backgroundColor = 'rgb(255,153,153)';
 					x.cells[1].innerHTML = "Booked";								// change text from FREE to Booked

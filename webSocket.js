@@ -3,8 +3,9 @@
 /	Web development Assignment A part 1
 /	August 2019
 /
-/	This file contains the javascript for the Web Socket functionality.
-/	It also contains a function for the accordion (which expands to reveal more detail on a subject.
+/	This file contains the javascript for the services.html page.
+/	It has functions for the Web Socket echo test.
+/	It also contains a function for the accordion (which expands to reveal more detail on a subject).
 /
 */
 var wsLink = "wss://echo.websocket.org/";
@@ -19,7 +20,6 @@ console.log('... webSocket.js has loaded ...');
 /	in the process of being loaded
 */
 window.addEventListener('DOMContentLoaded', function (event) {
-    console.log("DOM fully loaded and parsed");
 	addMoreEvents();
 });
 

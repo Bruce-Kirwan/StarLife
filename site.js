@@ -17,12 +17,10 @@ var windowWidth = 1000;
 var windowHeight=150;
 var sizeFactor=1.0;			// this changes for mobile view
 
-var w;
+var w;						// a web worker object reference variable
 var currentTimer = 0;		// value of current timer count from the web-worker timer
 
 console.log('... site.js has loaded ...');
-
-
 
 /*
 /	run the function below after most of page has loaded
@@ -33,9 +31,7 @@ window.addEventListener('DOMContentLoaded', function (event) {
 	document.getElementById("color-fade").style.display = "block";
 	document.getElementById("closeBtn").style.display = "none";
 	var existingTimer = getUrlParameter('timer');
-	console.log("    *******************           existingTimer is " + existingTimer);
 	addEvents();
-	console.log("XXXXXXXXXXXXXX");
 	if (existingTimer == "")
 		startWorker(0)
 	else
@@ -55,7 +51,6 @@ function addEvents() {;
 /	and then repeatedly call loop() function to display stars and title in canvas
 */
 	if( canvas && canvas.getContext ) {
-		console.log("in if statement");
         ctx = canvas.getContext("2d");
         initStars();
 		var timing = 35;		// timing is the time (in millisecons) between star movement (greater timing, slower speed)
@@ -155,7 +150,6 @@ function startWorker(inpTime) {
 /	function to open menu on clicking "hamburger" icon in top right of smaller screens (<= 600px)
 */
 function openNav() {
-    console.log("Open Nav Clicked");
 	setTimeout(function(){document.getElementById("closeBtn").style.display = "block";}, 100);	// show close button after waiting 100 milliseconds
     document.getElementById("main-nav").style.width = "100%";
 }
@@ -164,7 +158,6 @@ function openNav() {
 /	function to close menu again by clicking X in top right 
 */
 function closeNav() {
-    console.log("Close Nav Clicked");
     document.getElementById("main-nav").style.width = "0%";
 	document.getElementById("closeBtn").style.display = "none";
 }
@@ -175,10 +168,8 @@ function closeNav() {
 */
 function addUrlParameter(linkPage) {
 	var queryStr = "?timer=" + currentTimer;					// set up query string to add to end of URL (in order to pass current value of timer)
-	console.log("in addURLParameter, queryStr is "+queryStr+",  linkPage is  "+linkPage);
 	if (currentTimer > 0)										// if timer is a positive number
 		linkPage += queryStr;									// add the query string
-	console.log("linkPage is "+linkPage);
 	window.location.href = linkPage;							// navigate to internal webpage
 };
 
@@ -207,21 +198,17 @@ function initStars() {
 		/*
 		/   Change the canvas width to be the same as screen width
 		*/
-		console.log("********** window.innerWidth is "+window.innerWidth);
 		windowWidth = (window.innerWidth > 0) ? window.innerWidth : screen.width;
 		var mobileView = window.matchMedia("(max-width: 600px)")
 		if (mobileView.matches) {	// mobile view size
 			sizeFactor = 0.9;
 		}
 		canvas.width = windowWidth*sizeFactor;
-					console.log("********** windowWidth is "+windowWidth);
-			console.log("********** canvas.width is "+canvas.width);	
 
 		/*
 		/   Change the canvas height to be 20% of the screen height
 		*/
 		windowHeight = (window.innerHeight > 0) ? window.innerHeight : screen.height;
-		console.log('height is '+windowHeight);
 		canvas.height=(windowHeight*sizeFactor)/5;
 		/*
 		/   Create the intial stars
