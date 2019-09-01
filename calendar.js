@@ -248,8 +248,10 @@ function fetchJsonDataFile() {
 			} catch (e) {
 				console.log(e);											// output message to console if error writing to localStorage
 			}
-			
 			console.log('stored availability in StarLifeAvailability');
+			setTimeout(fetchJsonDataFile,10000);					// refresh every 25 seconds
+			if (displayingDay)										// if a date has been chosen, refresh display
+				initialiseDay();
 		},
 		error: function( data ) {
 			console.log("error getting availability.json");
@@ -304,6 +306,7 @@ function initialiseDay() {
 			schedRow.innerHTML = "<td><h3>Unable to retrieve schedule of bookings for Star Life.</h3>-</td><td></td>";
 		else {
 			schedRow.innerHTML = "<td><h3>Schedule of bookings not loaded to this website yet.</h3> Please try again later.</td><td></td>";
+			displayingDay = true;
 		}
 	}
 	/*
@@ -348,7 +351,7 @@ function showBooked(inpDate) {
 					else (key = 'halfHours')
 						count = value;
 				});
-				for (i=0; i<count; i++) {				// change text and background color for times booked
+				for (i=0; i<count; i++) {				// change text and background color for times 
 					var x = document.getElementById("day").rows[time];
 					x.style.backgroundColor = 'rgb(255,153,153)';
 					x.cells[1].innerHTML = "Booked";								// change text from FREE to Booked

@@ -53,6 +53,42 @@
 			"halfHours": 1
 		}
 	},
+			"2019-09-03": {
+		"1": {
+			"time": 4,
+			"halfHours": 3
+		},
+		"2": {
+			"time": 12,
+			"halfHours": 1
+		},
+		"3": {
+			"time": 24,
+			"halfHours": 2
+		},
+		"4": {
+			"time": 29,
+			"halfHours": 1
+		}
+	},
+			"2019-09-04": {
+		"1": {
+			"time": 4,
+			"halfHours": 3
+		},
+		"2": {
+			"time": 12,
+			"halfHours": 1
+		},
+		"3": {
+			"time": 24,
+			"halfHours": 2
+		},
+		"4": {
+			"time": 29,
+			"halfHours": 1
+		}
+	},
 	"2019-09-05": {
 		"1": {
 			"time": 10,
