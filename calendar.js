@@ -295,6 +295,8 @@ function initialiseDay() {
 	var createSchedule = document.getElementById("day");
 	createSchedule.style.display = "block";
 	var schedRow;
+	console.log('.............in initialiseDay, jsonPresent is '+jsonPresent);
+	console.log('............in initialiseDay, jsonNotFound is '+jsonNotFound);
 	if (jsonPresent) {
 		for (var i = 0, len = times.length; i < len; i++) {
 			schedRow = createSchedule.insertRow();
