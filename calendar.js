@@ -264,7 +264,7 @@ function fetchJsonDataFile() {
 			jsonData = JSON.parse(jsString);
 			console.log("tried to get item from localStorage");
 			console.log(jsonData);
-			if (jsonData=="") {
+			if (jsString=="") {
 				jsonPresent = false;
 				jsonNotFound = true;
 			}
