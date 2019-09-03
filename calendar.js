@@ -249,7 +249,7 @@ function fetchJsonDataFile() {
 				console.log(e);											// output message to console if error writing to localStorage
 			}
 			console.log('stored availability in StarLifeAvailability');
-			setTimeout(fetchJsonDataFile,10000);					// refresh every 25 seconds
+			setTimeout(fetchJsonDataFile,10000);					// refresh every 10 seconds
 			if (displayingDay)										// if a date has been chosen, refresh display
 				initialiseDay();
 		},
@@ -270,6 +270,7 @@ function fetchJsonDataFile() {
 			}
 			else
 				jsonPresent = true;
+			setTimeout(fetchJsonDataFile,45000);					// refresh every 45 seconds
 		}
 	});
 }
