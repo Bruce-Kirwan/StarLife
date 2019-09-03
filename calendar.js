@@ -270,7 +270,6 @@ function fetchJsonDataFile() {
 				jsonNotFound = true;
 			}
 			else
-				console.log('jsString NOT null');
 				jsonPresent = true;
 			setTimeout(fetchJsonDataFile,45000);					// refresh every 45 seconds
 		}
