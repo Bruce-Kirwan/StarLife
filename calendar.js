@@ -264,11 +264,13 @@ function fetchJsonDataFile() {
 			jsonData = JSON.parse(jsString);
 			console.log("tried to get item from localStorage");
 			console.log(jsonData);
-			if (jsString=="") {
+			if (jsString==null) {
+				console.log('jsString is null');
 				jsonPresent = false;
 				jsonNotFound = true;
 			}
 			else
+				console.log('jsString NOT null');
 				jsonPresent = true;
 			setTimeout(fetchJsonDataFile,45000);					// refresh every 45 seconds
 		}
