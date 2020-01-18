@@ -66,11 +66,12 @@ function getLocation() {
 /	to Finglas ETB.
 */
 function showPosition(position) {
-	document.getElementById("map-title").innerHTML = "The recommended route from your location to us, is below:";
-	y = "<iframe src=\"https://www.google.com/maps/embed?pb=!1m27!1m12!1m3!1d38079.00149741396!2d-6.295563540070553!3d53.38016607633322!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m12!3e6!4m4!2s"
+
+	y = "iframe src=\"https://www.google.com/maps/embed?pb=!1m27!1m12!1m3!1d38079.00149741396!2d-6.295563540070553!3d53.38016607633322!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m12!3e6!4m4!2s"
 	+position.coords.latitude+position.coords.longitude+"!3m2!1d"+position.coords.latitude+"!2d"+position.coords.longitude+
 	"!4m5!1s0x48670dc475e5c117%3A0x7baa038425845b41!2sFinglas%20Training%20Centre%20CDETB%2C%20Poppintree%20Industrial%20Estate%20Jamestown%20Road%20Finglas%2C%20Dublin%2011%2C%20Ireland!3m2!1d"
 	+ position.coords.latitude +"!2d-"+ position.coords.longitude +"!5e0!3m2!1sen!2suk!4v1566850380413!5m2!1sen!2suk\"  "
-	+ "width=\"100%\"  height=\"500\"  frameborder=\"0\" style=\"border:0;\" allowfullscreen=\"\"></iframe>"
-	document.getElementById("google-map").innerHTML = y;
+	+ "width=\"100%\"  height=\"500\"  frameborder=\"0\" style=\"border:0;\" allowfullscreen=\"\""
+	document.getElementById("google-map").innerHTML = "<"+y+"></iframe>";
+		document.getElementById("map-title").innerHTML = "The recommended route from your location to us, is below: "+y;
 }
